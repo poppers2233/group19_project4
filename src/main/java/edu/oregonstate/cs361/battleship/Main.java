@@ -6,8 +6,16 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
+import java.util.Random;
+
 
 public class Main {
+	
+	
+	public static int boardWidth = 10;
+	public static int boardHeight = 10;
+	public static int vertical = 1;
+	public static int horizontal = 0;
 
     public static void main(String[] args) {
     	
@@ -41,6 +49,10 @@ public class Main {
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
+    	
+    	
+   //------------------------------Parsing and execution of the player's turn
+    	
         BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
         Gson gson = new Gson();
         //declares variables for the details specified for the ship
@@ -65,6 +77,23 @@ public class Main {
             model.getSubmarine().set_location(row, col, orientation);
         }
         
+        
+      //------------------------------Execution of the AI's turn
+        
+        Random rand = new Random(System.currentTimeMillis());
+        int AICol, AIRow, AIOrientation;
+        do
+        {
+        	AICol = rand.nextInt(boardWidth);
+        	AIRow = rand.nextInt(boardHeight);
+        	AIOrientation = rand.nextInt(1);
+        	
+        }while(!checkValidLocation(AICol,AIRow, AIOrientation));
+        
+        //coords are now valid (in theory)
+        
+        model.getUnplacedShip().set_location(AIRow, AICol, getOrientation(AIOrientation));
+        
         //Possibly need below code for the AI since they are different objects in BattleshipModel, but they have same ID 
         //so I can't distinguish them right now unless I change the ID names of the AI ships in BattleshipModel
         /*
@@ -87,6 +116,19 @@ public class Main {
         
        // Ship currentShip = BattleshipModel.get
         return gson.toJson(model);
+    }
+    
+    private static String getOrientation(int orientation)
+    {
+    	if(orientation == 0)
+    		return "horizontal";
+    	return "vertical";
+    }
+    
+    private static boolean checkValidLocation(int x, int y, int orientation)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
+    {
+    	
+    	return true;
     }
 
     //Similar to placeShip, but with firing.
