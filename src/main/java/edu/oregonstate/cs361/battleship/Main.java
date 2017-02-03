@@ -82,39 +82,20 @@ public class Main {
         
         Random rand = new Random(System.currentTimeMillis());
         int AICol, AIRow, AIOrientation;
+        Ship temp = model.getUnplacedShip();
         do
         {
         	AICol = rand.nextInt(boardWidth);
         	AIRow = rand.nextInt(boardHeight);
         	AIOrientation = rand.nextInt(1);
         	
-        }while(!checkValidLocation(AICol,AIRow, AIOrientation));
+        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));
         
         //coords are now valid (in theory)
         
-        model.getUnplacedShip().set_location(AIRow, AICol, getOrientation(AIOrientation));
+        temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into 
         
-        //Possibly need below code for the AI since they are different objects in BattleshipModel, but they have same ID 
-        //so I can't distinguish them right now unless I change the ID names of the AI ships in BattleshipModel
-        /*
-        else if(id.equals("AIaircraftCarrier")){
-            model.getBattleship().set_location(row, col, orientation);
-        }
-        else if(id.equals("BattleShip")){
-            model.getBattleship().set_location(row, col, orientation);
-        }
-        else if(id.equals("Cruiser")){
-            model.getCruiser().set_location(row, col, orientation);
-        }
-        else if(id.equals("Destroyer")){
-            model.getDestroyer().set_location(row, col, orientation);
-        }
-        else if(id.equals("Submarine")){
-            model.getSubmarine().set_location(row, col, orientation);
-        }
-        */
         
-       // Ship currentShip = BattleshipModel.get
         return gson.toJson(model);
     }
     
@@ -125,15 +106,66 @@ public class Main {
     	return "vertical";
     }
     
-    private static boolean checkValidLocation(int x, int y, int orientation)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
+    private static boolean checkValidLocation(int x, int y, int orientation, int length)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
     {
     	
     	return true;
     }
 
+    private static boolean checkValidShot(BattleshipModel model, int[] coord)//Checks to see if a shot being done by the AI has already been done
+    {
+    	/*
+    	for (int i = 0; i < model.getComputerHits().length; i++) {
+			if(coord[0] == model.getComputerHits()[i].getX())//check if they have matching X coords
+			{
+				if(coord[1] == model.getComputerHits()[i].getY())//check if they have matching Y coords as well
+				{
+					return false;
+				}
+			}	
+		}
+    	
+    	for (int i = 0; i < model.getComputerMisses().length; i++) {
+			if(coord[0] == model.getComputerMisses()[i].getX())//check if they have matching X coords
+			{
+				if(coord[1] == model.getComputerMisses()[i].getY())//check if they have matching Y coords as well
+				{
+					return false;
+				}
+			}	
+		}
+    	*/
+    	return true;
+    }
+    
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
-        return null;
+    	
+    	Random rand = new Random(System.currentTimeMillis());
+    	int[] mycoord = new int[2];//row,col
+    	//Player does his fire things
+        
+    	
+    	//Need to check to see if the game is now complete (and who won)
+    	
+    	
+    	//If game isn't over, AI does his fire
+    	
+    	/*
+    	if(model.getAIShot() == null)//If the last show wasn't a hit
+    	{
+    		do
+    		{
+    			mycoord[0] = rand.nextInt(boardHeight);
+    			mycoord[1] = rand.nextInt(boardWidth);
+    		}while(!checkValidShot(model,mycoord));//while the shot has already been done
+    	}
+    	*/
+    	//check to see if the shot hits or misses
+    	
+    	//Check to see if the game is over now
+    	
+    	return null;
     }
 
 }
