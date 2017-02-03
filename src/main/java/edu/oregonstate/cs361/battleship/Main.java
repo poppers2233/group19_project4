@@ -21,9 +21,8 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
         
-    	
-    }
 
+    }
     //This function should return a new model
     static String newModel() {
     	BattleshipModel model = new BattleshipModel();
@@ -34,13 +33,60 @@ public class Main {
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
     private static BattleshipModel getModelFromReq(Request req){
-    	
-        return null;
+    	String boardState = req.body(); //should be a JSON stored as a string
+        Gson gson = new Gson();
+        BattleshipModel x = gson.fromJson(boardState, BattleshipModel.class); //should create a battleshipModel object from the board state json
+        return x; //returns the battleship model
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-        return "SHIP";
+        BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
+        Gson gson = new Gson();
+        //declares variables for the details specified for the ship
+        String id = req.params(":id");
+        int row = Integer.parseInt(req.params(":row"));
+        int col = Integer.parseInt(req.params(":col"));
+        String orientation = req.params(":orientation");
+
+        if(id.equals("AircraftCarrier")){
+            model.getAircraftCarrier().set_location(row, col, orientation);
+        }
+        else if(id.equals("BattleShip")){
+            model.getBattleship().set_location(row, col, orientation);
+        }
+        else if(id.equals("Cruiser")){
+            model.getCruiser().set_location(row, col, orientation);
+        }
+        else if(id.equals("Destroyer")){
+            model.getDestroyer().set_location(row, col, orientation);
+        }
+        else if(id.equals("Submarine")){
+            model.getSubmarine().set_location(row, col, orientation);
+        }
+        
+        //Possibly need below code for the AI since they are different objects in BattleshipModel, but they have same ID 
+        //so I can't distinguish them right now unless I change the ID names of the AI ships in BattleshipModel
+        /*
+        else if(id.equals("AIaircraftCarrier")){
+            model.getBattleship().set_location(row, col, orientation);
+        }
+        else if(id.equals("BattleShip")){
+            model.getBattleship().set_location(row, col, orientation);
+        }
+        else if(id.equals("Cruiser")){
+            model.getCruiser().set_location(row, col, orientation);
+        }
+        else if(id.equals("Destroyer")){
+            model.getDestroyer().set_location(row, col, orientation);
+        }
+        else if(id.equals("Submarine")){
+            model.getSubmarine().set_location(row, col, orientation);
+        }
+        */
+        
+       // Ship currentShip = BattleshipModel.get
+        return gson.toJson(model);
     }
 
     //Similar to placeShip, but with firing.
