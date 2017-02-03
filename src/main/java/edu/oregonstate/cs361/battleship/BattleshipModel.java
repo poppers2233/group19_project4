@@ -21,11 +21,11 @@ public class BattleshipModel {
 	private Ship cruiser;
 	private Ship destroyer;
 	private Ship submarine;
-	private Ship computeraircraftCarrier;
-	private Ship computerbattleship;
-	private Ship computercruiser;
-	private Ship computerdestroyer;
-	private Ship computersubmarine;
+	private Ship computer_aircraftCarrier;
+	private Ship computer_battleship;
+	private Ship computer_cruiser;
+	private Ship computer_destroyer;
+	private Ship computer_submarine;
 	private ArrayList<Ship> unplacedAIShips;
 	private Coord AIShot;
 	
@@ -38,17 +38,17 @@ public class BattleshipModel {
 		cruiser = new Ship("Cruiser", 3, 0, 0, 0, 0);
 		destroyer = new Ship("Destroyer", 2, 0, 0, 0, 0);
 		submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
-		computeraircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
-		computerbattleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
-		computercruiser = new Ship("Cruiser", 3, 0, 0, 0, 0);
-		computerdestroyer = new Ship("Destroyer", 2, 0, 0, 0, 0);
-		computersubmarine = new Ship("Submarine", 2, 0, 0, 0, 0);
+		computer_aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
+		computer_battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
+		computer_cruiser = new Ship("Cruiser", 3, 0, 0, 0, 0);
+		computer_destroyer = new Ship("Destroyer", 2, 0, 0, 0, 0);
+		computer_submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
 		//Put the AIs into the unplaced ArrayList
-		unplacedAIShips.add(computeraircraftCarrier);
-		unplacedAIShips.add(computerbattleship);
-		unplacedAIShips.add(computercruiser);
-		unplacedAIShips.add(computerdestroyer);
-		unplacedAIShips.add(computersubmarine);
+		unplacedAIShips.add(computer_aircraftCarrier);
+		unplacedAIShips.add(computer_battleship);
+		unplacedAIShips.add(computer_cruiser);
+		unplacedAIShips.add(computer_destroyer);
+		unplacedAIShips.add(computer_submarine);
 		
 	}
 	
@@ -112,43 +112,43 @@ public class BattleshipModel {
 	}
 
 	public Ship getAIaircraftCarrier() {
-		return computeraircraftCarrier;
+		return computer_aircraftCarrier;
 	}
 
 	public void setAIaircraftCarrier(Ship aIaircraftCarrier) {
-		computeraircraftCarrier = aIaircraftCarrier;
+		computer_aircraftCarrier = aIaircraftCarrier;
 	}
 
 	public Ship getAIbattleship() {
-		return computerbattleship;
+		return computer_battleship;
 	}
 
 	public void setAIbattleship(Ship aIbattleship) {
-		computerbattleship = aIbattleship;
+		computer_battleship = aIbattleship;
 	}
 
 	public Ship getAIcruiser() {
-		return computercruiser;
+		return computer_cruiser;
 	}
 
 	public void setAIcruiser(Ship aIcruiser) {
-		computercruiser = aIcruiser;
+		computer_cruiser = aIcruiser;
 	}
 
 	public Ship getAIdestroyer() {
-		return computerdestroyer;
+		return computer_destroyer;
 	}
 
 	public void setAIdestroyer(Ship aIdestroyer) {
-		computerdestroyer = aIdestroyer;
+		computer_destroyer = aIdestroyer;
 	}
 
 	public Ship getAIsubmarine() {
-		return computersubmarine;
+		return computer_submarine;
 	}
 
 	public void setAIsubmarine(Ship aIsubmarine) {
-		computersubmarine = aIsubmarine;
+		computer_submarine = aIsubmarine;
 	}
 
 

@@ -114,6 +114,7 @@ public class Main {
 
     private static boolean checkValidShot(BattleshipModel model, int[] coord)//Checks to see if a shot being done by the AI has already been done
     {
+    	/*
     	for (int i = 0; i < model.getComputerHits().length; i++) {
 			if(coord[0] == model.getComputerHits()[i].getX())//check if they have matching X coords
 			{
@@ -133,7 +134,7 @@ public class Main {
 				}
 			}	
 		}
-    	
+    	*/
     	return true;
     }
     
@@ -150,6 +151,7 @@ public class Main {
     	
     	//If game isn't over, AI does his fire
     	
+    	/*
     	if(model.getAIShot() == null)//If the last show wasn't a hit
     	{
     		do
@@ -158,7 +160,7 @@ public class Main {
     			mycoord[1] = rand.nextInt(boardWidth);
     		}while(!checkValidShot(model,mycoord));//while the shot has already been done
     	}
-    	
+    	*/
     	//check to see if the shot hits or misses
     	
     	//Check to see if the game is over now
