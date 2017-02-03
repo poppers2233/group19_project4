@@ -31,11 +31,12 @@ public class BattleshipModel {
 	private ArrayList<Coord> computerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
 	private ArrayList<Ship> unplacedAIShips;
-	//private Coord AIShot;
+	private Coord AIShot;
+
 	
 	
 	public BattleshipModel() {
-		//AIShot = null;
+		AIShot = null;
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
@@ -49,23 +50,23 @@ public class BattleshipModel {
 		computer_submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
 
 		//Put the AIs into the unplaced ArrayList
-		/*unplacedAIShips.add(computer_aircraftCarrier);
+		unplacedAIShips.add(computer_aircraftCarrier);
 		unplacedAIShips.add(computer_battleship);
 		unplacedAIShips.add(computer_cruiser);
 		unplacedAIShips.add(computer_destroyer);
-		unplacedAIShips.add(computer_submarine);*/
+		unplacedAIShips.add(computer_submarine);
 		
 	}
 	
 	
-	/*public Ship getUnplacedShip()//Gets one of the unplaced that the AI has yet to place
+	public Ship getUnplacedShip()//Gets one of the unplaced that the AI has yet to place
 	{
 		Random rand = new Random(System.currentTimeMillis());
 		Ship temp = unplacedAIShips.get(rand.nextInt(unplacedAIShips.size()));
 		unplacedAIShips.remove(temp);
 		
 		return temp;
-	}*/
+	}
 	
 
 	public Ship getaircraftCarrier() {
@@ -156,11 +157,13 @@ public class BattleshipModel {
 		computer_submarine = aIsubmarine;
 	}
 
+
 	public void add_player_hit(Coord new_hit){
 		playerHits.add(new_hit);
 	}
 	public void add_player_miss(Coord new_miss){
 		playerMisses.add(new_miss);
+
 	}
 	public void add_computer_miss(Coord new_miss){
 		computerMisses.add(new_miss);
@@ -176,14 +179,16 @@ public class BattleshipModel {
 	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
 	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
-	/*public Coord getAIShot() {
+
+	public Coord getAIShot() {
+
 		return AIShot;
 	}
 
 
 	public void setAIShot(Coord aIShot) {
 		AIShot = aIShot;
-	}*/
+	}
 
 	
 
