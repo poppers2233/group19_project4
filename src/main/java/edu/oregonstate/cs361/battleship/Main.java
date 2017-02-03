@@ -10,7 +10,7 @@ import static spark.Spark.staticFiles;
 public class Main {
 
     public static void main(String[] args) {
-    	/*
+    	
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
 
@@ -20,8 +20,8 @@ public class Main {
         post("/fire/:row/:col", (req, res) -> fireAt(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
-        */
-    	newModel();
+        
+    	
     }
 
     //This function should return a new model
