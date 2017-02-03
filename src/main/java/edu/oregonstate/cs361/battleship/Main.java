@@ -112,29 +112,29 @@ public class Main {
     	return true;
     }
 
-    private static boolean checkValidShot(BattleshipModel model, int[] coord)//Checks to see if a shot being done by the AI has already been done
+    private static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
-    	/*
-    	for (int i = 0; i < model.getComputerHits().length; i++) {
-			if(coord[0] == model.getComputerHits()[i].getX())//check if they have matching X coords
+    	
+    	for (int i = 0; i < model.get_computer_hits().size(); i++) {
+			if(coord.get_x() == model.get_computer_hits().get(i).get_x())//check if they have matching X coords
 			{
-				if(coord[1] == model.getComputerHits()[i].getY())//check if they have matching Y coords as well
+				if(coord.get_y() == model.get_computer_hits().get(i).get_y())//check if they have matching Y coords as well
 				{
 					return false;
 				}
 			}	
 		}
     	
-    	for (int i = 0; i < model.getComputerMisses().length; i++) {
-			if(coord[0] == model.getComputerMisses()[i].getX())//check if they have matching X coords
+    	for (int i = 0; i < model.get_computer_misses().size(); i++) {
+			if(coord.get_x() == model.get_computer_misses().get(i).get_x())//check if they have matching X coords
 			{
-				if(coord[1] == model.getComputerMisses()[i].getY())//check if they have matching Y coords as well
+				if(coord.get_y() == model.get_computer_misses().get(i).get_y())//check if they have matching Y coords as well
 				{
 					return false;
 				}
 			}	
 		}
-    	*/
+    	
     	return true;
     }
     
@@ -142,7 +142,40 @@ public class Main {
     private static String fireAt(Request req) {
     	
     	Random rand = new Random(System.currentTimeMillis());
-    	int[] mycoord = new int[2];//row,col
+
+    	Coord mycoord;
+
+        System.out.println("fireAt called.");
+        BattleshipModel model = getModelFromReq(req);
+        Gson gson = new Gson();
+        int[] pos = new int[]{0, 0};                                //to be passed to the position helper function
+        pos[0] = Integer.parseInt(req.params(":col"));
+        pos[1] = Integer.parseInt(req.params(":row"));
+        Coord shot = new Coord(pos[0], pos[1]);
+
+        System.out.println(pos[0]);
+        System.out.println(pos[1]);
+
+        //if we register any hits
+        if(posHelper(model.getAIaircraftCarrier(), pos) || posHelper(model.getAIbattleship(), pos) || posHelper(model.getAIcruiser(), pos) || posHelper(model.getAIdestroyer(), pos) || posHelper(model.getAIsubmarine(), pos)){
+            //mark as a hit for the player
+            model.add_player_hit(shot);
+            System.out.println("hit!");
+        } else {
+            //mark as a miss for the player
+            model.add_player_miss(shot);
+            System.out.println("miss!");
+
+        }
+
+
+        //add to hit/miss array in the gamestate
+        //possibly have Computer fire back in this function for ease of programming?
+        System.out.println(gson.toJson(model));
+       
+
+    	//int[] mycoord = new int[2];//row,col
+
     	//Player does his fire things
         
     	
@@ -151,21 +184,36 @@ public class Main {
     	
     	//If game isn't over, AI does his fire
     	
-    	/*
+    	
     	if(model.getAIShot() == null)//If the last show wasn't a hit
     	{
     		do
     		{
-    			mycoord[0] = rand.nextInt(boardHeight);
-    			mycoord[1] = rand.nextInt(boardWidth);
+    			mycoord = new Coord(rand.nextInt(boardHeight), rand.nextInt(boardWidth));
+ 
     		}while(!checkValidShot(model,mycoord));//while the shot has already been done
     	}
-    	*/
+    	
     	//check to see if the shot hits or misses
     	
-    	//Check to see if the game is over now
     	
-    	return null;
+    	
+    	//Check to see if the game is over now
+    	 return gson.toJson(model);
+    	//return null;
+    }
+
+    private static boolean posHelper(Ship model, int[] pos){
+        Coord start = model.get_start();
+        Coord end = model.get_end();
+        if(pos[0] >= start.get_x() || pos[0] <= end.get_x()) {           //if the x of the shot is within x bounds of ship
+            if (pos[1] >= start.get_y() || pos[0] <= end.get_y()) {      //if the y of the shot is within y bounds of ship
+                System.out.println("True");
+                return true;
+            }
+        }
+        System.out.println("False");
+        return false;
     }
 
 }
