@@ -37,91 +37,91 @@ public class BattleshipModel {
 		AIsubmarine = new Ship("Submarine", 2, 0, 0, 0, 0);
 	}
 
-	public Ship getaircraftCarrier() {
+	public static Ship getaircraftCarrier() {
 		return aircraftCarrier;
 	}
 
-	public void aircraftCarrier(Ship aircraftCarrier) {
+	public static void aircraftCarrier(Ship aircraftCarrier) {
 		this.aircraftCarrier = aircraftCarrier;
 	}
 	
-	public Ship getAircraftCarrier() {
+	public static Ship getAircraftCarrier() {
 		return aircraftCarrier;
 	}
 
-	public void setAircraftCarrier(Ship aircraftCarrier) {
+	public static void setAircraftCarrier(Ship aircraftCarrier) {
 		this.aircraftCarrier = aircraftCarrier;
 	}
 
-	public Ship getBattleship() {
+	public static Ship getBattleship() {
 		return battleship;
 	}
 
-	public void setBattleship(Ship battleship) {
+	public static void setBattleship(Ship battleship) {
 		this.battleship = battleship;
 	}
 
-	public Ship getCruiser() {
+	public static Ship getCruiser() {
 		return cruiser;
 	}
 
-	public void setCruiser(Ship cruiser) {
+	public static void setCruiser(Ship cruiser) {
 		this.cruiser = cruiser;
 	}
 
-	public Ship getDestroyer() {
+	public static Ship getDestroyer() {
 		return destroyer;
 	}
 
-	public void setDestroyer(Ship destroyer) {
+	public static void setDestroyer(Ship destroyer) {
 		this.destroyer = destroyer;
 	}
 
-	public Ship getSubmarine() {
+	public static Ship getSubmarine() {
 		return submarine;
 	}
 
-	public void setSubmarine(Ship submarine) {
+	public static void setSubmarine(Ship submarine) {
 		this.submarine = submarine;
 	}
 
-	public Ship getAIaircraftCarrier() {
+	public static Ship getAIaircraftCarrier() {
 		return AIaircraftCarrier;
 	}
 
-	public void setAIaircraftCarrier(Ship aIaircraftCarrier) {
+	public static void setAIaircraftCarrier(Ship aIaircraftCarrier) {
 		AIaircraftCarrier = aIaircraftCarrier;
 	}
 
-	public Ship getAIbattleship() {
+	public static Ship getAIbattleship() {
 		return AIbattleship;
 	}
 
-	public void setAIbattleship(Ship aIbattleship) {
+	public static void setAIbattleship(Ship aIbattleship) {
 		AIbattleship = aIbattleship;
 	}
 
-	public Ship getAIcruiser() {
+	public static Ship getAIcruiser() {
 		return AIcruiser;
 	}
 
-	public void setAIcruiser(Ship aIcruiser) {
+	public static void setAIcruiser(Ship aIcruiser) {
 		AIcruiser = aIcruiser;
 	}
 
-	public Ship getAIdestroyer() {
+	public static Ship getAIdestroyer() {
 		return AIdestroyer;
 	}
 
-	public void setAIdestroyer(Ship aIdestroyer) {
+	public static void setAIdestroyer(Ship aIdestroyer) {
 		AIdestroyer = aIdestroyer;
 	}
 
-	public Ship getAIsubmarine() {
+	public static Ship getAIsubmarine() {
 		return AIsubmarine;
 	}
 
-	public void setAIsubmarine(Ship aIsubmarine) {
+	public static void setAIsubmarine(Ship aIsubmarine) {
 		AIsubmarine = aIsubmarine;
 	}
 

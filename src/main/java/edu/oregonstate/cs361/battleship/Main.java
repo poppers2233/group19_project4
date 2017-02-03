@@ -34,12 +34,39 @@ public class Main {
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
     private static BattleshipModel getModelFromReq(Request req){
-    	
-        return null;
+    	String boardState = req.body(); //should be a JSON stored as a string
+        Gson gson = new Gson();
+        BattleshipModel x = gson.fromJson(boardState, BattleshipModel.class); //should create a battleshipModel object from the board state json
+        return x; //returns the battleship model
     }
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
+        BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
+
+        //declares variables for the details specified for the ship
+        String id = req.params(":id");
+        int row = Integer.parseInt(req.params(":row"));
+        int col = Integer.parseInt(req.params(":col"));
+        String orientation = req.params(":orientation");
+
+        if(id.equals("AircraftCarrier")){
+            model.getAircraftCarrier().set_location(row, col, orientation);
+        }
+        else if(id.equals("BattleShip")){
+            model.getBattleship().set_location(row, col, orientation);
+        }
+        else if(id.equals("Cruiser")){
+            model.getCruiser().set_location(row, col, orientation);
+        }
+        else if(id.equals("Destroyer")){
+            model.getDestroyer().set_location(row, col, orientation);
+        }
+        else if(id.equals("Submarine")){
+            model.getSubmarine().set_location(row, col, orientation);
+        }
+        Ship currentShip = BattleshipModel.get
+
         return "SHIP";
     }
 
