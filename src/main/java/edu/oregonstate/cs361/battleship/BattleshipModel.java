@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
  */
 public class BattleshipModel {
 
+
 	private Ship aircraftCarrier;
 	private Ship battleship;
 	private Ship cruiser;
@@ -125,6 +126,9 @@ public class BattleshipModel {
 	}
 
 	
+
+   
+
 }
 
 
