@@ -32,6 +32,7 @@ public class BattleshipModel {
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
 	private ArrayList<Ship> unplacedAIShips;
 	private Coord AIShot;
+
 	
 	
 	public BattleshipModel() {
@@ -156,36 +157,21 @@ public class BattleshipModel {
 		computer_submarine = aIsubmarine;
 	}
 
-	/*
+
 	public void add_player_hit(Coord new_hit){
-		for(int i = 16; i > 0; i = i + 1){
-			if(playerHits[i] == null){
-				playerHits[i] = new_hit;
-			}
-		}
-	}*/
-	/*public void add_player_miss(Coord new_miss){
-		for(int i = 16; i > 0; i = i + 1){
-			if(playerMisses[i] == null){
-				playerMisses[i] = new_miss;
-			}
-		}
+		playerHits.add(new_hit);
+	}
+	public void add_player_miss(Coord new_miss){
+		playerMisses.add(new_miss);
+
 	}
 	public void add_computer_miss(Coord new_miss){
-		for(int i = 16; i > 0; i = i + 1){
-			if(computerMisses[i] == null){
-				computerMisses[i] = new_miss;
-			}
-		}
+		computerMisses.add(new_miss);
 	}
 	public void add_computer_hit(Coord new_hit){
-		for(int i = 16; i > 0; i = i + 1){
-			if(computerHits[i] == null){
-				computerHits[i] = new_hit;
-			}
-		}
+		computerHits.add(new_hit);
 	}
-*/
+
 	public ArrayList<Coord> get_player_hits(){ return playerHits; }
 
 	public ArrayList<Coord> get_player_misses() {return playerMisses; }
@@ -193,7 +179,9 @@ public class BattleshipModel {
 	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
 	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
+
 	public Coord getAIShot() {
+
 		return AIShot;
 	}
 

@@ -142,12 +142,40 @@ public class Main {
     private static String fireAt(Request req) {
     	
     	Random rand = new Random(System.currentTimeMillis());
+
     	Coord mycoord;
-    	
-    	BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
+
+        System.out.println("fireAt called.");
+        BattleshipModel model = getModelFromReq(req);
         Gson gson = new Gson();
-        //declares variables for the details specified for the ship
-    	//row,col
+        int[] pos = new int[]{0, 0};                                //to be passed to the position helper function
+        pos[0] = Integer.parseInt(req.params(":col"));
+        pos[1] = Integer.parseInt(req.params(":row"));
+        Coord shot = new Coord(pos[0], pos[1]);
+
+        System.out.println(pos[0]);
+        System.out.println(pos[1]);
+
+        //if we register any hits
+        if(posHelper(model.getAIaircraftCarrier(), pos) || posHelper(model.getAIbattleship(), pos) || posHelper(model.getAIcruiser(), pos) || posHelper(model.getAIdestroyer(), pos) || posHelper(model.getAIsubmarine(), pos)){
+            //mark as a hit for the player
+            model.add_player_hit(shot);
+            System.out.println("hit!");
+        } else {
+            //mark as a miss for the player
+            model.add_player_miss(shot);
+            System.out.println("miss!");
+
+        }
+
+
+        //add to hit/miss array in the gamestate
+        //possibly have Computer fire back in this function for ease of programming?
+        System.out.println(gson.toJson(model));
+       
+
+    	//int[] mycoord = new int[2];//row,col
+
     	//Player does his fire things
         
     	
@@ -171,8 +199,21 @@ public class Main {
     	
     	
     	//Check to see if the game is over now
-    	
-    	return null;
+    	 return gson.toJson(model);
+    	//return null;
+    }
+
+    private static boolean posHelper(Ship model, int[] pos){
+        Coord start = model.get_start();
+        Coord end = model.get_end();
+        if(pos[0] >= start.get_x() || pos[0] <= end.get_x()) {           //if the x of the shot is within x bounds of ship
+            if (pos[1] >= start.get_y() || pos[0] <= end.get_y()) {      //if the y of the shot is within y bounds of ship
+                System.out.println("True");
+                return true;
+            }
+        }
+        System.out.println("False");
+        return false;
     }
 
 }
