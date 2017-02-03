@@ -112,29 +112,29 @@ public class Main {
     	return true;
     }
 
-    private static boolean checkValidShot(BattleshipModel model, int[] coord)//Checks to see if a shot being done by the AI has already been done
+    private static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
-    	/*
-    	for (int i = 0; i < model.getComputerHits().length; i++) {
-			if(coord[0] == model.getComputerHits()[i].getX())//check if they have matching X coords
+    	
+    	for (int i = 0; i < model.get_computer_hits().size(); i++) {
+			if(coord.get_x() == model.get_computer_hits().get(i).get_x())//check if they have matching X coords
 			{
-				if(coord[1] == model.getComputerHits()[i].getY())//check if they have matching Y coords as well
+				if(coord.get_y() == model.get_computer_hits().get(i).get_y())//check if they have matching Y coords as well
 				{
 					return false;
 				}
 			}	
 		}
     	
-    	for (int i = 0; i < model.getComputerMisses().length; i++) {
-			if(coord[0] == model.getComputerMisses()[i].getX())//check if they have matching X coords
+    	for (int i = 0; i < model.get_computer_misses().size(); i++) {
+			if(coord.get_x() == model.get_computer_misses().get(i).get_x())//check if they have matching X coords
 			{
-				if(coord[1] == model.getComputerMisses()[i].getY())//check if they have matching Y coords as well
+				if(coord.get_y() == model.get_computer_misses().get(i).get_y())//check if they have matching Y coords as well
 				{
 					return false;
 				}
 			}	
 		}
-    	*/
+    	
     	return true;
     }
     
@@ -142,7 +142,12 @@ public class Main {
     private static String fireAt(Request req) {
     	
     	Random rand = new Random(System.currentTimeMillis());
-    	int[] mycoord = new int[2];//row,col
+    	Coord mycoord;
+    	
+    	BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
+        Gson gson = new Gson();
+        //declares variables for the details specified for the ship
+    	//row,col
     	//Player does his fire things
         
     	
@@ -151,17 +156,19 @@ public class Main {
     	
     	//If game isn't over, AI does his fire
     	
-    	/*
+    	
     	if(model.getAIShot() == null)//If the last show wasn't a hit
     	{
     		do
     		{
-    			mycoord[0] = rand.nextInt(boardHeight);
-    			mycoord[1] = rand.nextInt(boardWidth);
+    			mycoord = new Coord(rand.nextInt(boardHeight), rand.nextInt(boardWidth));
+ 
     		}while(!checkValidShot(model,mycoord));//while the shot has already been done
     	}
-    	*/
+    	
     	//check to see if the shot hits or misses
+    	
+    	
     	
     	//Check to see if the game is over now
     	

@@ -30,12 +30,12 @@ public class BattleshipModel {
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private ArrayList<Coord> computerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
-	//private ArrayList<Ship> unplacedAIShips;
-	//private Coord AIShot;
+	private ArrayList<Ship> unplacedAIShips;
+	private Coord AIShot;
 	
 	
 	public BattleshipModel() {
-		//AIShot = null;
+		AIShot = null;
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
@@ -49,23 +49,23 @@ public class BattleshipModel {
 		computer_submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
 
 		//Put the AIs into the unplaced ArrayList
-		/*unplacedAIShips.add(computer_aircraftCarrier);
+		unplacedAIShips.add(computer_aircraftCarrier);
 		unplacedAIShips.add(computer_battleship);
 		unplacedAIShips.add(computer_cruiser);
 		unplacedAIShips.add(computer_destroyer);
-		unplacedAIShips.add(computer_submarine);*/
+		unplacedAIShips.add(computer_submarine);
 		
 	}
 	
 	
-	/*public Ship getUnplacedShip()//Gets one of the unplaced that the AI has yet to place
+	public Ship getUnplacedShip()//Gets one of the unplaced that the AI has yet to place
 	{
 		Random rand = new Random(System.currentTimeMillis());
 		Ship temp = unplacedAIShips.get(rand.nextInt(unplacedAIShips.size()));
 		unplacedAIShips.remove(temp);
 		
 		return temp;
-	}*/
+	}
 	
 
 	public Ship getaircraftCarrier() {
@@ -156,7 +156,8 @@ public class BattleshipModel {
 		computer_submarine = aIsubmarine;
 	}
 
-	/*public void add_player_hit(Coord new_hit){
+	/*
+	public void add_player_hit(Coord new_hit){
 		for(int i = 16; i > 0; i = i + 1){
 			if(playerHits[i] == null){
 				playerHits[i] = new_hit;
@@ -184,22 +185,22 @@ public class BattleshipModel {
 			}
 		}
 	}
+*/
+	public ArrayList<Coord> get_player_hits(){ return playerHits; }
 
-	//public Coord[] get_player_hits(){ return playerHits; }
+	public ArrayList<Coord> get_player_misses() {return playerMisses; }
 
-	public Coord[] get_player_misses() {return playerMisses; }
+	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
-	public Coord[] get_computer_hits(){ return computerHits; }
-
-	public Coord[] get_computer_misses(){ return computerMisses; }*/
-	/*public Coord getAIShot() {
+	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
+	public Coord getAIShot() {
 		return AIShot;
 	}
 
 
 	public void setAIShot(Coord aIShot) {
 		AIShot = aIShot;
-	}*/
+	}
 
 	
 
