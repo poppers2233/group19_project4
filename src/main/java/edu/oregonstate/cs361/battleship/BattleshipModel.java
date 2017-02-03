@@ -27,8 +27,11 @@ public class BattleshipModel {
 	private Ship AIdestroyer;
 	private Ship AIsubmarine;
 	private ArrayList<Ship> unplacedAIShips;
+	private Coord AIShot;
+	
 	
 	public BattleshipModel() {
+		AIShot = null;
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
@@ -146,6 +149,16 @@ public class BattleshipModel {
 
 	public void setAIsubmarine(Ship aIsubmarine) {
 		AIsubmarine = aIsubmarine;
+	}
+
+
+	public Coord getAIShot() {
+		return AIShot;
+	}
+
+
+	public void setAIShot(Coord aIShot) {
+		AIShot = aIShot;
 	}
 
 	
