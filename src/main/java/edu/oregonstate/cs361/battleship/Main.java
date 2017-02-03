@@ -49,7 +49,7 @@ public class Main {
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
-    	
+
     	
    //------------------------------Parsing and execution of the player's turn
     	
@@ -82,18 +82,18 @@ public class Main {
         
         Random rand = new Random(System.currentTimeMillis());
         int AICol, AIRow, AIOrientation;
-        Ship temp = model.getUnplacedShip();
-        do
+        //Ship temp = model.getUnplacedShip();
+        /*do
         {
         	AICol = rand.nextInt(boardWidth);
         	AIRow = rand.nextInt(boardHeight);
         	AIOrientation = rand.nextInt(1);
         	
-        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));
+        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));*/
         
         //coords are now valid (in theory)
         
-        temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into 
+        //temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into
         
         
         return gson.toJson(model);
