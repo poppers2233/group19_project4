@@ -1,5 +1,6 @@
 package edu.oregonstate.cs361.battleship;
 
+
 /**
  * Created by Juanma on 2/2/2017.
  */
