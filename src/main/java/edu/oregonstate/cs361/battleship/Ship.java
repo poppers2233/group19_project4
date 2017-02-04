@@ -26,19 +26,27 @@ public class Ship {
     public String get_name(){ return name; }
 
     /////////////////////////////////////
-    public void set_location(int row, int col, String orientation){
+    public void set_location(int col, int row, String orientation){
         int x1 = col;
         int y1 = row;
         int x2 = 0;
         int y2 = 0;
 
-        if(orientation == "vertical"){
+        if(orientation.equals("horizontal")){
              x2 = x1;
              y2 = y1+length;
+             if(x2 > 10 || y2 > 10){
+                 x2 = 0;
+                 y2 = 0;
+             }
         }
         else{
              x2 = x1+length;
              y2 = y1;
+        }
+        if(x2 > 10 || y2 > 10){
+            x2 = 0;
+            y2 = 0;
         }
         start = new Coord(x1,y1);
         end   = new Coord(x2,y2);
