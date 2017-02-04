@@ -50,6 +50,9 @@ public class Main {
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
     private static String placeShip(Request req) {
 
+    	Random rand = new Random(System.currentTimeMillis());
+        int AICol, AIRow;
+        String AIOrientation;
     	
    //------------------------------Parsing and execution of the player's turn
         System.out.println("hello");
@@ -63,61 +66,117 @@ public class Main {
 
         System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
         if(id.equals("aircraftCarrier")){
-            if(isValidLocation(model, row, col, orientation, 5)) {
+            if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getAircraftCarrier().set_location(row, col, orientation);
+                Ship temp = model.getAIaircraftCarrier();
+                do
+                {
+                	AICol = rand.nextInt(boardWidth);
+                	AIRow = rand.nextInt(boardHeight);
+                	if(rand.nextInt(1) == 0)
+                		AIOrientation = "horizontal";
+                	else
+                		AIOrientation = "vertical";
+                	
+                	
+                }while(!isValidLocation(model, AIRow,AICol, AIOrientation, temp.get_length(), false));
+                
+                //coords are now valid (in theory)
+                
+                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("battleship")){
-            if(isValidLocation(model, row, col, orientation, 5)) {
+            if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getBattleship().set_location(row, col, orientation);
+                Ship temp = model.getAIbattleship();
+                do
+                {
+                	AICol = rand.nextInt(boardWidth);
+                	AIRow = rand.nextInt(boardHeight);
+                	if(rand.nextInt(1) == 0)
+                		AIOrientation = "horizontal";
+                	else
+                		AIOrientation = "vertical";
+                	
+                	
+                }while(!isValidLocation(model, AIRow,AICol, AIOrientation, temp.get_length(), false));
+                
+                //coords are now valid (in theory)
+                
+                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("cruiser")){
-            if(isValidLocation(model, row, col, orientation, 5)) {
+            if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getCruiser().set_location(row, col, orientation);
+                Ship temp = model.getAIcruiser();
+                do
+                {
+                	AICol = rand.nextInt(boardWidth);
+                	AIRow = rand.nextInt(boardHeight);
+                	if(rand.nextInt(1) == 0)
+                		AIOrientation = "horizontal";
+                	else
+                		AIOrientation = "vertical";
+                	
+                	
+                }while(!isValidLocation(model, AIRow,AICol, AIOrientation, temp.get_length(), false));
+                
+                //coords are now valid (in theory)
+                
+                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("destroyer")){
-            if(isValidLocation(model, row, col, orientation, 5)) {
+            if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getDestroyer().set_location(row, col, orientation);
+                Ship temp = model.getAIdestroyer();
+                do
+                {
+                	AICol = rand.nextInt(boardWidth);
+                	AIRow = rand.nextInt(boardHeight);
+                	if(rand.nextInt(1) == 0)
+                		AIOrientation = "horizontal";
+                	else
+                		AIOrientation = "vertical";
+                	
+                	
+                }while(!isValidLocation(model, AIRow,AICol, AIOrientation, temp.get_length(), false));
+                
+                //coords are now valid (in theory)
+                
+                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("submarine")){
-            if(isValidLocation(model, row, col, orientation, 5)) {
+            if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getSubmarine().set_location(row, col, orientation);
+                Ship temp = model.getAIsubmarine();
+                do
+                {
+                	AICol = rand.nextInt(boardWidth);
+                	AIRow = rand.nextInt(boardHeight);
+                	if(rand.nextInt(1) == 0)
+                		AIOrientation = "horizontal";
+                	else
+                		AIOrientation = "vertical";
+                	
+                	
+                }while(!isValidLocation(model, AIRow,AICol, AIOrientation, temp.get_length(), false));
+                
+                //coords are now valid (in theory)
+                
+                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
 
         }
-        
-      //------------------------------Execution of the AI's turn
-        
-        Random rand = new Random(System.currentTimeMillis());
-        int AICol, AIRow, AIOrientation;
-        Ship temp = model.getUnplacedShip();
-        do
-        {
-        	AICol = rand.nextInt(boardWidth);
-        	AIRow = rand.nextInt(boardHeight);
-        	AIOrientation = rand.nextInt(1);
-        	
-        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));
-        
-        //coords are now valid (in theory)
-        
-        temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into
         
         
         return gson.toJson(model);
     }
     
-    private static String getOrientation(int orientation)
-    {
-    	if(orientation == 0)
-    		return "horizontal";
-    	return "vertical";
-    }
-    
-    private static boolean isValidLocation(BattleshipModel model, int row, int col, String orientation, int length)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
+    private static boolean isValidLocation(BattleshipModel model, int row, int col, String orientation, int length, boolean isPlayer)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
     {
         // aircraft carrier check
         if(     (row != model.getAIaircraftCarrier().get_start().get_x() ) &&
