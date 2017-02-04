@@ -6,6 +6,7 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -492,7 +493,6 @@ public class Main {
             //possibly have Computer fire back in this function for ease of programming?
             System.out.println(gson.toJson(model));
 
-
             //Need to check to see if the game is now complete (and who won)
 
 
@@ -522,7 +522,11 @@ public class Main {
             }
         }
     	//Check to see if the game is over now
-        return gson.toJson(model);
+        
+        if(game_over(model))
+        	game_complete(model, false);
+        
+    	 return gson.toJson(model);
     
     }
 
@@ -549,5 +553,84 @@ public class Main {
 
         else
             return false;
+     }
+     
+     private static void game_complete(BattleshipModel model, boolean isPlayer)
+     {
+    	 ArrayList<Coord> temp = new ArrayList<Coord>();
+    	 model.get_player_hits().clear();
+		 model.get_computer_hits().clear();
+		 model.get_computer_misses().clear();
+		 model.get_player_misses().clear();
+    	 if(isPlayer)
+    	 {
+    		 
+    		 //Add in the coords for the W and L for the winner and loser
+    		 //MAKES THE W
+    		 temp.add(new Coord(2,1));temp.add(new Coord(2,2));temp.add(new Coord(3,1));
+    		 temp.add(new Coord(3,2));temp.add(new Coord(4,1));temp.add(new Coord(4,2));
+    		 temp.add(new Coord(4,3));temp.add(new Coord(5,2));temp.add(new Coord(5,3));
+    		 temp.add(new Coord(6,2));temp.add(new Coord(6,3));temp.add(new Coord(6,4));
+    		 temp.add(new Coord(7,3));temp.add(new Coord(7,4));temp.add(new Coord(7,5));
+    		 temp.add(new Coord(8,4));temp.add(new Coord(8,5));temp.add(new Coord(7,6));
+    		 temp.add(new Coord(6,6));temp.add(new Coord(7,7));temp.add(new Coord(8,7));
+    		 temp.add(new Coord(8,7));temp.add(new Coord(7,8));temp.add(new Coord(6,8));
+    		 temp.add(new Coord(6,9));temp.add(new Coord(5,8));temp.add(new Coord(5,9));
+    		 temp.add(new Coord(4,8));temp.add(new Coord(4,9));temp.add(new Coord(4,10));
+    		 temp.add(new Coord(3,9));temp.add(new Coord(3,10));temp.add(new Coord(2,9));
+    		 temp.add(new Coord(2,10));
+    		 
+    		 model.setPlayerHits(temp);
+    		 
+    		 
+    		 //MAKES THE L
+    		 temp = new ArrayList<Coord>();
+    		 
+    		 temp.add(new Coord(2,4));temp.add(new Coord(2,5));temp.add(new Coord(3,4));
+    		 temp.add(new Coord(3,5));temp.add(new Coord(4,4));temp.add(new Coord(4,5));
+    		 temp.add(new Coord(5,4));temp.add(new Coord(5,4));temp.add(new Coord(6,4));
+    		 temp.add(new Coord(6,5));temp.add(new Coord(7,4));temp.add(new Coord(7,5));
+    		 temp.add(new Coord(8,4));temp.add(new Coord(8,5));temp.add(new Coord(8,6));
+    		 temp.add(new Coord(8,7));temp.add(new Coord(8,8));temp.add(new Coord(9,4));
+    		 temp.add(new Coord(9,5));temp.add(new Coord(9,6));temp.add(new Coord(9,7));
+    		 temp.add(new Coord(9,8));
+    		 
+    		 model.setComputerHits(temp);
+    		 
+    	 }
+    	 else
+    	 {
+    		//Add in the coords for the W and L for the winner and loser
+    		 //MAKES THE W
+    		 temp.add(new Coord(2,1));temp.add(new Coord(2,2));temp.add(new Coord(3,1));
+    		 temp.add(new Coord(3,2));temp.add(new Coord(4,1));temp.add(new Coord(4,2));
+    		 temp.add(new Coord(4,3));temp.add(new Coord(5,2));temp.add(new Coord(5,3));
+    		 temp.add(new Coord(6,2));temp.add(new Coord(6,3));temp.add(new Coord(6,4));
+    		 temp.add(new Coord(7,3));temp.add(new Coord(7,4));temp.add(new Coord(7,5));
+    		 temp.add(new Coord(8,4));temp.add(new Coord(8,5));temp.add(new Coord(7,6));
+    		 temp.add(new Coord(6,6));temp.add(new Coord(7,7));temp.add(new Coord(8,7));
+    		 temp.add(new Coord(8,7));temp.add(new Coord(7,8));temp.add(new Coord(6,8));
+    		 temp.add(new Coord(6,9));temp.add(new Coord(5,8));temp.add(new Coord(5,9));
+    		 temp.add(new Coord(4,8));temp.add(new Coord(4,9));temp.add(new Coord(4,10));
+    		 temp.add(new Coord(3,9));temp.add(new Coord(3,10));temp.add(new Coord(2,9));
+    		 temp.add(new Coord(2,10));
+    		 
+    		 model.setComputerHits(temp);
+    		 
+    		 
+    		 //MAKES THE L
+    		 temp = new ArrayList<Coord>();
+    		 
+    		 temp.add(new Coord(2,4));temp.add(new Coord(2,5));temp.add(new Coord(3,4));
+    		 temp.add(new Coord(3,5));temp.add(new Coord(4,4));temp.add(new Coord(4,5));
+    		 temp.add(new Coord(5,4));temp.add(new Coord(5,4));temp.add(new Coord(6,4));
+    		 temp.add(new Coord(6,5));temp.add(new Coord(7,4));temp.add(new Coord(7,5));
+    		 temp.add(new Coord(8,4));temp.add(new Coord(8,5));temp.add(new Coord(8,6));
+    		 temp.add(new Coord(8,7));temp.add(new Coord(8,8));temp.add(new Coord(9,4));
+    		 temp.add(new Coord(9,5));temp.add(new Coord(9,6));temp.add(new Coord(9,7));
+    		 temp.add(new Coord(9,8));
+    		 
+    		 model.setPlayerHits(temp);
+    	 }
      }
 }
