@@ -191,7 +191,7 @@ public class Main {
             	Ship s = model.getAircraftCarrier();
             	
                 if (orientation.equals("horizontal")) {
-                    for (int i = -1; i < length; i++) {
+                    for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row, col + i);
                         if (posHelper(s, c))
                             return false;
@@ -213,13 +213,13 @@ public class Main {
                 Ship s = model.getBattleship();
 
                 if (orientation.equals("horizontal")) {
-                    for (int i = -1; i < length; i++) {
+                    for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row, col + i);
                         if (posHelper(s, c))
                             return false;
                     }
                 } else {
-                    for (int i = -1; i < length; i++) {
+                    for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row + i, col);
                         if (posHelper(s, c))
                             return false;
@@ -236,7 +236,7 @@ public class Main {
             	Ship s = model.getCruiser();
             	
                 if (orientation.equals("horizontal")) {
-                    for (int i = -1; i < length; i++) {
+                    for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row, col + i);
                         if (posHelper(s, c))
                             return false;
@@ -258,7 +258,7 @@ public class Main {
             	Ship s = model.getDestroyer();
             	
                 if (orientation.equals("horizontal")) {
-                    for (int i = -1; i < length; i++) {
+                    for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row, col + i);
                         if (posHelper(s, c))
                             return false;
@@ -280,7 +280,7 @@ public class Main {
             	Ship s = model.getSubmarine();
             	
                 if (orientation.equals("horizontal")) {
-                    for (int i = -1; i < length; i++) {
+                    for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row, col + i);
                         if (posHelper(s, c))
                             return false;
