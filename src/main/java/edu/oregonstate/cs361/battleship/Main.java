@@ -584,7 +584,7 @@ public class Main {
 		 model.get_computer_hits().clear();
 		 model.get_computer_misses().clear();
 		 model.get_player_misses().clear();
-    	 if(isPlayer)
+    	 if(!isPlayer)
     	 {
     		 
     		 //Add in the coords for the W and L for the winner and loser
@@ -610,7 +610,7 @@ public class Main {
     		 
     		 temp.add(new Coord(2,4));temp.add(new Coord(2,5));temp.add(new Coord(3,4));
     		 temp.add(new Coord(3,5));temp.add(new Coord(4,4));temp.add(new Coord(4,5));
-    		 temp.add(new Coord(5,4));temp.add(new Coord(5,4));temp.add(new Coord(6,4));
+    		 temp.add(new Coord(5,4));temp.add(new Coord(5,5));temp.add(new Coord(6,4));
     		 temp.add(new Coord(6,5));temp.add(new Coord(7,4));temp.add(new Coord(7,5));
     		 temp.add(new Coord(8,4));temp.add(new Coord(8,5));temp.add(new Coord(8,6));
     		 temp.add(new Coord(8,7));temp.add(new Coord(8,8));temp.add(new Coord(9,4));
@@ -645,7 +645,7 @@ public class Main {
     		 
     		 temp.add(new Coord(2,4));temp.add(new Coord(2,5));temp.add(new Coord(3,4));
     		 temp.add(new Coord(3,5));temp.add(new Coord(4,4));temp.add(new Coord(4,5));
-    		 temp.add(new Coord(5,4));temp.add(new Coord(5,4));temp.add(new Coord(6,4));
+    		 temp.add(new Coord(5,4));temp.add(new Coord(5,5));temp.add(new Coord(6,4));
     		 temp.add(new Coord(6,5));temp.add(new Coord(7,4));temp.add(new Coord(7,5));
     		 temp.add(new Coord(8,4));temp.add(new Coord(8,5));temp.add(new Coord(8,6));
     		 temp.add(new Coord(8,7));temp.add(new Coord(8,8));temp.add(new Coord(9,4));
