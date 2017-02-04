@@ -64,7 +64,7 @@ public class Main {
         if(id.equals("aircraftCarrier")){
             model.getAircraftCarrier().set_location(row, col, orientation);
         }
-        else if(id.equals("battleShip")){
+        else if(id.equals("battleship")){
             model.getBattleship().set_location(row, col, orientation);
         }
         else if(id.equals("cruiser")){
