@@ -478,13 +478,13 @@ public class Main {
     	//check to see if the shot hits or misses
     	
     	 //if we register any hits
-        if(posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIcruiser(), shot) || posHelper(model.getAIdestroyer(), shot) || posHelper(model.getAIsubmarine(), shot)){
+        if(posHelper(model.getAIaircraftCarrier(), mycoord) || posHelper(model.getAIbattleship(), mycoord) || posHelper(model.getAIcruiser(), mycoord) || posHelper(model.getAIdestroyer(), mycoord) || posHelper(model.getAIsubmarine(), mycoord)){
             //mark as a hit for the player
-            model.add_computer_hit(shot);
+            model.add_computer_hit(mycoord);
             System.out.println("hit!");
         } else {
             //mark as a miss for the player
-            model.add_computer_miss(shot);
+            model.add_computer_miss(mycoord);
             System.out.println("miss!");
 
         }
