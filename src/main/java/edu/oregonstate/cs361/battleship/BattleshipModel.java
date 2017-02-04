@@ -30,11 +30,9 @@ public class BattleshipModel {
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
-	private Coord AIShot;
 	
 	
 	public BattleshipModel() {
-		AIShot = null;
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
@@ -160,20 +158,7 @@ public class BattleshipModel {
 	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
 	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
-
-	public Coord getAIShot() {
-
-		return AIShot;
-	}
-
-
-	public void setAIShot(Coord aIShot) {
-		AIShot = aIShot;
-	}
-
-	
-
-   
+ 
 
 }
 

@@ -354,33 +354,23 @@ public class Main {
     	//If game isn't over, AI does his fire
     	
     	
-    	if(model.getAIShot() == null)//If the last show wasn't a hit
-    	{
-    		do
-    		{
-    			mycoord = new Coord(rand.nextInt(boardHeight), rand.nextInt(boardWidth));
- 
-    		}while(!checkValidShot(model,mycoord));//while the shot has already been done
-    	}
-    	else
-    	{
-    		mycoord = new Coord(model.getAIShot().get_x() + 1, model.getAIShot().get_y());
-    		if(!checkValidShot(model, mycoord))//If thats wrong
-    			mycoord = new Coord(model.getAIShot().get_x() - 1, model.getAIShot().get_y());
-    	}
     	
+   		do
+   		{
+   			mycoord = new Coord(rand.nextInt(boardHeight), rand.nextInt(boardWidth));
+   			
+     	}while(!checkValidShot(model,mycoord));//while the shot has already been done
+
     	//check to see if the shot hits or misses
     	
     	 //if we register any hits
         if(posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIcruiser(), shot) || posHelper(model.getAIdestroyer(), shot) || posHelper(model.getAIsubmarine(), shot)){
             //mark as a hit for the player
             model.add_computer_hit(shot);
-            model.setAIShot(shot);
             System.out.println("hit!");
         } else {
             //mark as a miss for the player
             model.add_computer_miss(shot);
-            model.setAIShot(null);
             System.out.println("miss!");
 
         }
