@@ -82,18 +82,18 @@ public class Main {
         
         Random rand = new Random(System.currentTimeMillis());
         int AICol, AIRow, AIOrientation;
-        //Ship temp = model.getUnplacedShip();
-        /*do
+        Ship temp = model.getUnplacedShip();
+        do
         {
         	AICol = rand.nextInt(boardWidth);
         	AIRow = rand.nextInt(boardHeight);
         	AIOrientation = rand.nextInt(1);
         	
-        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));*/
+        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));
         
         //coords are now valid (in theory)
         
-        //temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into
+        temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into
         
         
         return gson.toJson(model);
@@ -149,7 +149,11 @@ public class Main {
     	Random rand = new Random(System.currentTimeMillis());
 
     	Coord mycoord;
-
+    	
+    	
+    	//------------------------------Parsing and execution of the player's turn
+    	
+    	
         System.out.println("fireAt called.");
         BattleshipModel model = getModelFromReq(req);
         Gson gson = new Gson();
@@ -185,6 +189,9 @@ public class Main {
     	//Need to check to see if the game is now complete (and who won)
     	
     	
+        //------------------------------Execution of the AI's turn
+        
+        
     	//If game isn't over, AI does his fire
     	
     	
