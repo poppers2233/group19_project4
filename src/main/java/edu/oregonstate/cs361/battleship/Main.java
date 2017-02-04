@@ -179,12 +179,15 @@ public class Main {
     }
     
     private static boolean isValidLocation(BattleshipModel model, int row, int col, String orientation, int length, boolean isPlayer)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
-    {
+     {
         if(isPlayer)
         {
-        	// aircraft carrier check
-            if(     (row != model.getAircraftCarrier().get_start().get_x() ) &&
-                    (col != model.getAircraftCarrier().get_start().get_y() )   ) {
+            // aircraft carrier check
+            if(     (row == model.getAircraftCarrier().get_start().get_x() ) &&
+                    (col == model.getAircraftCarrier().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
 
             	Ship s = model.getAircraftCarrier();
             	
@@ -203,11 +206,13 @@ public class Main {
                 }
             }
             // battle ship check
-            if(     (row != model.getBattleship().get_start().get_x() ) &&
-                    (col != model.getBattleship().get_start().get_y() )   ) {
+            if(     (row == model.getBattleship().get_start().get_x() ) &&
+                    (col == model.getBattleship().get_start().get_y() )   ) {
+                return false;
+            }
+            else {
+                Ship s = model.getBattleship();
 
-            	Ship s = model.getBattleship();
-            	
                 if (orientation.equals("horizontal")) {
                     for (int i = 0; i < length; i++) {
                         Coord c = new Coord(row, col + i);
@@ -223,9 +228,12 @@ public class Main {
                 }
             }
             // cruiser check
-            if(     (row != model.getCruiser().get_start().get_x() ) &&
-                    (col != model.getCruiser().get_start().get_y() )   ) {
+            if(     (row == model.getCruiser().get_start().get_x() ) &&
+                    (col == model.getCruiser().get_start().get_y() )   ) {
 
+                return false;
+            }
+            else{
             	Ship s = model.getCruiser();
             	
                 if (orientation.equals("horizontal")) {
@@ -243,9 +251,11 @@ public class Main {
                 }
             }
             // destroyer check
-            if(     (row != model.getDestroyer().get_start().get_x() ) &&
-                    (col != model.getDestroyer().get_start().get_y() )   ) {
-
+            if(     (row == model.getDestroyer().get_start().get_x() ) &&
+                    (col == model.getDestroyer().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getDestroyer();
             	
                 if (orientation.equals("horizontal")) {
@@ -263,9 +273,11 @@ public class Main {
                 }
             }
             //submarine check
-            if(     (row != model.getSubmarine().get_start().get_x() ) &&
-                    (col != model.getSubmarine().get_start().get_y() )   ) {
-
+            if(     (row == model.getSubmarine().get_start().get_x() ) &&
+                    (col == model.getSubmarine().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getSubmarine();
             	
                 if (orientation.equals("horizontal")) {
@@ -287,9 +299,11 @@ public class Main {
         else
         {
         	// aircraft carrier check
-            if(     (row != model.getAIaircraftCarrier().get_start().get_x() ) &&
-                    (col != model.getAIaircraftCarrier().get_start().get_y() )   ) {
-
+            if(     (row == model.getAIaircraftCarrier().get_start().get_x() ) &&
+                    (col == model.getAIaircraftCarrier().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getAIaircraftCarrier();
             	
                 if (orientation.equals("horizontal")) {
@@ -307,9 +321,11 @@ public class Main {
                 }
             }
             // battle ship check
-            if(     (row != model.getAIbattleship().get_start().get_x() ) &&
-                    (col != model.getAIbattleship().get_start().get_y() )   ) {
-
+            if(     (row == model.getAIbattleship().get_start().get_x() ) &&
+                    (col == model.getAIbattleship().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getAIbattleship();
             	
                 if (orientation.equals("horizontal")) {
@@ -327,9 +343,11 @@ public class Main {
                 }
             }
             // cruiser check
-            if(     (row != model.getAIcruiser().get_start().get_x() ) &&
-                    (col != model.getAIcruiser().get_start().get_y() )   ) {
-
+            if(     (row == model.getAIcruiser().get_start().get_x() ) &&
+                    (col == model.getAIcruiser().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getAIcruiser();
             	
                 if (orientation.equals("horizontal")) {
@@ -347,9 +365,11 @@ public class Main {
                 }
             }
             // destroyer check
-            if(     (row != model.getAIdestroyer().get_start().get_x() ) &&
-                    (col != model.getAIdestroyer().get_start().get_y() )   ) {
-
+            if(     (row == model.getAIdestroyer().get_start().get_x() ) &&
+                    (col == model.getAIdestroyer().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getAIdestroyer();
             	
                 if (orientation.equals("horizontal")) {
@@ -367,9 +387,11 @@ public class Main {
                 }
             }
             //submarine check
-            if(     (row != model.getAIsubmarine().get_start().get_x() ) &&
-                    (col != model.getAIsubmarine().get_start().get_y() )   ) {
-
+            if(     (row == model.getAIsubmarine().get_start().get_x() ) &&
+                    (col == model.getAIsubmarine().get_start().get_y() )   ) {
+                return false;
+            }
+            else{
             	Ship s = model.getAIsubmarine();
             	
                 if (orientation.equals("horizontal")) {
