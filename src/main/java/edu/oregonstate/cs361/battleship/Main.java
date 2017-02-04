@@ -82,18 +82,18 @@ public class Main {
         
         Random rand = new Random(System.currentTimeMillis());
         int AICol, AIRow, AIOrientation;
-        //Ship temp = model.getUnplacedShip();
-        /*do
+        Ship temp = model.getUnplacedShip();
+        do
         {
         	AICol = rand.nextInt(boardWidth);
         	AIRow = rand.nextInt(boardHeight);
         	AIOrientation = rand.nextInt(1);
         	
-        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));*/
+        }while(!checkValidLocation(AICol,AIRow, AIOrientation, temp.get_length()));
         
         //coords are now valid (in theory)
         
-        //temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into
+        temp.set_location(AIRow, AICol, getOrientation(AIOrientation));//Place a ship into
         
         
         return gson.toJson(model);
@@ -114,7 +114,12 @@ public class Main {
 
     private static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
-    	
+    	//Check to see if it is off the map
+    	if(coord.get_x() < 0 || coord.get_x() > boardWidth || coord.get_y() < 0 || coord.get_y() > boardHeight)
+    	{
+    		return false;
+    	}
+    	//Check to see if thats been fired before
     	for (int i = 0; i < model.get_computer_hits().size(); i++) {
 			if(coord.get_x() == model.get_computer_hits().get(i).get_x())//check if they have matching X coords
 			{
@@ -144,7 +149,11 @@ public class Main {
     	Random rand = new Random(System.currentTimeMillis());
 
     	Coord mycoord;
-
+    	
+    	
+    	//------------------------------Parsing and execution of the player's turn
+    	
+    	
         System.out.println("fireAt called.");
         BattleshipModel model = getModelFromReq(req);
         Gson gson = new Gson();
@@ -157,7 +166,7 @@ public class Main {
         System.out.println(pos[1]);
 
         //if we register any hits
-        if(posHelper(model.getAIaircraftCarrier(), pos) || posHelper(model.getAIbattleship(), pos) || posHelper(model.getAIcruiser(), pos) || posHelper(model.getAIdestroyer(), pos) || posHelper(model.getAIsubmarine(), pos)){
+        if(posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIcruiser(), shot) || posHelper(model.getAIdestroyer(), shot) || posHelper(model.getAIsubmarine(), shot)){
             //mark as a hit for the player
             model.add_player_hit(shot);
             System.out.println("hit!");
@@ -172,9 +181,7 @@ public class Main {
         //add to hit/miss array in the gamestate
         //possibly have Computer fire back in this function for ease of programming?
         System.out.println(gson.toJson(model));
-       
-
-    	//int[] mycoord = new int[2];//row,col
+      
 
     	//Player does his fire things
         
@@ -182,6 +189,9 @@ public class Main {
     	//Need to check to see if the game is now complete (and who won)
     	
     	
+        //------------------------------Execution of the AI's turn
+        
+        
     	//If game isn't over, AI does his fire
     	
     	
@@ -193,21 +203,40 @@ public class Main {
  
     		}while(!checkValidShot(model,mycoord));//while the shot has already been done
     	}
+    	else
+    	{
+    		mycoord = new Coord(model.getAIShot().get_x() + 1, model.getAIShot().get_y());
+    		if(!checkValidShot(model, mycoord))//If thats wrong
+    			mycoord = new Coord(model.getAIShot().get_x() - 1, model.getAIShot().get_y());
+    	}
     	
     	//check to see if the shot hits or misses
     	
-    	
+    	 //if we register any hits
+        if(posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIcruiser(), shot) || posHelper(model.getAIdestroyer(), shot) || posHelper(model.getAIsubmarine(), shot)){
+            //mark as a hit for the player
+            model.add_computer_hit(shot);
+            model.setAIShot(shot);
+            System.out.println("hit!");
+        } else {
+            //mark as a miss for the player
+            model.add_computer_miss(shot);
+            model.setAIShot(null);
+            System.out.println("miss!");
+
+        }
     	
     	//Check to see if the game is over now
     	 return gson.toJson(model);
-    	//return null;
+    
     }
 
-    private static boolean posHelper(Ship model, int[] pos){
+    private static boolean posHelper(Ship model, Coord pos){
         Coord start = model.get_start();
         Coord end = model.get_end();
-        if(pos[0] >= start.get_x() && pos[0] <= end.get_x()) {           //if the x of the shot is within x bounds of ship
-            if (pos[1] >= start.get_y() && pos[0] <= end.get_y()) {      //if the y of the shot is within y bounds of ship
+
+        if(pos.get_x() >= start.get_x() && pos.get_x() <= end.get_x()) {           //if the x of the shot is within x bounds of ship
+            if (pos.get_y() >= start.get_y() && pos.get_y() <= end.get_y()) {      //if the y of the shot is within y bounds of ship
                 System.out.println("True");
                 return true;
             }
