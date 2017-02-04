@@ -30,12 +30,9 @@ public class BattleshipModel {
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
-	private ArrayList<Ship> unplacedAIShips;
-	private Coord AIShot;
 	
 	
 	public BattleshipModel() {
-		AIShot = null;
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
@@ -47,26 +44,9 @@ public class BattleshipModel {
 		computer_cruiser = new Ship("Cruiser", 3, 0, 0, 0, 0);
 		computer_destroyer = new Ship("Destroyer", 2, 0, 0, 0, 0);
 		computer_submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
+		
+	}
 
-		//Put the AIs into the unplaced ArrayList
-		unplacedAIShips.add(computer_aircraftCarrier);
-		unplacedAIShips.add(computer_battleship);
-		unplacedAIShips.add(computer_cruiser);
-		unplacedAIShips.add(computer_destroyer);
-		unplacedAIShips.add(computer_submarine);
-		
-	}
-	
-	
-	public Ship getUnplacedShip()//Gets one of the unplaced that the AI has yet to place
-	{
-		Random rand = new Random(System.currentTimeMillis());
-		Ship temp = unplacedAIShips.get(rand.nextInt(unplacedAIShips.size()));
-		unplacedAIShips.remove(temp);
-		
-		return temp;
-	}
-	
 
 	public Ship getaircraftCarrier() {
 		return aircraftCarrier;
@@ -178,20 +158,7 @@ public class BattleshipModel {
 	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
 	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
-
-	public Coord getAIShot() {
-
-		return AIShot;
-	}
-
-
-	public void setAIShot(Coord aIShot) {
-		AIShot = aIShot;
-	}
-
-	
-
-   
+ 
 
 }
 
