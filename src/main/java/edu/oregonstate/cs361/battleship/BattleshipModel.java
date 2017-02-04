@@ -26,13 +26,12 @@ public class BattleshipModel {
 	private Ship computer_cruiser;
 	private Ship computer_destroyer;
 	private Ship computer_submarine;
-	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
-	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private ArrayList<Coord> computerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
+	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
+	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private ArrayList<Ship> unplacedAIShips;
 	private Coord AIShot;
-
 	
 	
 	public BattleshipModel() {

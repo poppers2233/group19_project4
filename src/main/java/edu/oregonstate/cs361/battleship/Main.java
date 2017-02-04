@@ -61,19 +61,19 @@ public class Main {
         int col = Integer.parseInt(req.params(":col"));
         String orientation = req.params(":orientation");
 
-        if(id.equals("AircraftCarrier")){
+        if(id.equals("aircraftCarrier")){
             model.getAircraftCarrier().set_location(row, col, orientation);
         }
-        else if(id.equals("BattleShip")){
+        else if(id.equals("battleship")){
             model.getBattleship().set_location(row, col, orientation);
         }
-        else if(id.equals("Cruiser")){
+        else if(id.equals("cruiser")){
             model.getCruiser().set_location(row, col, orientation);
         }
-        else if(id.equals("Destroyer")){
+        else if(id.equals("destroyer")){
             model.getDestroyer().set_location(row, col, orientation);
         }
-        else if(id.equals("Submarine")){
+        else if(id.equals("submarine")){
             model.getSubmarine().set_location(row, col, orientation);
         }
         
@@ -234,8 +234,9 @@ public class Main {
     private static boolean posHelper(Ship model, Coord pos){
         Coord start = model.get_start();
         Coord end = model.get_end();
-        if(pos.get_x() >= start.get_x() || pos.get_x() <= end.get_x()) {           //if the x of the shot is within x bounds of ship
-            if (pos.get_y() >= start.get_y() || pos.get_y() <= end.get_y()) {      //if the y of the shot is within y bounds of ship
+
+        if(pos.get_x() >= start.get_x() && pos.get_x() <= end.get_x()) {           //if the x of the shot is within x bounds of ship
+            if (pos.get_y() >= start.get_y() && pos.get_y() <= end.get_y()) {      //if the y of the shot is within y bounds of ship
                 System.out.println("True");
                 return true;
             }
