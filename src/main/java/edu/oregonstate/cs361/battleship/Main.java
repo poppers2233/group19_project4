@@ -14,6 +14,7 @@ public class Main {
 	
 	public static int boardWidth = 10;
 	public static int boardHeight = 10;
+	public static int max_hits = 16;
 	public static int vertical = 1;
 	public static int horizontal = 0;
 
@@ -423,7 +424,7 @@ public class Main {
     private static String fireAt(Request req) {
     	
     	Random rand = new Random(System.currentTimeMillis());
-
+      
     	Coord mycoord;
     	
     	
@@ -507,5 +508,15 @@ public class Main {
         System.out.println("False");
         return false;
     }
+     private static boolean game_over(BattleshipModel model){
 
+        if(model.get_player_hits().size() == max_hits)
+        {   return true; }
+
+        if(model.get_computer_hits().size() == max_hits)
+        {   return true; }
+
+        else
+            return false;
+     }
 }
