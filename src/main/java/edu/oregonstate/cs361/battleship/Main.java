@@ -85,7 +85,7 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getAIaircraftCarrier().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("battleship")){
@@ -106,7 +106,7 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getAIbattleship().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("cruiser")){
@@ -127,7 +127,7 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getAIcruiser().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("destroyer")){
@@ -148,7 +148,7 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getAIdestroyer().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
         else if(id.equals("submarine")){
@@ -169,7 +169,7 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                temp.set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getAIsubmarine().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
 
         }
