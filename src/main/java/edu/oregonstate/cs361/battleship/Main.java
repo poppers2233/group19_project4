@@ -52,7 +52,7 @@ public class Main {
 
     	
    //------------------------------Parsing and execution of the player's turn
-    	
+        System.out.println("hello");
         BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
         Gson gson = new Gson();
         //declares variables for the details specified for the ship
@@ -60,23 +60,32 @@ public class Main {
         int row = Integer.parseInt(req.params(":row"));
         int col = Integer.parseInt(req.params(":col"));
         String orientation = req.params(":orientation");
-
-        if(id.equals("AircraftCarrier")){
-            model.getAircraftCarrier().set_location(row, col, orientation);
+        System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
+        if(id.equals("aircraftCarrier")){
+            if(isValidLocation(model, row, col, orientation, 5)) {
+                model.getAircraftCarrier().set_location(row, col, orientation);
+            }
         }
-        else if(id.equals("BattleShip")){
-            model.getBattleship().set_location(row, col, orientation);
+        else if(id.equals("battleship")){
+            if(isValidLocation(model, row, col, orientation, 5)) {
+                model.getBattleship().set_location(row, col, orientation);
+            }
         }
-        else if(id.equals("Cruiser")){
-            model.getCruiser().set_location(row, col, orientation);
+        else if(id.equals("cruiser")){
+            if(isValidLocation(model, row, col, orientation, 5)) {
+                model.getCruiser().set_location(row, col, orientation);
+            }
         }
-        else if(id.equals("Destroyer")){
-            model.getDestroyer().set_location(row, col, orientation);
+        else if(id.equals("destroyer")){
+            if(isValidLocation(model, row, col, orientation, 5)) {
+                model.getDestroyer().set_location(row, col, orientation);
+            }
         }
-        else if(id.equals("Submarine")){
-            model.getSubmarine().set_location(row, col, orientation);
+        else if(id.equals("submarine")){
+            if(isValidLocation(model, row, col, orientation, 5)) {
+                model.getSubmarine().set_location(row, col, orientation);
+            }
         }
-        
         
       //------------------------------Execution of the AI's turn
         
@@ -106,9 +115,98 @@ public class Main {
     	return "vertical";
     }
     
-    private static boolean checkValidLocation(int x, int y, int orientation, int length)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
+    private static boolean isValidLocation(BattleshipModel model, int row, int col, String orientation, int length)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
     {
-    	
+        // aircraft carrier check
+        if(     (row != model.getAIaircraftCarrier().get_start().get_x() ) &&
+                (col != model.getAIaircraftCarrier().get_start().get_y() )   ) {
+
+            if (orientation.equals("horizontal")) {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row, col + i);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row + i, col);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            }
+        }
+        // battle ship check
+        if(     (row != model.getBattleship().get_start().get_x() ) &&
+                (col != model.getBattleship().get_start().get_y() )   ) {
+
+            if (orientation.equals("horizontal")) {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row, col + i);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row + i, col);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            }
+        }
+        // cruiser check
+        if(     (row != model.getCruiser().get_start().get_x() ) &&
+                (col != model.getCruiser().get_start().get_y() )   ) {
+
+            if (orientation.equals("horizontal")) {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row, col + i);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row + i, col);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            }
+        }
+        // destroyer check
+        if(     (row != model.getDestroyer().get_start().get_x() ) &&
+                (col != model.getDestroyer().get_start().get_y() )   ) {
+
+            if (orientation.equals("horizontal")) {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row, col + i);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row + i, col);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            }
+        }
+        //submarine check
+        if(     (row != model.getSubmarine().get_start().get_x() ) &&
+                (col != model.getSubmarine().get_start().get_y() )   ) {
+
+            if (orientation.equals("horizontal")) {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row, col + i);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            } else {
+                for (int i = 0; i < length; i++) {
+                    Coord c = new Coord(row + i, col);
+                    if (poshelper(s, c))
+                        return false;
+                }
+            }
+        }
     	return true;
     }
 
