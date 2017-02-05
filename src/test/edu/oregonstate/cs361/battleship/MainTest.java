@@ -5,14 +5,16 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import spark.Spark;
+import spark.Request;
 import spark.utils.IOUtils;
 
 import java.io.IOException;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static spark.Spark.awaitInitialization;
 
@@ -37,9 +39,19 @@ class MainTest {
     public void testGetModel() {
         TestResponse res = request("GET", "/model");
         assertEquals(200, res.status);
-        assertEquals("{\"aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"computer_battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"computer_cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"computer_destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computerHits\":[],\"computerMisses\":[],\"playerHits\":[],\"playerMisses\":[]}",res.body);
-    }
 
+        assertEquals("{\"aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"computer_battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"computer_cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"computer_destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computerHits\":[],\"computerMisses\":[],\"playerHits\":[],\"playerMisses\":[]}",res.body);
+
+    }
+    @Test
+    public void testFireAt(){
+        TestResponse res = request("POST", "/fire/1/1");
+        Gson gson = new Gson();
+        BattleshipModel model = gson.fromJson(res.body, BattleshipModel.class);
+        ArrayList<Coord> miss = new ArrayList<Coord>();
+        assertEquals(miss, model.get_computer_hits());
+
+    }
     @Test
     public void testPlaceShip() {
             BattleshipModel model = new BattleshipModel();
@@ -90,6 +102,7 @@ class MainTest {
             res = request("POST", "/placeShip/destroyer/1/1/vertical");
             model = gson.fromJson(res.body, BattleshipModel.class);
             assertEquals(1, model.getDestroyer().get_start().get_x());
+
     }
 
     private TestResponse request(String method, String path) {
