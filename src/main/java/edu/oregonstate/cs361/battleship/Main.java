@@ -77,7 +77,7 @@ public class Main {
                 {
                 	AICol = rand.nextInt(boardWidth);
                 	AIRow = rand.nextInt(boardHeight);
-                	if(rand.nextInt(1) == 0)
+                	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
                 		AIOrientation = "vertical";
@@ -98,7 +98,7 @@ public class Main {
                 {
                 	AICol = rand.nextInt(boardWidth);
                 	AIRow = rand.nextInt(boardHeight);
-                	if(rand.nextInt(1) == 0)
+                	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
                 		AIOrientation = "vertical";
@@ -119,7 +119,7 @@ public class Main {
                 {
                 	AICol = rand.nextInt(boardWidth);
                 	AIRow = rand.nextInt(boardHeight);
-                	if(rand.nextInt(1) == 0)
+                	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
                 		AIOrientation = "vertical";
@@ -140,7 +140,7 @@ public class Main {
                 {
                 	AICol = rand.nextInt(boardWidth);
                 	AIRow = rand.nextInt(boardHeight);
-                	if(rand.nextInt(1) == 0)
+                	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
                 		AIOrientation = "vertical";
@@ -161,7 +161,7 @@ public class Main {
                 {
                 	AICol = rand.nextInt(boardWidth);
                 	AIRow = rand.nextInt(boardHeight);
-                	if(rand.nextInt(1) == 0)
+                	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
                 		AIOrientation = "vertical";
