@@ -88,4 +88,14 @@ public class FireAtTest {
         model = Main.doMyFire(model, new Coord(1, 4), gson);
     }
 
+
+    //This just makes sure the change is made, we know it displays "W" "L" on the boards
+    @Test
+    public void testGameCompleteDraw(){
+        BattleshipModel test = new BattleshipModel();
+        BattleshipModel model = new BattleshipModel();
+        Main.game_complete(model, true);
+        Main.game_complete(model, false);
+    }
+
 }
