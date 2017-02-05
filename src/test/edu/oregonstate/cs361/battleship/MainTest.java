@@ -52,6 +52,13 @@ class MainTest {
         assertEquals(miss, model.get_computer_hits());
 
     }
+    
+   /*
+   This function tests the second and third user story. The first user story is the ability to place ships while avoiding 
+   invalid location. This test goes through all of the ships, making sure that they are placed at the right location, and the 
+   JSON is updated. Additionally, the 3rd user story, the ability for the AI to work, is tested in this function because  
+   every time that the placeShip function is called, an AI place ship is called too, which is then tested in this function. 
+   */
     @Test
     public void testPlaceShip() {
         //looped so the random element for AI placing is accounted for
