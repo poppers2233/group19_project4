@@ -158,6 +158,96 @@ public class BattleshipModel {
 	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
 	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
+
+
+	public Ship getComputer_aircraftCarrier() {
+		return computer_aircraftCarrier;
+	}
+
+
+	public void setComputer_aircraftCarrier(Ship computer_aircraftCarrier) {
+		this.computer_aircraftCarrier = computer_aircraftCarrier;
+	}
+
+
+	public Ship getComputer_battleship() {
+		return computer_battleship;
+	}
+
+
+	public void setComputer_battleship(Ship computer_battleship) {
+		this.computer_battleship = computer_battleship;
+	}
+
+
+	public Ship getComputer_cruiser() {
+		return computer_cruiser;
+	}
+
+
+	public void setComputer_cruiser(Ship computer_cruiser) {
+		this.computer_cruiser = computer_cruiser;
+	}
+
+
+	public Ship getComputer_destroyer() {
+		return computer_destroyer;
+	}
+
+
+	public void setComputer_destroyer(Ship computer_destroyer) {
+		this.computer_destroyer = computer_destroyer;
+	}
+
+
+	public Ship getComputer_submarine() {
+		return computer_submarine;
+	}
+
+
+	public void setComputer_submarine(Ship computer_submarine) {
+		this.computer_submarine = computer_submarine;
+	}
+
+
+	public ArrayList<Coord> getComputerHits() {
+		return computerHits;
+	}
+
+
+	public void setComputerHits(ArrayList<Coord> computerHits) {
+		this.computerHits = computerHits;
+	}
+
+
+	public ArrayList<Coord> getComputerMisses() {
+		return computerMisses;
+	}
+
+
+	public void setComputerMisses(ArrayList<Coord> computerMisses) {
+		this.computerMisses = computerMisses;
+	}
+
+
+	public ArrayList<Coord> getPlayerHits() {
+		return playerHits;
+	}
+
+
+	public void setPlayerHits(ArrayList<Coord> playerHits) {
+		this.playerHits = playerHits;
+	}
+
+
+	public ArrayList<Coord> getPlayerMisses() {
+		return playerMisses;
+	}
+
+
+	public void setPlayerMisses(ArrayList<Coord> playerMisses) {
+		this.playerMisses = playerMisses;
+	}
  
 
 }
