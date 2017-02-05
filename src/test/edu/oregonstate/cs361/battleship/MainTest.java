@@ -42,9 +42,54 @@ class MainTest {
 
     @Test
     public void testPlaceShip() {
-        TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
-        assertEquals(200, res.status);
-        assertEquals("SHIP",res.body);
+            BattleshipModel model = new BattleshipModel();
+            Gson gson = new Gson();
+            TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
+            assertEquals(200, res.status);
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getAircraftCarrier().get_start().get_x());
+            assertEquals(1, model.getAircraftCarrier().get_start().get_y());
+            assertEquals(1, model.getAircraftCarrier().get_end().get_x());
+            assertEquals(6, model.getAircraftCarrier().get_end().get_y());
+            //name
+            assertEquals("AircraftCarrier", model.getAircraftCarrier().get_name());
+
+            //model = gson.fromJson(, BattleshipModel.class);
+
+            res = request("POST", "/placeShip/submarine/1/1/horizontal");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getSubmarine().get_start().get_x());
+            res = request("POST", "/placeShip/battleship/1/1/horizontal");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getBattleship().get_start().get_x());
+            res = request("POST", "/placeShip/cruiser/1/1/horizontal");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getCruiser().get_start().get_x());
+            res = request("POST", "/placeShip/destroyer/1/1/horizontal");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getDestroyer().get_start().get_x());
+
+            //out of bounds
+            res = request("POST", "/placeShip/aircraftCarrier/12/12/horizontal");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(0, model.getAircraftCarrier().get_end().get_x());
+
+            //vertical
+            res = request("POST", "/placeShip/aircraftCarrier/1/1/vertical");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getAircraftCarrier().get_start().get_x());
+            res = request("POST", "/placeShip/submarine/1/1/vertical");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getSubmarine().get_start().get_x());
+            res = request("POST", "/placeShip/battleship/1/1/vertical");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getBattleship().get_start().get_x());
+            res = request("POST", "/placeShip/cruiser/1/1/vertical");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getCruiser().get_start().get_x());
+            res = request("POST", "/placeShip/destroyer/1/1/vertical");
+            model = gson.fromJson(res.body, BattleshipModel.class);
+            assertEquals(1, model.getDestroyer().get_start().get_x());
     }
 
     private TestResponse request(String method, String path) {
