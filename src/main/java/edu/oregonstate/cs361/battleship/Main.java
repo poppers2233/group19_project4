@@ -415,7 +415,7 @@ public class Main {
     public static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
     	//Check to see if it is off the map
-    	if(coord.get_x() < 0 || coord.get_x() > boardWidth || coord.get_y() < 0 || coord.get_y() > boardHeight)
+    	if(coord.get_x() < 1 || coord.get_x() > boardWidth || coord.get_y() < 1 || coord.get_y() > boardHeight)
     	{
     		return false;
     	}
@@ -474,48 +474,55 @@ public class Main {
     
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req) {
-    	
-    	Random rand = new Random(System.currentTimeMillis());
-      
-    	Coord mycoord;
+
     	
     	
     	//------------------------------Parsing and execution of the player's turn
-    	
-    	
+
+
         //System.out.println("fireAt called.");
         BattleshipModel model = getModelFromReq(req);
+        if(model == null){
+            model = new BattleshipModel();
+        }
         Gson gson = new Gson();
         int[] pos = new int[]{0, 0};                                //to be passed to the position helper function
         pos[0] = Integer.parseInt(req.params(":col"));
         pos[1] = Integer.parseInt(req.params(":row"));
         Coord shot = new Coord(pos[0], pos[1]);
 
-        //System.out.println(pos[0]);
-        //System.out.println(pos[1]);
-
         //>>>>>This if statement makes sure that the user has not already fired at the location. if they have it will prevent
         // the AI from fireing that turn and NOT add to the users hits/misses to prevent that array from having
         // multiple of the same hit/ miss
+        model = doMyFire(model, shot, gson);
+    	//Check to see if the game is over now
+        
+        if(game_over(model))
+        	game_complete(model, false);
+        
+    	 return gson.toJson(model);
+    
+    }
+
+    public static BattleshipModel doMyFire(BattleshipModel model, Coord shot, Gson gson){
+
+
+        Random rand = new Random(System.currentTimeMillis());
+
+        Coord mycoord;
+
         if(checkPlayerShot(model, shot)) {
             //if we register any hits
             if (posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIcruiser(), shot) || posHelper(model.getAIdestroyer(), shot) || posHelper(model.getAIsubmarine(), shot)) {
                 //mark as a hit for the player
                 model.add_computer_hit(shot);
-                //System.out.println("hit!");
             } else {
                 //mark as a miss for the player
                 model.add_computer_miss(shot);
-                //System.out.println("miss!");
 
             }
 
-
-            //add to hit/miss array in the gamestate
-            //possibly have Computer fire back in this function for ease of programming?
             System.out.println(gson.toJson(model));
-
-            //Need to check to see if the game is now complete (and who won)
 
 
             //------------------------------Execution of the AI's turn
@@ -535,21 +542,13 @@ public class Main {
             if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getCruiser(), mycoord) || posHelper(model.getDestroyer(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
                 //mark as a hit for the computer
                 model.add_player_hit(mycoord);
-                //System.out.println("hit!");
             } else {
                 //mark as a miss for the computer
                 model.add_player_miss(mycoord);
-                //System.out.println("miss!");
 
             }
         }
-    	//Check to see if the game is over now
-        
-        if(game_over(model))
-        	game_complete(model, false);
-        
-    	 return gson.toJson(model);
-    
+        return model;
     }
 
     public static boolean posHelper(Ship model, Coord pos){
