@@ -412,7 +412,7 @@ public class Main {
         }
     }
 
-    private static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
+    public static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
     	//Check to see if it is off the map
     	if(coord.get_x() < 0 || coord.get_x() > boardWidth || coord.get_y() < 0 || coord.get_y() > boardHeight)
@@ -444,7 +444,7 @@ public class Main {
     }
 
     //Used to make sure the player does not fire at the same spot more than once.
-    private static boolean checkPlayerShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
+    public static boolean checkPlayerShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
         //Check to see if thats been fired before
         for (int i = 0; i < model.get_computer_hits().size(); i++) {
@@ -552,7 +552,7 @@ public class Main {
     
     }
 
-    private static boolean posHelper(Ship model, Coord pos){
+    public static boolean posHelper(Ship model, Coord pos){
         Coord start = model.get_start();
         Coord end = model.get_end();
 
@@ -565,7 +565,7 @@ public class Main {
         //System.out.println("False");
         return false;
     }
-     private static boolean game_over(BattleshipModel model){
+     public static boolean game_over(BattleshipModel model){
 
         if(model.get_player_hits().size() == max_hits)
         {   return true; }
