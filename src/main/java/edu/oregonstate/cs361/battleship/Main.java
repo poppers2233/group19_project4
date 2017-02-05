@@ -576,7 +576,7 @@ public class Main {
             return false;
      }
      
-     private static void game_complete(BattleshipModel model, boolean isPlayer)
+     public static void game_complete(BattleshipModel model, boolean isPlayer)
      {
     	 ArrayList<Coord> temp = new ArrayList<Coord>();
     	 model.get_player_hits().clear();
