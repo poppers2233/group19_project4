@@ -54,6 +54,8 @@ class MainTest {
     }
     @Test
     public void testPlaceShip() {
+        //looped so the random element for AI placing is accounted for
+        for(i = 0; i<100; i++){
             BattleshipModel model = new BattleshipModel();
             Gson gson = new Gson();
             TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
@@ -102,7 +104,7 @@ class MainTest {
             res = request("POST", "/placeShip/destroyer/1/1/vertical");
             model = gson.fromJson(res.body, BattleshipModel.class);
             assertEquals(1, model.getDestroyer().get_start().get_x());
-
+        }
     }
 
     private TestResponse request(String method, String path) {
