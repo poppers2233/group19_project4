@@ -71,5 +71,21 @@ public class FireAtTest {
         assertEquals(true, Main.checkValidShot(model, new Coord(4, 4)));
         assertEquals(false, Main.checkValidShot(model, new Coord(11, 4)));
     }
+    @Test
+    public void testDoFire(){
+        BattleshipModel model = new BattleshipModel();
+        Coord shot = new Coord(1, 1);
+        Gson gson = new Gson();
+        Ship AC = new Ship("AircraftCarrier", 5, 1, 2, 1, 7);
+
+        model.setAircraftCarrier(AC);
+
+        model = Main.doMyFire(model, shot, gson);
+        model = Main.doMyFire(model, new Coord(0, 0), gson);
+        model = Main.doMyFire(model, new Coord(1, 1), gson);
+        model = Main.doMyFire(model, new Coord(1, 2), gson);
+        model = Main.doMyFire(model, new Coord(1, 3), gson);
+        model = Main.doMyFire(model, new Coord(1, 4), gson);
+    }
 
 }
