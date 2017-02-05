@@ -37,7 +37,7 @@ public class Main {
     static String newModel() {
     	BattleshipModel model = new BattleshipModel();
     	Gson gson = new Gson();
-    	System.out.println(gson.toJson(model));
+    	//System.out.println(gson.toJson(model));
         return gson.toJson(model);
     }
 
@@ -68,7 +68,7 @@ public class Main {
         int col = Integer.parseInt(req.params(":col"));
         String orientation = req.params(":orientation");
 
-        System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
+        //System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
         if(id.equals("aircraftCarrier")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getAircraftCarrier().set_location(row, col, orientation);
@@ -454,7 +454,7 @@ public class Main {
             {
                 if(coord.get_y() == model.get_computer_hits().get(i).get_y())//check if they have matching Y coords as well
                 {
-                    System.out.println("False");
+                    //System.out.println("False");
                     return false;
                 }
             }
@@ -465,12 +465,12 @@ public class Main {
             {
                 if(coord.get_y() == model.get_computer_misses().get(i).get_y())//check if they have matching Y coords as well
                 {
-                    System.out.println("False");
+                    //System.out.println("False");
                     return false;
                 }
             }
         }
-        System.out.println("checkplayershot true");
+        //System.out.println("checkplayershot true");
         return true;
     }
     
@@ -524,7 +524,7 @@ public class Main {
 
             }
 
-            System.out.println(gson.toJson(model));
+            //System.out.println(gson.toJson(model));
 
 
             //------------------------------Execution of the AI's turn
