@@ -17,7 +17,11 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FireAtTest {
-
+    
+    //This function tests to make sure the game over function returnes the correct value when the number of hits
+    // by the player OR the AI reaches the maximum number of hits for their respective board. IE: all ships for
+    // that board have been sunk.
+    //This covers the fire user story, the AI user story, the place ships user story, and the win condition user story
     @Test
     public void gameOverTest(){
         BattleshipModel model = new BattleshipModel();
@@ -37,7 +41,12 @@ public class FireAtTest {
 
         assertEquals(true, Main.game_over(model2));
     }
-
+    
+    //This function is used to make sure there is no colision with the passed ship at the given position
+    //This makes sure the user's hits/ misses register as they should
+    //This makes sure the AI's hits/missses register as they should
+    //This makes sure the ships can NOT be overlaping at any point
+    //This covers The fire user story, the AI user story, and the place ships user story
     @Test
     public void posHelperTest(){
         Ship model = new Ship("Tester", 5, 1, 2, 1, 6);
@@ -48,7 +57,8 @@ public class FireAtTest {
         assertEquals(true, Main.posHelper(model, starthit));
         assertEquals(false, Main.posHelper(model, endmiss));
     }
-
+    
+    //This test makes sure the user can only fire at each location once and is used to make sure the AI doesn't fire more than the player
     @Test
     public void checkPlayerShotTest(){
         BattleshipModel model = new BattleshipModel();
@@ -60,6 +70,9 @@ public class FireAtTest {
         assertEquals(true, Main.checkPlayerShot(model, new Coord(4, 4)));
     }
 
+    //This is a test of the function that makes sure the AI doenst shoot the same place twice and doesn't shoot out of bounds
+    //This covers part of the fire user story AND the AI user story
+    //This ALSO covers part of the AI user story as the function prevents the AI from firing if the user tries to fire at the same location
     @Test
     public void checkValidShotTest(){
         BattleshipModel model = new BattleshipModel();
@@ -71,6 +84,8 @@ public class FireAtTest {
         assertEquals(true, Main.checkValidShot(model, new Coord(4, 4)));
         assertEquals(false, Main.checkValidShot(model, new Coord(11, 4)));
     }
+    
+    //This tests the fire user story and the AI user story
     @Test
     public void testDoFire(){
         BattleshipModel model = new BattleshipModel();
