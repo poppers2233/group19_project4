@@ -45,10 +45,10 @@ public class Main {
 		int rowInt = Integer.parseInt(row);
 		int colInt = Integer.parseInt(col);
 		currModel.scan(rowInt,colInt);
-		currModel.shootAtPlayer();
+		//currModel.shootAtPlayer();
 		Gson gson = new Gson();
 		return gson.toJson(currModel);
-     	}
+    }
 
 
     //This function should return a new model

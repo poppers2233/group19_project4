@@ -253,7 +253,7 @@ public class BattleshipModel {
 
 	public void scan(int rowInt, int colInt) 
 	{
-        	 Coordinate coor = new Coordinate(rowInt,colInt);
+        	 Coord coor = new Coord(rowInt,colInt);
 		 scanResult = false;
 		 if(computer_aircraftCarrier.scan(coor)){
 		     scanResult = true;
