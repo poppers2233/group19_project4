@@ -675,3 +675,12 @@ public class Main {
     	 }
      }
 }
+
+/*
+The how to play section:
+
+How To Play
+
+
+
+ */
