@@ -1,16 +1,21 @@
+
 var gameModel;
 
-//This function will be called once the page is loaded.  It will get a new game model from the back end, and display it.
 $( document ).ready(function() {
-
+  // Handler for .ready() called.
   $.getJSON("model", function( json ) {
-    displayGameState(json);
-    gameModel = json;
+  gameModel = json;
+    console.log( "JSON Data: " + json );
    });
 });
 
 function placeShip() {
-   // This ajax call will asnychonously call the back end, and tell it where to place the ship, then get back a game model with the ship placed, and display the new model.
+   console.log($( "#shipSelec" ).val());
+   console.log($( "#rowSelec" ).val());
+   console.log($( "#colSelec" ).val());
+   console.log($( "#orientationSelec" ).val());
+
+   //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
      url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$( "#orientationSelec" ).val(),
      method: "post",
@@ -19,21 +24,24 @@ function placeShip() {
      dataType: "json"
    });
 
-   //This will be called when the call is returned from the server.
    request.done(function( currModel ) {
      displayGameState(currModel);
      gameModel = currModel;
 
    });
 
-   // if there is a problem, and the back end does not respond, then an alert will be shown.
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
    });
 }
 
-//Similar to placeShip, but instead it will fire at a location the user selects.
+
+
+
 function fire(){
+ console.log($( "#colFire" ).val());
+   console.log($( "#rowFire" ).val());
+//var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
      url: "/fire/"+$( "#colFire" ).val()+"/"+$( "#rowFire" ).val(),
      method: "post",
@@ -53,11 +61,65 @@ function fire(){
    });
 
 }
+//Fires at the location clicked on the board by the user.
+function fireClick(c, r){
+   var request = $.ajax({
+     url: "/fire/"+c+"/"+r,
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
 
-//This function will display the game model.  It displays the ships on the users board, and then shows where there have been hits and misses on both boards.
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+}
+
+function scan(){
+ console.log($( "#colScan" ).val());
+   console.log($( "#rowScan" ).val());
+//var menuId = $( "ul.nav" ).first().attr( "id" );
+   var request = $.ajax({
+     url: "/scan/"+$( "#colScan" ).val()+"/"+$( "#rowScan" ).val(),
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
+
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+}
+
+
+function log(logContents){
+    console.log(logContents);
+}
+
 function displayGameState(gameModel){
 $( '#MyBoard td'  ).css("background-color", "blue");
 $( '#TheirBoard td'  ).css("background-color", "blue");
+
+if(gameModel.scanResult){
+alert("Scan found at least one Ship")}
+else{
+alert("Scan found no Ships")}
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
@@ -84,12 +146,13 @@ for (var i = 0; i < gameModel.playerHits.length; i++) {
 }
 
 
-//This function will display a ship given a ship object in JSON
+
 function displayShip(ship){
  startCoordAcross = ship.start.Across;
  startCoordDown = ship.start.Down;
  endCoordAcross = ship.end.Across;
  endCoordDown = ship.end.Down;
+// console.log(startCoordAcross);
  if(startCoordAcross > 0){
     if(startCoordAcross == endCoordAcross){
         for (i = startCoordDown; i <= endCoordDown; i++) {
@@ -101,4 +164,7 @@ function displayShip(ship){
         }
     }
  }
+
+
+
 }

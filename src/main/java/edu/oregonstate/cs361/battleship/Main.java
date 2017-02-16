@@ -28,11 +28,29 @@ public class Main {
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
         post("/fire/:row/:col", (req, res) -> fireAt(req));
+	//This will listen to POST requests and expects to receive a game model, as well as location to scan
+        post("/scan/:row/:col", (req, res) -> scan(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
         
 
     }
+
+
+ 	private static String scan(Request req) {
+ 
+		BattleshipModel currModel = getModelFromReq(req);
+		String row = req.params("row");
+		String col = req.params("col");
+		int rowInt = Integer.parseInt(row);
+		int colInt = Integer.parseInt(col);
+		currModel.scan(rowInt,colInt);
+		//currModel.shootAtPlayer();
+		Gson gson = new Gson();
+		return gson.toJson(currModel);
+    }
+
+
     //This function should return a new model
     static String newModel() {
     	BattleshipModel model = new BattleshipModel();
@@ -657,3 +675,12 @@ public class Main {
     	 }
      }
 }
+
+/*
+The how to play section:
+
+How To Play
+
+
+
+ */

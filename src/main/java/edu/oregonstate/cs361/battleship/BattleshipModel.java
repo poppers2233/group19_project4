@@ -30,7 +30,7 @@ public class BattleshipModel {
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
-	
+	private boolean scanResult = false;	
 	
 	public BattleshipModel() {
 		//Create the ship objects
@@ -248,8 +248,33 @@ public class BattleshipModel {
 	public void setPlayerMisses(ArrayList<Coord> playerMisses) {
 		this.playerMisses = playerMisses;
 	}
- 
 
+
+
+	public void scan(int rowInt, int colInt) 
+	{
+        	 Coord coor = new Coord(rowInt,colInt);
+		 scanResult = false;
+		 if(computer_aircraftCarrier.scan(coor)){
+		     scanResult = true;
+		 }
+		 else if (computer_battleship.scan(coor)){
+		     scanResult = true;
+		 }else if (computer_cruiser.scan(coor)){
+		     scanResult = true;
+		 }else if (computer_destroyer.scan(coor)){
+		     scanResult = true;
+		 }else if (computer_submarine.scan(coor)){
+		     scanResult = true;
+		 } else {
+		     scanResult = false;
+		 }
+	}
+ 
+	public boolean getScanResult()
+	{
+		return scanResult;
+	}
 }
 
 
