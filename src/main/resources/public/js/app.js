@@ -53,6 +53,26 @@ function fire(){
    });
 
 }
+function fireClick(c, r){
+   var request = $.ajax({
+     url: "/fire/"+c+"/"+r,
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
+
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+}
 
 //This function will display the game model.  It displays the ships on the users board, and then shows where there have been hits and misses on both boards.
 function displayGameState(gameModel){
