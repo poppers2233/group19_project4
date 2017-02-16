@@ -1,3 +1,4 @@
+
 var gameModel;
 
 $( document ).ready(function() {
@@ -43,6 +44,27 @@ function fire(){
 //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
      url: "/fire/"+$( "#colFire" ).val()+"/"+$( "#rowFire" ).val(),
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
+
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+}
+//Fires at the location clicked on the board by the user.
+function fireClick(c, r){
+   var request = $.ajax({
+     url: "/fire/"+c+"/"+r,
      method: "post",
      data: JSON.stringify(gameModel),
      contentType: "application/json; charset=utf-8",
