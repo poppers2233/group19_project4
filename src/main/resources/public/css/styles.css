@@ -27,6 +27,12 @@ height: 20px;
 background-color:blue;
 }
 
+#Row_Health td {
+width: 20px;
+height: 20px;
+background-color:green;
+}
+
 #placeShip{
     width: 20px;
     height: 20px;

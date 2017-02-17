@@ -149,6 +149,9 @@ for (var i = 0; i < gameModel.computerHits.length; i++) {
       var hit = document.createElement("span");
              hit.innerHTML = "X";
              var place = document.getElementById('C'+gameModel.computerHits[i].Across + '_' + gameModel.computerHits[i].Down);
+   $( '#Row_Health #' + 'h_' + (i/2)+'c').css("background-color", "red");
+      //var health = document.getElementById("h_"+(i/2)+'c');
+      //health.style.backgroundColor = 'red';
             if(place.childNodes.length == 0)
              place.appendChild(hit);
 }
@@ -166,6 +169,7 @@ for (var i = 0; i < gameModel.playerHits.length; i++) {
     var hit = document.createElement("span");
            hit.innerHTML = "X";
            var place = document.getElementById(gameModel.playerHits[i].Across + '_' + gameModel.playerHits[i].Down);
+    $( '#Row_Health #' + 'h_' + (i/2)+'').css("background-color", "red");
            if(place.childNodes.length == 0)
            place.appendChild(hit);
 }
