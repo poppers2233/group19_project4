@@ -93,8 +93,8 @@ public class Main {
                 Ship temp = model.getAIaircraftCarrier();
                 do
                 {
-                	AICol = rand.nextInt(boardWidth);
-                	AIRow = rand.nextInt(boardHeight);
+                	AICol = rand.nextInt(boardWidth + 1);
+                	AIRow = rand.nextInt(boardHeight + 1);
                 	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
@@ -114,8 +114,8 @@ public class Main {
                 Ship temp = model.getAIbattleship();
                 do
                 {
-                	AICol = rand.nextInt(boardWidth);
-                	AIRow = rand.nextInt(boardHeight);
+                	AICol = rand.nextInt(boardWidth + 1);
+                	AIRow = rand.nextInt(boardHeight + 1);
                 	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
@@ -135,8 +135,8 @@ public class Main {
                 Ship temp = model.getAIcruiser();
                 do
                 {
-                	AICol = rand.nextInt(boardWidth);
-                	AIRow = rand.nextInt(boardHeight);
+                	AICol = rand.nextInt(boardWidth + 1);
+                	AIRow = rand.nextInt(boardHeight + 1);
                 	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
@@ -156,8 +156,8 @@ public class Main {
                 Ship temp = model.getAIdestroyer();
                 do
                 {
-                	AICol = rand.nextInt(boardWidth);
-                	AIRow = rand.nextInt(boardHeight);
+                	AICol = rand.nextInt(boardWidth + 1);
+                	AIRow = rand.nextInt(boardHeight + 1);
                 	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
@@ -177,8 +177,8 @@ public class Main {
                 Ship temp = model.getAIsubmarine();
                 do
                 {
-                	AICol = rand.nextInt(boardWidth);
-                	AIRow = rand.nextInt(boardHeight);
+                	AICol = rand.nextInt(boardWidth + 1);
+                	AIRow = rand.nextInt(boardHeight + 1);
                 	if(rand.nextInt(2) == 0)
                 		AIOrientation = "horizontal";
                 	else
