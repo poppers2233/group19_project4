@@ -11,9 +11,15 @@ background-color: light-gray;
 }
 
 .gameBoard td {
-width: 40px;
-height:40px;
+width: 20px;
+height: 20px;
 background-color:blue;
+}
+
+#placeShip{
+    width: 20px;
+    height: 20px;
+    background-color:yellow;
 }
 
 table, th, td {
@@ -25,12 +31,14 @@ background-color: orange;
 }
 
 span{
-  font-size: 2em;
+  font-size: 1em;
   font-weight: bold;
   text-align: center;
   /*padding-left: 8px;*/
-  padding: 7px;
+  padding: 5px;
 }
+
+
 /*
 button {
     margin: 0;
