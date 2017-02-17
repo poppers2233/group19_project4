@@ -17,6 +17,10 @@ height:100px;*/
 background-color: light-gray;
 }
 
+.invis{
+    visibility: hidden;
+}
+
 .gameBoard td {
 width: 20px;
 height: 20px;

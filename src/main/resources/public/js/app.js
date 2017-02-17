@@ -36,7 +36,16 @@ function placeShip() {
 }
 
 
-
+function shipchange(ship){
+    var obj = document.getElementById("shipSelec");
+    var selected = obj.options;
+    for(var opt, j = 0; opt = selected[j]; j++) {
+            if(opt.value == ship) {
+                obj.selectedIndex = j;
+                break;
+            }
+        }
+}
 
 function fire(){
  console.log($( "#colFire" ).val());
