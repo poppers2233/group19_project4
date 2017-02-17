@@ -24,6 +24,13 @@ table, th, td {
 background-color: orange;
 }
 
+span{
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  /*padding-left: 8px;*/
+  padding: 7px;
+}
 /*
 button {
     margin: 0;
