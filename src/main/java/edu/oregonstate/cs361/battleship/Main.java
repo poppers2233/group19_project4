@@ -15,7 +15,7 @@ public class Main {
 	
 	public static int boardWidth = 10;
 	public static int boardHeight = 10;
-	public static int max_hits = 16;
+	public static int max_hits = 21;
 	public static int vertical = 1;
 	public static int horizontal = 0;
 
