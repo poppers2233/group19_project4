@@ -435,7 +435,7 @@ public class Main {
     public static boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
     	//Check to see if it is off the map
-    	if(coord.get_x() < 1 || coord.get_x() > boardWidth || coord.get_y() < 1 || coord.get_y() > boardHeight)
+    	if(coord.get_x() < 1 || coord.get_x() > boardWidth + 1 || coord.get_y() < 1 || coord.get_y() > boardHeight + 1)
     	{
     		return false;
     	}
@@ -552,7 +552,7 @@ public class Main {
 
 
             do {
-                mycoord = new Coord(rand.nextInt(boardHeight), rand.nextInt(boardWidth));
+                mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
 
             } while (!checkValidShot(model, mycoord));//while the shot has already been done
 
