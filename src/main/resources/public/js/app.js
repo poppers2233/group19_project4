@@ -118,8 +118,8 @@ $( '#TheirBoard td'  ).css("background-color", "blue");
 
 if(gameModel.scanResult){
 alert("Scan found at least one Ship")}
-else{
-alert("Scan found no Ships")}
+/*else{
+alert("Scan found no Ships")}*/
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
@@ -160,8 +160,6 @@ for (var i = 0; i < gameModel.playerHits.length; i++) {
            if(place.childNodes.length == 0)
            place.appendChild(hit);
 }
-
-
 
 }
 
