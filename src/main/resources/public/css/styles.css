@@ -3,7 +3,14 @@ body {
     margin: 0;
     padding: 0;
 }
-
+html{
+        background: url("https://i.ytimg.com/vi/X5ecpL7PsLE/maxresdefault.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        color: white;
+}
 .gameBoard{
 /*with:100px;
 height:100px;*/
@@ -18,6 +25,12 @@ background-color: light-gray;
 width: 20px;
 height: 20px;
 background-color:blue;
+}
+
+#Row_Health td {
+width: 20px;
+height: 20px;
+background-color:green;
 }
 
 #placeShip{
