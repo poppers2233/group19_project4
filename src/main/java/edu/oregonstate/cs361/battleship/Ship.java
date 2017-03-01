@@ -20,12 +20,10 @@ public class Ship {
     }
 
     public int get_length(){ return length; }
-    ////////////////////////////////////
     public Coord get_start(){ return start; }
     public Coord get_end(){ return end; }
     public String get_name(){ return name; }
 
-    /////////////////////////////////////
     public void set_location(int col, int row, String orientation){
         int x1 = col;
         int y1 = row;
