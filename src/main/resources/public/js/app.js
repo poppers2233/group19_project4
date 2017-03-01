@@ -95,9 +95,39 @@ function fireClick(c, r){
 function scan(){
  console.log($( "#colScan" ).val());
    console.log($( "#rowScan" ).val());
-//var menuId = $( "ul.nav" ).first().attr( "id" );
+   //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
      url: "/scan/"+$( "#colScan" ).val()+"/"+$( "#rowScan" ).val(),
+     method: "post",
+     data: JSON.stringify(gameModel),
+     contentType: "application/json; charset=utf-8",
+     dataType: "json"
+   });
+
+   request.done(function( currModel ) {
+     displayGameState(currModel);
+     gameModel = currModel;
+
+   });
+
+   request.fail(function( jqXHR, textStatus ) {
+     alert( "Request failed: " + textStatus );
+   });
+
+}
+
+function mClick(event, r, c){
+    if(event.button == 0){
+        fireClick(r, c);
+    } else if(event.button == 2){
+        scanAt(r, c);
+    }
+}
+
+function scanAt(r, c){
+   document.getElementById("ScanLocation").innerHTML = "Scan at: " + r + ", " + c;
+   var request = $.ajax({
+     url: "/scan/"+c+"/"+r,
      method: "post",
      data: JSON.stringify(gameModel),
      contentType: "application/json; charset=utf-8",
@@ -126,9 +156,9 @@ $( '#MyBoard td'  ).css("background-color", "blue");
 $( '#TheirBoard td'  ).css("background-color", "blue");
 
 if(gameModel.scanResult){
-alert("Scan found at least one Ship")}
-/*else{
-alert("Scan found no Ships")}*/
+document.getElementById("ScanResults").innerHTML = "Scan found at leas one ship"}
+else{
+document.getElementById("ScanResults").innerHTML = "Scan found no ships"}
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
