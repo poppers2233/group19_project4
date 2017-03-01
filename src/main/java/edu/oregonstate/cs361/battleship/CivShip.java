@@ -14,8 +14,19 @@ public class CivShip extends Ship {
 
     }
 
-    public void hit()//Occures when a civilian ship is shot
+    public void hit()//Occurs when a civilian ship is shot
     {
+        //Need to find which orientation the ship is in
+        if(start.get_x() == end.get_x())//If the X's are equal, then it is vertical
+        {
 
+            //Iterate through the ships, places and create a hit at that location
+            //This might have to change locations/scopes
+
+        }
+        else//Not vertical means Horizontal
+        {
+
+        }
     }
 }
