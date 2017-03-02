@@ -87,7 +87,7 @@ public class Main {
         String orientation = req.params(":orientation");
 
         //System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
-        if(id.equals("AircraftCarrier")){
+        if(id.equals("aircraftCarrier")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getAircraftCarrier().set_location(row, col, orientation);
                 Ship temp = model.getAIaircraftCarrier();
@@ -108,7 +108,7 @@ public class Main {
                 model.getAIaircraftCarrier().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("Battleship")){
+        else if(id.equals("battleship")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getBattleship().set_location(row, col, orientation);
                 Ship temp = model.getAIbattleship();
@@ -129,7 +129,7 @@ public class Main {
                 model.getAIbattleship().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("Clipper")){
+        else if(id.equals("clipper")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getClipper().set_location(row, col, orientation);
                 Ship temp = model.getComputer_clipper();
@@ -150,7 +150,7 @@ public class Main {
                 model.getComputer_clipper().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("Dinghy")){
+        else if(id.equals("dinghy")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getDinghy().set_location(row, col, orientation);
                 Ship temp = model.getComputer_dinghy();
@@ -171,7 +171,7 @@ public class Main {
                 model.getComputer_dinghy().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("Submarine")){
+        else if(id.equals("submarine")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getSubmarine().set_location(row, col, orientation);
                 Ship temp = model.getAIsubmarine();
