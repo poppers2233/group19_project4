@@ -42,13 +42,11 @@ public class BattleshipModel {
 		computer_aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		computer_battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
 		computer_submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
+		computer_clipper = new CivShip("Clipper", 3, 0,0,0,0);
+		computer_dinghy = new CivShip("Dinghy",1,0,0,0,0);
 		
 	}
 
-
-	public Ship getaircraftCarrier() {
-		return aircraftCarrier;
-	}
 
 	public void aircraftCarrier(Ship aircraftCarrier) {
 		this.aircraftCarrier = aircraftCarrier;
@@ -70,7 +68,7 @@ public class BattleshipModel {
 		this.battleship = battleship;
 	}
 
-	public Ship getClipper() {
+	public CivShip getClipper() {
 		return clipper;
 	}
 
@@ -78,7 +76,7 @@ public class BattleshipModel {
 		this.clipper = clipper;
 	}
 
-	public Ship getDinghy() {
+	public CivShip getDinghy() {
 		return dinghy;
 	}
 
