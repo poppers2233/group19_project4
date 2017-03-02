@@ -87,7 +87,7 @@ public class Main {
         String orientation = req.params(":orientation");
 
         //System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
-        if(id.equals("aircraftCarrier")){
+        if(id.equals("AircraftCarrier")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getAircraftCarrier().set_location(row, col, orientation);
                 Ship temp = model.getAIaircraftCarrier();
@@ -108,7 +108,7 @@ public class Main {
                 model.getAIaircraftCarrier().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("battleship")){
+        else if(id.equals("Battleship")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getBattleship().set_location(row, col, orientation);
                 Ship temp = model.getAIbattleship();
@@ -129,10 +129,10 @@ public class Main {
                 model.getAIbattleship().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("cruiser")){
+        else if(id.equals("Clipper")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
-                model.getCruiser().set_location(row, col, orientation);
-                Ship temp = model.getAIcruiser();
+                model.getClipper().set_location(row, col, orientation);
+                Ship temp = model.getComputer_clipper();
                 do
                 {
                 	AICol = rand.nextInt(boardWidth + 1);
@@ -147,13 +147,13 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                model.getAIcruiser().set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getComputer_clipper().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("destroyer")){
+        else if(id.equals("Dinghy")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
-                model.getDestroyer().set_location(row, col, orientation);
-                Ship temp = model.getAIdestroyer();
+                model.getDinghy().set_location(row, col, orientation);
+                Ship temp = model.getComputer_dinghy();
                 do
                 {
                 	AICol = rand.nextInt(boardWidth + 1);
@@ -168,10 +168,10 @@ public class Main {
                 
                 //coords are now valid (in theory)
                 
-                model.getAIdestroyer().set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                model.getComputer_dinghy().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
-        else if(id.equals("submarine")){
+        else if(id.equals("Submarine")){
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getSubmarine().set_location(row, col, orientation);
                 Ship temp = model.getAIsubmarine();
@@ -247,14 +247,14 @@ public class Main {
                     }
                 }
             }
-            // cruiser check
-            if(     (row == model.getCruiser().get_start().get_x() ) &&
-                    (col == model.getCruiser().get_start().get_y() )   ) {
+            // dinghy check
+            if(     (row == model.getDinghy().get_start().get_x() ) &&
+                    (col == model.getDinghy().get_start().get_y() )   ) {
 
                 return false;
             }
             else{
-            	Ship s = model.getCruiser();
+            	Ship s = model.getDinghy();
             	
                 if (orientation.equals("horizontal")) {
                     for (int i = 0; i < length; i++) {
@@ -270,13 +270,13 @@ public class Main {
                     }
                 }
             }
-            // destroyer check
-            if(     (row == model.getDestroyer().get_start().get_x() ) &&
-                    (col == model.getDestroyer().get_start().get_y() )   ) {
+            // clipper check
+            if(     (row == model.getClipper().get_start().get_x() ) &&
+                    (col == model.getClipper().get_start().get_y() )   ) {
                 return false;
             }
             else{
-            	Ship s = model.getDestroyer();
+            	Ship s = model.getClipper();
             	
                 if (orientation.equals("horizontal")) {
                     for (int i = 0; i < length; i++) {
@@ -362,13 +362,13 @@ public class Main {
                     }
                 }
             }
-            // cruiser check
-            if(     (row == model.getAIcruiser().get_start().get_x() ) &&
-                    (col == model.getAIcruiser().get_start().get_y() )   ) {
+            // dinghy check
+            if(     (row == model.getComputer_dinghy().get_start().get_x() ) &&
+                    (col == model.getComputer_dinghy().get_start().get_y() )   ) {
                 return false;
             }
             else{
-            	Ship s = model.getAIcruiser();
+            	Ship s = model.getComputer_dinghy();
             	
                 if (orientation.equals("horizontal")) {
                     for (int i = 0; i < length; i++) {
@@ -384,13 +384,13 @@ public class Main {
                     }
                 }
             }
-            // destroyer check
-            if(     (row == model.getAIdestroyer().get_start().get_x() ) &&
-                    (col == model.getAIdestroyer().get_start().get_y() )   ) {
+            // clipper check
+            if(     (row == model.getComputer_clipper().get_start().get_x() ) &&
+                    (col == model.getComputer_clipper().get_start().get_y() )   ) {
                 return false;
             }
             else{
-            	Ship s = model.getAIdestroyer();
+            	Ship s = model.getComputer_clipper();
             	
                 if (orientation.equals("horizontal")) {
                     for (int i = 0; i < length; i++) {
@@ -533,10 +533,17 @@ public class Main {
 
         if(checkPlayerShot(model, shot)) {
             //if we register any hits
-            if (posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIcruiser(), shot) || posHelper(model.getAIdestroyer(), shot) || posHelper(model.getAIsubmarine(), shot)) {
+            if (posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIsubmarine(), shot)) {
                 //mark as a hit for the player
                 model.add_computer_hit(shot);
-            } else {
+            }
+            else if(posHelper(model.getComputer_clipper(), shot)){
+                model.getComputer_clipper().hit(model, true);
+            }
+            else if(posHelper(model.getComputer_dinghy(), shot)){
+                model.getComputer_dinghy().hit(model, true);
+            }
+            else{
                 //mark as a miss for the player
                 model.add_computer_miss(shot);
 
@@ -559,10 +566,17 @@ public class Main {
             //check to see if the shot hits or misses
 
             //if we register any hits
-            if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getCruiser(), mycoord) || posHelper(model.getDestroyer(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
+            if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
                 //mark as a hit for the computer
                 model.add_player_hit(mycoord);
-            } else {
+            }
+            else if( posHelper(model.getClipper(), mycoord)){
+                model.getClipper().hit(model, false);
+            }
+            else if( posHelper(model.getDinghy(), mycoord )){
+                model.getDinghy().hit(model, false);
+            }
+            else {
                 //mark as a miss for the computer
                 model.add_player_miss(mycoord);
 
