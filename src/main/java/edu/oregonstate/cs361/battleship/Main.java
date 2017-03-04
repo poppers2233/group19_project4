@@ -23,7 +23,6 @@ public class Main {
     	
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
-
         //This will listen to GET requests to /model and return a clean new model
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
@@ -53,6 +52,7 @@ public class Main {
 
     //This function should return a new model
     static String newModel() {
+
     	BattleshipModel model = new BattleshipModel();
     	Ship ship = new Ship("thefkinship",1,0,0,0,0);
     	Gson gson = new Gson();
@@ -550,8 +550,6 @@ public class Main {
                 model.add_computer_miss(shot);
 
             }
-
-            //System.out.println(gson.toJson(model));
 
 
             //------------------------------Execution of the AI's turn

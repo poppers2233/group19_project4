@@ -30,7 +30,7 @@ public class BattleshipModel {
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
-	private boolean scanResult = false;	
+	private boolean scanResult = false;
 	
 	public BattleshipModel() {
 		//Create the ship objects
@@ -140,16 +140,6 @@ public class BattleshipModel {
 	public ArrayList<Coord> get_computer_hits(){ return computerHits; }
 
 	public ArrayList<Coord> get_computer_misses(){ return computerMisses; }
-
-
-	public Ship getComputer_aircraftCarrier() {
-		return computer_aircraftCarrier;
-	}
-
-
-	public void setComputer_aircraftCarrier(Ship computer_aircraftCarrier) {
-		this.computer_aircraftCarrier = computer_aircraftCarrier;
-	}
 
 
 	public Ship getComputer_battleship() {
