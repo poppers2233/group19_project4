@@ -54,8 +54,10 @@ public class Main {
     //This function should return a new model
     static String newModel() {
     	BattleshipModel model = new BattleshipModel();
+    	Ship ship = new Ship("thefkinship",1,0,0,0,0);
     	Gson gson = new Gson();
-    	//System.out.println(gson.toJson(model));
+        //System.out.println(gson.toJson(ship));
+        //System.out.println(gson.toJson(model));
         return gson.toJson(model);
     }
 
@@ -76,9 +78,9 @@ public class Main {
     	
    //------------------------------Parsing and execution of the player's turn
         BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
-	if(model == null){
-		model = new BattleshipModel();
-	}
+        if(model == null){
+            model = new BattleshipModel();
+        }
         Gson gson = new Gson();
         //declares variables for the details specified for the ship
         String id = req.params(":id");
