@@ -5,11 +5,11 @@ import spark.Request;
  * Created by MarkSprouse on 3/1/2017.
  */
 public class CivShip extends Ship {
-    private String name;
-    private Coord start;
-    private Coord end;
-    private int length;
 
+
+    public CivShip(){
+        super();
+    }
     public CivShip(String id, int length, int x1, int y1, int x2, int y2) {
         super(id,length,x1,y1,x2,y2);
 
@@ -51,7 +51,7 @@ public class CivShip extends Ship {
             //This might have to change locations/scopes
 
         }
-        else//Not vertical means Horizontal
+        if(start.get_y() == end.get_y() )//Not vertical means Horizontal
         {
             if(isAI){
                 //if its a Clipper need to add a hit at start, end, and in the middle
