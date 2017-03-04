@@ -162,8 +162,8 @@ document.getElementById("ScanResults").innerHTML = "Scan found no ships"}
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
-displayShip(gameModel.cruiser);
-displayShip(gameModel.destroyer);
+displayShip(gameModel.clipper);
+displayShip(gameModel.dinghy);
 displayShip(gameModel.submarine);
 
 for (var i = 0; i < gameModel.computerMisses.length; i++) {
@@ -216,11 +216,11 @@ function displayShip(ship){
 // console.log(startCoordAcross);
  if(startCoordAcross > 0){
     if(startCoordAcross == endCoordAcross){
-        for (i = startCoordDown; i <= endCoordDown; i++) {
+        for (i = startCoordDown; i < endCoordDown; i++) {
             $( '#MyBoard #'+startCoordAcross+'_'+i  ).css("background-color", "yellow");
         }
     } else {
-        for (i = startCoordAcross; i <= endCoordAcross; i++) {
+        for (i = startCoordAcross; i < endCoordAcross; i++) {
             $( '#MyBoard #'+i+'_'+startCoordDown  ).css("background-color", "yellow");
         }
     }

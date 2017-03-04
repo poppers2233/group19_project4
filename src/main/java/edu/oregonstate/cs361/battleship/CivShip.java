@@ -9,6 +9,9 @@ public class CivShip extends Ship {
 
     public CivShip(String id, int length, int x1, int y1, int x2, int y2) {
         super(id,length,x1,y1,x2,y2);
+        System.out.println("Just made: " + id);
+        System.out.println("Start: " + start.get_x() + "," + start.get_y());
+        System.out.println("End: " + end.get_x() + "," + start.get_y());
     }
 
     public void hit(BattleshipModel model, boolean isAI)//Occurs when a civilian ship is shot
