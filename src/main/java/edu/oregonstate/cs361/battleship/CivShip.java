@@ -22,7 +22,7 @@ public class CivShip extends Ship {
         if(isAI)
         {
             model.add_computer_hit(start);
-            model.add_computer_hit(new Coord(start.get_x() + diffX/2, start.get_y() + diffY/2));
+            model.add_computer_hit(new Coord(start.get_x() + diffX, start.get_y() + diffY));
             model.add_computer_hit(end);
         }
         else
