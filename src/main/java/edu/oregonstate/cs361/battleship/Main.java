@@ -52,8 +52,12 @@ public class Main {
 
     //This function should return a new model
     static String newModel() {
-        BattleshipModel model = new BattleshipModel();
+
+    	BattleshipModel model = new BattleshipModel();
+    	Ship ship = new Ship("thefkinship",1,0,0,0,0);
     	Gson gson = new Gson();
+        //System.out.println(gson.toJson(ship));
+        //System.out.println(gson.toJson(model));
         return gson.toJson(model);
     }
 

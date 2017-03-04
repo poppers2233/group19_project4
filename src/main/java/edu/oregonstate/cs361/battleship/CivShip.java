@@ -7,6 +7,9 @@ import spark.Request;
 public class CivShip extends Ship {
 
 
+    public CivShip(){
+        super();
+    }
     public CivShip(String id, int length, int x1, int y1, int x2, int y2) {
         super(id,length,x1,y1,x2,y2);
         System.out.println("Just made: " + id);
@@ -50,7 +53,7 @@ public class CivShip extends Ship {
             //This might have to change locations/scopes
 
         }
-        else//Not vertical means Horizontal
+        if(start.get_y() == end.get_y() )//Not vertical means Horizontal
         {
             if(isAI){
                 //if its a Clipper need to add a hit at start, end, and in the middle
