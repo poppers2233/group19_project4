@@ -551,8 +551,6 @@ public class Main {
 
             }
 
-            //System.out.println(gson.toJson(model));
-
 
             //------------------------------Execution of the AI's turn
 
