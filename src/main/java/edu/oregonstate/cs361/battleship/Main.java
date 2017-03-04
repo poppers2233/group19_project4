@@ -15,7 +15,7 @@ public class Main {
 	
 	public static int boardWidth = 10;
 	public static int boardHeight = 10;
-	public static int max_hits = 21;
+	public static int max_hits = 15;
 	public static int vertical = 1;
 	public static int horizontal = 0;
 
@@ -23,7 +23,6 @@ public class Main {
     	
         //This will allow us to server the static pages such as index.html, app.js, etc.
         staticFiles.location("/public");
-
         //This will listen to GET requests to /model and return a clean new model
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
@@ -53,6 +52,7 @@ public class Main {
 
     //This function should return a new model
     static String newModel() {
+
     	BattleshipModel model = new BattleshipModel();
     	Ship ship = new Ship("thefkinship",1,0,0,0,0);
     	Gson gson = new Gson();
@@ -518,9 +518,8 @@ public class Main {
         // multiple of the same hit/ miss
         model = doMyFire(model, shot, gson);
     	//Check to see if the game is over now
-        
-        if(game_over(model))
-        	game_complete(model, false);
+
+        game_over(model);
         
     	 return gson.toJson(model);
     
@@ -550,8 +549,6 @@ public class Main {
                 model.add_computer_miss(shot);
 
             }
-
-            //System.out.println(gson.toJson(model));
 
 
             //------------------------------Execution of the AI's turn
@@ -600,16 +597,17 @@ public class Main {
         //System.out.println("False");
         return false;
     }
-     public static boolean game_over(BattleshipModel model){
+     public static void game_over(BattleshipModel model){
 
         if(model.get_player_hits().size() == max_hits)
-        {   return true; }
+        {
+            game_complete(model, true);
+        }
 
         if(model.get_computer_hits().size() == max_hits)
-        {   return true; }
-
-        else
-            return false;
+        {
+            game_complete(model, false);
+        }
      }
      
      public static void game_complete(BattleshipModel model, boolean isPlayer)
@@ -619,7 +617,7 @@ public class Main {
 		 model.get_computer_hits().clear();
 		 model.get_computer_misses().clear();
 		 model.get_player_misses().clear();
-    	 if(!isPlayer)
+    	 if(isPlayer)
     	 {
     		 
     		 //Add in the coords for the W and L for the winner and loser

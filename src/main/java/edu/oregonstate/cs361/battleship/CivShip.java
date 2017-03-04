@@ -12,73 +12,28 @@ public class CivShip extends Ship {
     }
     public CivShip(String id, int length, int x1, int y1, int x2, int y2) {
         super(id,length,x1,y1,x2,y2);
-
     }
 
     public void hit(BattleshipModel model, boolean isAI)//Occurs when a civilian ship is shot
     {
-
+        int diffX = (end.get_x() - start.get_x())/2;
+        int diffY = (end.get_y() - start.get_y())/2;
         model.add_computer_hit(start);
+        if(isAI)
+        {
+            model.add_computer_hit(start);
+            model.add_computer_hit(new Coord(start.get_x() + diffX, start.get_y() + diffY));
+            model.add_computer_hit(end);
+        }
+        else
+        {
+            model.add_player_hit(start);
+            model.add_player_hit(new Coord(start.get_x() + diffX, start.get_y() + diffY));
+            model.add_player_hit(end);
+        }
         //Need to find which orientation the ship is in
-        if(start.get_x() == end.get_x())//If the X's are equal, then it is vertical
-        {
-            if(isAI){
-                //if its a Clipper need to add a hit at start, end, and in the middle
-                if(this.name.equals("Clipper")){
-                    model.add_computer_hit(this.start);
-                    model.add_computer_hit(new Coord(this.start.get_y()+1, this.start.get_x()));
-                    model.add_computer_hit(this.end);
-                }
-                //if its a dinghy its only one space so just need to add one at start
-                else{
-                    model.add_computer_hit(this.start);
-                }
-            }
-            else{
-                //if its a Clipper need to add a hit at start, end, and in the middle
-                if(this.name.equals("Clipper")){
-                    model.add_player_hit(this.start);
-                    model.add_player_hit(new Coord(this.start.get_y()+1, this.start.get_x()));
-                    model.add_player_hit(this.end);
-                }
-                //if its a dinghy its only one space so just need to add one at start
-                else{
-                    model.add_player_hit(this.start);
-                }
-            }
-
-            //Iterate through the ships, places and create a hit at that location
-            //This might have to change locations/scopes
-
-        }
-        if(start.get_y() == end.get_y() )//Not vertical means Horizontal
-        {
-            if(isAI){
-                //if its a Clipper need to add a hit at start, end, and in the middle
-                if(this.name.equals("Clipper")){
-                    model.add_computer_hit(this.start);
-                    model.add_computer_hit(new Coord(this.start.get_y(), this.start.get_x()+1));
-                    model.add_computer_hit(this.end);
-                }
-                //if its a dinghy its only one space so just need to add one at start
-                else{
-                    model.add_computer_hit(this.start);
-                }
-            }
-            else{
-                //if its a Clipper need to add a hit at start, end, and in the middle
-                if(this.name.equals("Clipper")){
-                    model.add_player_hit(this.start);
-                    model.add_player_hit(new Coord(this.start.get_y(), this.start.get_x()+1));
-                    model.add_player_hit(this.end);
-                }
-                //if its a dinghy its only one space so just need to add one at start
-                else{
-                    model.add_player_hit(this.start);
-                }
-            }
-
-        }
 
     }
+
+
 }
