@@ -76,9 +76,9 @@ public class Main {
     	
    //------------------------------Parsing and execution of the player's turn
         BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
-	if(model == null){
-		model = new BattleshipModel();
-	}
+        if(model == null){
+            model = new BattleshipModel();
+        }
         Gson gson = new Gson();
         //declares variables for the details specified for the ship
         String id = req.params(":id");
