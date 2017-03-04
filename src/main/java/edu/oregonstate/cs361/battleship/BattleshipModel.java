@@ -18,13 +18,13 @@ public class BattleshipModel {
 
 	private Ship aircraftCarrier;
 	private Ship battleship;
-	private Ship cruiser;
-	private Ship destroyer;
+	private CivShip clipper;
+	private CivShip dinghy;
 	private Ship submarine;
 	private Ship computer_aircraftCarrier;
 	private Ship computer_battleship;
-	private Ship computer_cruiser;
-	private Ship computer_destroyer;
+	private CivShip computer_clipper;
+	private CivShip computer_dinghy;
 	private Ship computer_submarine;
 	private ArrayList<Coord> computerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> computerMisses = new ArrayList<Coord>();
@@ -36,21 +36,17 @@ public class BattleshipModel {
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
-		cruiser = new Ship("Cruiser", 3, 0, 0, 0, 0);
-		destroyer = new Ship("Destroyer", 2, 0, 0, 0, 0);
 		submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
+		clipper = new CivShip("Clipper", 3, 0,0,0,0);
+		dinghy = new CivShip("Dinghy",1,0,0,0,0);
 		computer_aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
 		computer_battleship = new Ship("BattleShip", 4, 0, 0, 0, 0);
-		computer_cruiser = new Ship("Cruiser", 3, 0, 0, 0, 0);
-		computer_destroyer = new Ship("Destroyer", 2, 0, 0, 0, 0);
 		computer_submarine = new Ship("Submarine", 2, 0, 0, 0, 0);
+		computer_clipper = new CivShip("Clipper", 3, 0,0,0,0);
+		computer_dinghy = new CivShip("Dinghy",1,0,0,0,0);
 		
 	}
 
-
-	public Ship getaircraftCarrier() {
-		return aircraftCarrier;
-	}
 
 	public void aircraftCarrier(Ship aircraftCarrier) {
 		this.aircraftCarrier = aircraftCarrier;
@@ -72,20 +68,20 @@ public class BattleshipModel {
 		this.battleship = battleship;
 	}
 
-	public Ship getCruiser() {
-		return cruiser;
+	public CivShip getClipper() {
+		return clipper;
 	}
 
-	public void setCruiser(Ship cruiser) {
-		this.cruiser = cruiser;
+	public void setClipper(CivShip clipper) {
+		this.clipper = clipper;
 	}
 
-	public Ship getDestroyer() {
-		return destroyer;
+	public CivShip getDinghy() {
+		return dinghy;
 	}
 
-	public void setDestroyer(Ship destroyer) {
-		this.destroyer = destroyer;
+	public void setDinghy(CivShip dinghy) {
+		this.dinghy = dinghy;
 	}
 
 	public Ship getSubmarine() {
@@ -112,21 +108,7 @@ public class BattleshipModel {
 		computer_battleship = aIbattleship;
 	}
 
-	public Ship getAIcruiser() {
-		return computer_cruiser;
-	}
 
-	public void setAIcruiser(Ship aIcruiser) {
-		computer_cruiser = aIcruiser;
-	}
-
-	public Ship getAIdestroyer() {
-		return computer_destroyer;
-	}
-
-	public void setAIdestroyer(Ship aIdestroyer) {
-		computer_destroyer = aIdestroyer;
-	}
 
 	public Ship getAIsubmarine() {
 		return computer_submarine;
@@ -180,25 +162,21 @@ public class BattleshipModel {
 	}
 
 
-	public Ship getComputer_cruiser() {
-		return computer_cruiser;
+	public CivShip getComputer_clipper() {
+		return computer_clipper;
 	}
 
-
-	public void setComputer_cruiser(Ship computer_cruiser) {
-		this.computer_cruiser = computer_cruiser;
+	public void setComputer_clipper(CivShip computer_clipper) {
+		this.computer_clipper = computer_clipper;
 	}
 
-
-	public Ship getComputer_destroyer() {
-		return computer_destroyer;
+	public CivShip getComputer_dinghy() {
+		return computer_dinghy;
 	}
 
-
-	public void setComputer_destroyer(Ship computer_destroyer) {
-		this.computer_destroyer = computer_destroyer;
+	public void setComputer_dinghy(CivShip computer_dinghy) {
+		this.computer_dinghy = computer_dinghy;
 	}
-
 
 	public Ship getComputer_submarine() {
 		return computer_submarine;
@@ -260,9 +238,9 @@ public class BattleshipModel {
 		 }
 		 else if (computer_battleship.scan(coor)){
 		     scanResult = true;
-		 }else if (computer_cruiser.scan(coor)){
+		 }else if (computer_clipper.scan(coor)){
 		     scanResult = true;
-		 }else if (computer_destroyer.scan(coor)){
+		 }else if (computer_dinghy.scan(coor)){
 		     scanResult = true;
 		 }else if (computer_submarine.scan(coor)){
 		     scanResult = true;

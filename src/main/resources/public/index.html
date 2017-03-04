@@ -17,8 +17,8 @@
     <select name="shipSelec" id="shipSelec">
         <option value="aircraftCarrier">Aircraft Carrier</option>
         <option value="battleship">Battleship</option>
-        <option value="cruiser">Cruiser</option>
-        <option value="destroyer">Destroyer</option>
+        <option value="clipper">Clipper</option>
+        <option value="dinghy">Dinghy</option>
         <option value="submarine">Submarine</option>
     </select>
     Row:
@@ -86,13 +86,13 @@
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
                     </tr>
-                    <tr onclick="shipchange('cruiser')">
+                    <tr onclick="shipchange('clipper')">
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
                     </tr>
-                    <tr onclick="shipchange('destroyer')">
+                    <tr onclick="shipchange('dinghy')">
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
@@ -260,127 +260,127 @@
                     <td id="h_10c"></td>
                 </tr>
             </table>
-            <div id="TheirBoard" class="gameBoard">
+            <div id="TheirBoard" class="gameBoard" oncontextmenu="return false">
                 <table>
                     <tr id="Row_1">
-                        <td id="C1_1" onclick="fireClick('1', '1');"></td>
-                        <td id="C1_2" onclick="fireClick('2', '1');"></td>
-                        <td id="C1_3" onclick="fireClick('3', '1');"></td>
-                        <td id="C1_4" onclick="fireClick('4', '1');"></td>
-                        <td id="C1_5" onclick="fireClick('5', '1');"></td>
-                        <td id="C1_6" onclick="fireClick('6', '1');"></td>
-                        <td id="C1_7" onclick="fireClick('7', '1');"></td>
-                        <td id="C1_8" onclick="fireClick('8', '1');"></td>
-                        <td id="C1_9" onclick="fireClick('9', '1');"></td>
-                        <td id="C1_10" onclick="fireClick('10', '1');"></td>
+                        <td id="C1_1" onmousedown="mClick(event, '1', '1');"></td>
+                        <td id="C1_2" onmousedown="mClick(event,'2', '1');"></td>
+                        <td id="C1_3" onmousedown="mClick(event,'3', '1');"></td>
+                        <td id="C1_4" onmousedown="mClick(event,'4', '1');"></td>
+                        <td id="C1_5" onmousedown="mClick(event,'5', '1');"></td>
+                        <td id="C1_6" onmousedown="mClick(event,'6', '1');"></td>
+                        <td id="C1_7" onmousedown="mClick(event,'7', '1');"></td>
+                        <td id="C1_8" onmousedown="mClick(event,'8', '1');"></td>
+                        <td id="C1_9" onmousedown="mClick(event,'9', '1');"></td>
+                        <td id="C1_10" onmousedown="mClick(event,'10', '1');"></td>
                     </tr>
                     <tr id="Row_2">
-                        <td id="C2_1" onclick="fireClick('1', '2');"></td>
-                        <td id="C2_2" onclick="fireClick('2', '2');"></td>
-                        <td id="C2_3" onclick="fireClick('3', '2');"></td>
-                        <td id="C2_4" onclick="fireClick('4', '2');"></td>
-                        <td id="C2_5" onclick="fireClick('5', '2');"></td>
-                        <td id="C2_6" onclick="fireClick('6', '2');"></td>
-                        <td id="C2_7" onclick="fireClick('7', '2');"></td>
-                        <td id="C2_8" onclick="fireClick('8', '2');"></td>
-                        <td id="C2_9" onclick="fireClick('9', '2');"></td>
-                        <td id="C2_10" onclick="fireClick('10', '2');"></td>
+                        <td id="C2_1" onmousedown="mClick(event,'1', '2');"></td>
+                        <td id="C2_2" onmousedown="mClick(event,'2', '2');"></td>
+                        <td id="C2_3" onmousedown="mClick(event,'3', '2');"></td>
+                        <td id="C2_4" onmousedown="mClick(event,'4', '2');"></td>
+                        <td id="C2_5" onmousedown="mClick(event,'5', '2');"></td>
+                        <td id="C2_6" onmousedown="mClick(event,'6', '2');"></td>
+                        <td id="C2_7" onmousedown="mClick(event,'7', '2');"></td>
+                        <td id="C2_8" onmousedown="mClick(event,'8', '2');"></td>
+                        <td id="C2_9" onmousedown="mClick(event,'9', '2');"></td>
+                        <td id="C2_10" onmousedown="mClick(event,'10', '2');"></td>
                     </tr>
                     <tr id="Row_3">
-                        <td id="C3_1" onclick="fireClick('1', '3');"></td>
-                        <td id="C3_2" onclick="fireClick('2', '3');"></td>
-                        <td id="C3_3" onclick="fireClick('3', '3');"></td>
-                        <td id="C3_4" onclick="fireClick('4', '3');"></td>
-                        <td id="C3_5" onclick="fireClick('5', '3');"></td>
-                        <td id="C3_6" onclick="fireClick('6', '3');"></td>
-                        <td id="C3_7" onclick="fireClick('7', '3');"></td>
-                        <td id="C3_8" onclick="fireClick('8', '3');"></td>
-                        <td id="C3_9" onclick="fireClick('9', '3');"></td>
-                        <td id="C3_10" onclick="fireClick('10', '3');"></td>
+                        <td id="C3_1" onmousedown="mClick(event,'1', '3');"></td>
+                        <td id="C3_2" onmousedown="mClick(event,'2', '3');"></td>
+                        <td id="C3_3" onmousedown="mClick(event,'3', '3');"></td>
+                        <td id="C3_4" onmousedown="mClick(event,'4', '3');"></td>
+                        <td id="C3_5" onmousedown="mClick(event,'5', '3');"></td>
+                        <td id="C3_6" onmousedown="mClick(event,'6', '3');"></td>
+                        <td id="C3_7" onmousedown="mClick(event,'7', '3');"></td>
+                        <td id="C3_8" onmousedown="mClick(event,'8', '3');"></td>
+                        <td id="C3_9" onmousedown="mClick(event,'9', '3');"></td>
+                        <td id="C3_10" onmousedown="mClick(event,'10', '3');"></td>
                     </tr>
                     <tr id="Row_4">
-                        <td id="C4_1" onclick="fireClick('1', '4');"></td>
-                        <td id="C4_2" onclick="fireClick('2', '4');"></td>
-                        <td id="C4_3" onclick="fireClick('3', '4');"></td>
-                        <td id="C4_4" onclick="fireClick('4', '4');"></td>
-                        <td id="C4_5" onclick="fireClick('5', '4');"></td>
-                        <td id="C4_6" onclick="fireClick('6', '4');"></td>
-                        <td id="C4_7" onclick="fireClick('7', '4');"></td>
-                        <td id="C4_8" onclick="fireClick('8', '4');"></td>
-                        <td id="C4_9" onclick="fireClick('9', '4');"></td>
-                        <td id="C4_10" onclick="fireClick('10', '4');"></td>
+                        <td id="C4_1" onmousedown="mClick(event,'1', '4');"></td>
+                        <td id="C4_2" onmousedown="mClick(event,'2', '4');"></td>
+                        <td id="C4_3" onmousedown="mClick(event,'3', '4');"></td>
+                        <td id="C4_4" onmousedown="mClick(event,'4', '4');"></td>
+                        <td id="C4_5" onmousedown="mClick(event,'5', '4');"></td>
+                        <td id="C4_6" onmousedown="mClick(event,'6', '4');"></td>
+                        <td id="C4_7" onmousedown="mClick(event,'7', '4');"></td>
+                        <td id="C4_8" onmousedown="mClick(event,'8', '4');"></td>
+                        <td id="C4_9" onmousedown="mClick(event,'9', '4');"></td>
+                        <td id="C4_10" onmousedown="mClick(event,'10', '4');"></td>
                     </tr>
                     <tr id="Row_5">
-                        <td id="C5_1" onclick="fireClick('1', '5');"></td>
-                        <td id="C5_2" onclick="fireClick('2', '5');"></td>
-                        <td id="C5_3" onclick="fireClick('3', '5');"></td>
-                        <td id="C5_4" onclick="fireClick('4', '5');"></td>
-                        <td id="C5_5" onclick="fireClick('5', '5');"></td>
-                        <td id="C5_6" onclick="fireClick('6', '5');"></td>
-                        <td id="C5_7" onclick="fireClick('7', '5');"></td>
-                        <td id="C5_8" onclick="fireClick('8', '5');"></td>
-                        <td id="C5_9" onclick="fireClick('9', '5');"></td>
-                        <td id="C5_10" onclick="fireClick('10', '5');"></td>
+                        <td id="C5_1" onmousedown="mClick(event,'1', '5');"></td>
+                        <td id="C5_2" onmousedown="mClick(event,'2', '5');"></td>
+                        <td id="C5_3" onmousedown="mClick(event,'3', '5');"></td>
+                        <td id="C5_4" onmousedown="mClick(event,'4', '5');"></td>
+                        <td id="C5_5" onmousedown="mClick(event,'5', '5');"></td>
+                        <td id="C5_6" onmousedown="mClick(event,'6', '5');"></td>
+                        <td id="C5_7" onmousedown="mClick(event,'7', '5');"></td>
+                        <td id="C5_8" onmousedown="mClick(event,'8', '5');"></td>
+                        <td id="C5_9" onmousedown="mClick(event,'9', '5');"></td>
+                        <td id="C5_10" onmousedown="mClick(event,'10', '5');"></td>
                     </tr>
                     <tr id="Row_6">
-                        <td id="C6_1" onclick="fireClick('1', '6');"></td>
-                        <td id="C6_2" onclick="fireClick('2', '6');"></td>
-                        <td id="C6_3" onclick="fireClick('3', '6');"></td>
-                        <td id="C6_4" onclick="fireClick('4', '6');"></td>
-                        <td id="C6_5" onclick="fireClick('5', '6');"></td>
-                        <td id="C6_6" onclick="fireClick('6', '6');"></td>
-                        <td id="C6_7" onclick="fireClick('7', '6');"></td>
-                        <td id="C6_8" onclick="fireClick('8', '6');"></td>
-                        <td id="C6_9" onclick="fireClick('9', '6');"></td>
-                        <td id="C6_10" onclick="fireClick('10', '6');"></td>
+                        <td id="C6_1" onmousedown="mClick(event,'1', '6');"></td>
+                        <td id="C6_2" onmousedown="mClick(event,'2', '6');"></td>
+                        <td id="C6_3" onmousedown="mClick(event,'3', '6');"></td>
+                        <td id="C6_4" onmousedown="mClick(event,'4', '6');"></td>
+                        <td id="C6_5" onmousedown="mClick(event,'5', '6');"></td>
+                        <td id="C6_6" onmousedown="mClick(event,'6', '6');"></td>
+                        <td id="C6_7" onmousedown="mClick(event,'7', '6');"></td>
+                        <td id="C6_8" onmousedown="mClick(event,'8', '6');"></td>
+                        <td id="C6_9" onmousedown="mClick(event,'9', '6');"></td>
+                        <td id="C6_10" onmousedown="mClick(event,'10', '6');"></td>
                     </tr>
                     <tr id="Row_7">
-                        <td id="C7_1" onclick="fireClick('1', '7');"></td>
-                        <td id="C7_2" onclick="fireClick('2', '7');"></td>
-                        <td id="C7_3" onclick="fireClick('3', '7');"></td>
-                        <td id="C7_4" onclick="fireClick('4', '7');"></td>
-                        <td id="C7_5" onclick="fireClick('5', '7');"></td>
-                        <td id="C7_6" onclick="fireClick('6', '7');"></td>
-                        <td id="C7_7" onclick="fireClick('7', '7');"></td>
-                        <td id="C7_8" onclick="fireClick('8', '7');"></td>
-                        <td id="C7_9" onclick="fireClick('9', '7');"></td>
-                        <td id="C7_10" onclick="fireClick('10', '7');"></td>
+                        <td id="C7_1" onmousedown="mClick(event,'1', '7');"></td>
+                        <td id="C7_2" onmousedown="mClick(event,'2', '7');"></td>
+                        <td id="C7_3" onmousedown="mClick(event,'3', '7');"></td>
+                        <td id="C7_4" onmousedown="mClick(event,'4', '7');"></td>
+                        <td id="C7_5" onmousedown="mClick(event,'5', '7');"></td>
+                        <td id="C7_6" onmousedown="mClick(event,'6', '7');"></td>
+                        <td id="C7_7" onmousedown="mClick(event,'7', '7');"></td>
+                        <td id="C7_8" onmousedown="mClick(event,'8', '7');"></td>
+                        <td id="C7_9" onmousedown="mClick(event,'9', '7');"></td>
+                        <td id="C7_10" onmousedown="mClick(event,'10', '7');"></td>
                     </tr>
                     <tr id="Row_8">
-                        <td id="C8_1" onclick="fireClick('1', '8');"></td>
-                        <td id="C8_2" onclick="fireClick('2', '8');"></td>
-                        <td id="C8_3" onclick="fireClick('3', '8');"></td>
-                        <td id="C8_4" onclick="fireClick('4', '8');"></td>
-                        <td id="C8_5" onclick="fireClick('5', '8');"></td>
-                        <td id="C8_6" onclick="fireClick('6', '8');"></td>
-                        <td id="C8_7" onclick="fireClick('7', '8');"></td>
-                        <td id="C8_8" onclick="fireClick('8', '8');"></td>
-                        <td id="C8_9" onclick="fireClick('9', '8');"></td>
-                        <td id="C8_10" onclick="fireClick('10', '8');"></td>
+                        <td id="C8_1" onmousedown="mClick(event,'1', '8');"></td>
+                        <td id="C8_2" onmousedown="mClick(event,'2', '8');"></td>
+                        <td id="C8_3" onmousedown="mClick(event,'3', '8');"></td>
+                        <td id="C8_4" onmousedown="mClick(event,'4', '8');"></td>
+                        <td id="C8_5" onmousedown="mClick(event,'5', '8');"></td>
+                        <td id="C8_6" onmousedown="mClick(event,'6', '8');"></td>
+                        <td id="C8_7" onmousedown="mClick(event,'7', '8');"></td>
+                        <td id="C8_8" onmousedown="mClick(event,'8', '8');"></td>
+                        <td id="C8_9" onmousedown="mClick(event,'9', '8');"></td>
+                        <td id="C8_10" onmousedown="mClick(event,'10', '8');"></td>
                     </tr>
                     <tr id="Row_9">
-                        <td id="C9_1" onclick="fireClick('1', '9');"></td>
-                        <td id="C9_2" onclick="fireClick('2', '9');"></td>
-                        <td id="C9_3" onclick="fireClick('3', '9');"></td>
-                        <td id="C9_4" onclick="fireClick('4', '9');"></td>
-                        <td id="C9_5" onclick="fireClick('5', '9');"></td>
-                        <td id="C9_6" onclick="fireClick('6', '9');"></td>
-                        <td id="C9_7" onclick="fireClick('7', '9');"></td>
-                        <td id="C9_8" onclick="fireClick('8', '9');"></td>
-                        <td id="C9_9" onclick="fireClick('9', '9');"></td>
-                        <td id="C9_10" onclick="fireClick('10', '9');"></td>
+                        <td id="C9_1" onmousedown="mClick(event,'1', '9');"></td>
+                        <td id="C9_2" onmousedown="mClick(event,'2', '9');"></td>
+                        <td id="C9_3" onmousedown="mClick(event,'3', '9');"></td>
+                        <td id="C9_4" onmousedown="mClick(event,'4', '9');"></td>
+                        <td id="C9_5" onmousedown="mClick(event,'5', '9');"></td>
+                        <td id="C9_6" onmousedown="mClick(event,'6', '9');"></td>
+                        <td id="C9_7" onmousedown="mClick(event,'7', '9');"></td>
+                        <td id="C9_8" onmousedown="mClick(event,'8', '9');"></td>
+                        <td id="C9_9" onmousedown="mClick(event,'9', '9');"></td>
+                        <td id="C9_10" onmousedown="mClick(event,'10', '9');"></td>
                     </tr>
                     <tr id="Row_10">
-                        <td id="C10_1" onclick="fireClick('1', '10');"></td>
-                        <td id="C10_2" onclick="fireClick('2', '10');"></td>
-                        <td id="C10_3" onclick="fireClick('3', '10');"></td>
-                        <td id="C10_4" onclick="fireClick('4', '10');"></td>
-                        <td id="C10_5" onclick="fireClick('5', '10');"></td>
-                        <td id="C10_6" onclick="fireClick('6', '10');"></td>
-                        <td id="C10_7" onclick="fireClick('7', '10');"></td>
-                        <td id="C10_8" onclick="fireClick('8', '10');"></td>
-                        <td id="C10_9" onclick="fireClick('9', '10');"></td>
-                        <td id="C10_10" onclick="fireClick('10', '10');"></td>
+                        <td id="C10_1" onmousedown="mClick(event,'1', '10');"></td>
+                        <td id="C10_2" onmousedown="mClick(event,'2', '10');"></td>
+                        <td id="C10_3" onmousedown="mClick(event,'3', '10');"></td>
+                        <td id="C10_4" onmousedown="mClick(event,'4', '10');"></td>
+                        <td id="C10_5" onmousedown="mClick(event,'5', '10');"></td>
+                        <td id="C10_6" onmousedown="mClick(event,'6', '10');"></td>
+                        <td id="C10_7" onmousedown="mClick(event,'7', '10');"></td>
+                        <td id="C10_8" onmousedown="mClick(event,'8', '10');"></td>
+                        <td id="C10_9" onmousedown="mClick(event,'9', '10');"></td>
+                        <td id="C10_10" onmousedown="mClick(event,'10', '10');"></td>
                     </tr>
                 </table>
             </div>
@@ -418,6 +418,13 @@
                         <td id="placeShip"></td>
                         <td id="placeShip"></td>
                     </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>Scan:</th>
+                        <td id="ScanLocation">  </td>
+                    </tr>
+                    <tr> <td id="ScanResults">  </td> </tr>
                 </table>
             </td>
         </tr>
