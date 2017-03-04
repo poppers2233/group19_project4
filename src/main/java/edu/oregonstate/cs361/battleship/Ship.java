@@ -6,10 +6,17 @@ package edu.oregonstate.cs361.battleship;
  */
 public class Ship {
 
-    private String name;
-    private Coord start;
-    private Coord end;
-    private int length;
+    public String name;
+    public Coord start;
+    public Coord end;
+    public int length;
+
+    public Ship(){
+        name = "this should not have happened";
+        start = new Coord(-1,-1);
+        end = new Coord(-2,-2);
+        length = -1;
+    }
 
     public Ship(String id, int length, int x1,int y1,int x2,int y2){
         this.length = length;
