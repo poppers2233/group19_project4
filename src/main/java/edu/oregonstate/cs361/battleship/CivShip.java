@@ -16,8 +16,8 @@ public class CivShip extends Ship {
 
     public void hit(BattleshipModel model, boolean isAI)//Occurs when a civilian ship is shot
     {
-        int diffX = end.get_x() - start.get_x();
-        int diffY = end.get_y() - start.get_y();
+        int diffX = (end.get_x() - start.get_x())/2;
+        int diffY = (end.get_y() - start.get_y())/2;
         model.add_computer_hit(start);
         if(isAI)
         {
