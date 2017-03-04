@@ -11,6 +11,7 @@ public class Ship {
     public Coord end;
     public int length;
 
+
     public Ship(){
         name = "this should not have happened";
         start = new Coord(-1,-1);
@@ -39,14 +40,14 @@ public class Ship {
 
         if(orientation.equals("horizontal")){
              x2 = x1;
-             y2 = y1+length;
+             y2 = y1+length-1;
              if(x2 > 10 || y2 > 10){
                  x2 = 0;
                  y2 = 0;
              }
         }
         else{
-             x2 = x1+length;
+             x2 = x1+length-1;
              y2 = y1;
         }
         if(x2 > 10 || y2 > 10){
