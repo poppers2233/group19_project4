@@ -48,9 +48,7 @@ public class BattleshipModel {
 	}
 
 
-	public void aircraftCarrier(Ship aircraftCarrier) {
-		this.aircraftCarrier = aircraftCarrier;
-	}
+
 	
 	public Ship getAircraftCarrier() {
 		return aircraftCarrier;
@@ -227,13 +225,13 @@ public class BattleshipModel {
 		     scanResult = true;
 		 }
 		 else if (computer_battleship.scan(coor)){
-		     scanResult = true;
+		     scanResult = false;
 		 }else if (computer_clipper.scan(coor)){
 		     scanResult = true;
 		 }else if (computer_dinghy.scan(coor)){
 		     scanResult = true;
 		 }else if (computer_submarine.scan(coor)){
-		     scanResult = true;
+		     scanResult = false;
 		 } else {
 		     scanResult = false;
 		 }
