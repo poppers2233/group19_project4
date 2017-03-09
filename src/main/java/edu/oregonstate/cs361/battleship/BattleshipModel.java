@@ -154,31 +154,11 @@ public class BattleshipModel {
 		return computer_clipper;
 	}
 
-	public void setComputer_clipper(CivShip computer_clipper) {
-		this.computer_clipper = computer_clipper;
-	}
 
 	public CivShip getComputer_dinghy() {
 		return computer_dinghy;
 	}
 
-	public void setComputer_dinghy(CivShip computer_dinghy) {
-		this.computer_dinghy = computer_dinghy;
-	}
-
-	public Ship getComputer_submarine() {
-		return computer_submarine;
-	}
-
-
-	public void setComputer_submarine(Ship computer_submarine) {
-		this.computer_submarine = computer_submarine;
-	}
-
-
-	public ArrayList<Coord> getComputerHits() {
-		return computerHits;
-	}
 
 
 	public void setComputerHits(ArrayList<Coord> computerHits) {
@@ -186,36 +166,11 @@ public class BattleshipModel {
 	}
 
 
-	public ArrayList<Coord> getComputerMisses() {
-		return computerMisses;
-	}
-
-
-	public void setComputerMisses(ArrayList<Coord> computerMisses) {
-		this.computerMisses = computerMisses;
-	}
-
-
-	public ArrayList<Coord> getPlayerHits() {
-		return playerHits;
-	}
-
 
 	public void setPlayerHits(ArrayList<Coord> playerHits) {
 		this.playerHits = playerHits;
 	}
-
-
-	public ArrayList<Coord> getPlayerMisses() {
-		return playerMisses;
-	}
-
-
-	public void setPlayerMisses(ArrayList<Coord> playerMisses) {
-		this.playerMisses = playerMisses;
-	}
-
-
+	
 
 	public void scan(int rowInt, int colInt) 
 	{
