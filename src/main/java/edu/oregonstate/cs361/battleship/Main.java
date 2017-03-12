@@ -26,7 +26,7 @@ public class Main {
         //This will listen to GET requests to /model and return a clean new model
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
-        post("/fire/:row/:col", (req, res) -> fireAt(req));
+        post("/fire/:row/:col", (req, res) -> prepFire(req));
 	//This will listen to POST requests and expects to receive a game model, as well as location to scan
         post("/scan/:row/:col", (req, res) -> scan(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
@@ -495,14 +495,14 @@ public class Main {
     }
     
     //Similar to placeShip, but with firing.
-    private static String fireAt(Request req) {
+    private static String prepFire(Request req) {
 
     	
     	
     	//------------------------------Parsing and execution of the player's turn
 
 
-        //System.out.println("fireAt called.");
+        //System.out.println("prepFire called.");
         BattleshipModel model = getModelFromReq(req);
         if(model == null){
             model = new BattleshipModel();
@@ -516,7 +516,7 @@ public class Main {
         //>>>>>This if statement makes sure that the user has not already fired at the location. if they have it will prevent
         // the AI from fireing that turn and NOT add to the users hits/misses to prevent that array from having
         // multiple of the same hit/ miss
-        model = doMyFire(model, shot, gson);
+        model = fireAt(model, shot);
     	//Check to see if the game is over now
 
         game_over(model);
@@ -525,63 +525,71 @@ public class Main {
     
     }
 
-    public static BattleshipModel doMyFire(BattleshipModel model, Coord shot, Gson gson){
+    public static BattleshipModel fireAt(BattleshipModel model, Coord shot){
 
-
-        Random rand = new Random(System.currentTimeMillis());
-
-        Coord mycoord;
 
         if(checkPlayerShot(model, shot)) {
-            //if we register any hits
-            if (posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIsubmarine(), shot)) {
-                //mark as a hit for the player
-                model.add_computer_hit(shot);
-            }
-            else if(posHelper(model.getComputer_clipper(), shot)){
-                model.getComputer_clipper().hit(model, true);
-            }
-            else if(posHelper(model.getComputer_dinghy(), shot)){
-                model.getComputer_dinghy().hit(model, true);
-            }
-            else{
-                //mark as a miss for the player
-                model.add_computer_miss(shot);
-
-            }
-
+            playerShot(model, shot);
 
             //------------------------------Execution of the AI's turn
 
-
-            //If game isn't over, AI does his fire
-
-
-            do {
-                mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
-
-            } while (!checkValidShot(model, mycoord));//while the shot has already been done
-
-            //check to see if the shot hits or misses
-
-            //if we register any hits
-            if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
-                //mark as a hit for the computer
-                model.add_player_hit(mycoord);
-            }
-            else if( posHelper(model.getClipper(), mycoord)){
-                model.getClipper().hit(model, false);
-            }
-            else if( posHelper(model.getDinghy(), mycoord )){
-                model.getDinghy().hit(model, false);
-            }
-            else {
-                //mark as a miss for the computer
-                model.add_player_miss(mycoord);
-
-            }
+            AIFire(model);
         }
         return model;
+    }
+
+    private static void playerShot(BattleshipModel model, Coord shot) {
+        //if we register any hits
+        if (posHelper(model.getAIaircraftCarrier(), shot) || posHelper(model.getAIbattleship(), shot) || posHelper(model.getAIsubmarine(), shot)) {
+            //mark as a hit for the player
+            model.add_computer_hit(shot);
+        }
+        else if(posHelper(model.getComputer_clipper(), shot)){
+            model.getComputer_clipper().hit(model, true);
+        }
+        else if(posHelper(model.getComputer_dinghy(), shot)){
+            model.getComputer_dinghy().hit(model, true);
+        }
+        else{
+            //mark as a miss for the player
+            model.add_computer_miss(shot);
+
+        }
+    }
+
+    private static void AIFire(BattleshipModel model) {
+        //If set to easy mode
+        AIEasyFire(model);
+
+        //If it is hard mode
+    }
+
+    private static void AIEasyFire(BattleshipModel model) {
+        Random rand = new Random(System.currentTimeMillis());
+        Coord mycoord;
+        do {
+            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
+
+        } while (!checkValidShot(model, mycoord));//while the shot has already been done
+
+        //check to see if the shot hits or misses
+
+        //if we register any hits
+        if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
+            //mark as a hit for the computer
+            model.add_player_hit(mycoord);
+        }
+        else if( posHelper(model.getClipper(), mycoord)){
+            model.getClipper().hit(model, false);
+        }
+        else if( posHelper(model.getDinghy(), mycoord )){
+            model.getDinghy().hit(model, false);
+        }
+        else {
+            //mark as a miss for the computer
+            model.add_player_miss(mycoord);
+
+        }
     }
 
     public static boolean posHelper(Ship model, Coord pos){
@@ -689,12 +697,3 @@ public class Main {
     	 }
      }
 }
-
-/*
-The how to play section:
-
-How To Play
-
-
-
- */

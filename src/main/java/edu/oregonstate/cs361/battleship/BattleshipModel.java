@@ -170,7 +170,7 @@ public class BattleshipModel {
 	public void setPlayerHits(ArrayList<Coord> playerHits) {
 		this.playerHits = playerHits;
 	}
-	
+
 
 	public void scan(int rowInt, int colInt) 
 	{
