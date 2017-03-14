@@ -32,6 +32,7 @@ public class BattleshipModel {
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private boolean scanResult = false;
 	private boolean difficulty = false; //False means easy, true for hard mode
+	private Coord AIShot = null;
 
 
 	public BattleshipModel() {
@@ -200,6 +201,14 @@ public class BattleshipModel {
 	}
 
 	public boolean isHard(){return difficulty;}
+
+	public Coord getAIShot() {
+		return AIShot;
+	}
+
+	public void setAIShot(Coord AIShot) {
+		this.AIShot = AIShot;
+	}
 }
 
 

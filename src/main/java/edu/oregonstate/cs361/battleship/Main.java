@@ -592,20 +592,23 @@ public class Main {
     private static Coord AIHardFire(BattleshipModel model) {
         Random rand = new Random(System.currentTimeMillis());
         Coord mycoord;
+        //If the previious shot was not a hit
+        do {
+            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
 
-        mycoord = new Coord(1,1);
+        } while (!checkValidShot(model, mycoord));//while the shot has already been done
+
+        //If it was a hit
+
 
 
         return mycoord;
     }
 
     private static Coord AIEasyFire(BattleshipModel model) {
-        Random rand = new Random(System.currentTimeMillis());
-        Coord mycoord;
-        do {
-            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
+       Coord mycoord;
 
-        } while (!checkValidShot(model, mycoord));//while the shot has already been done
+        mycoord = new Coord(1,1);
 
        return mycoord;
     }
