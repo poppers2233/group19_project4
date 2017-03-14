@@ -31,7 +31,9 @@ public class BattleshipModel {
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private boolean scanResult = false;
-	
+	private boolean difficulty = false; //False means easy, true for hard mode
+
+
 	public BattleshipModel() {
 		//Create the ship objects
 		aircraftCarrier = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
@@ -196,6 +198,8 @@ public class BattleshipModel {
 	{
 		return scanResult;
 	}
+
+	public boolean isHard(){return difficulty;}
 }
 
 

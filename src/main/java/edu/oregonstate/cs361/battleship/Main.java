@@ -558,19 +558,16 @@ public class Main {
     }
 
     private static void AIFire(BattleshipModel model) {
-        //If set to easy mode
-        AIEasyFire(model);
 
-        //If it is hard mode
-    }
-
-    private static void AIEasyFire(BattleshipModel model) {
-        Random rand = new Random(System.currentTimeMillis());
         Coord mycoord;
-        do {
-            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
 
-        } while (!checkValidShot(model, mycoord));//while the shot has already been done
+        //Get the coordinate
+        if(model.isHard())
+        //If it is hard mode
+        mycoord = AIHardFire(model);
+        else
+        //If set to easy mode
+        mycoord = AIEasyFire(model);
 
         //check to see if the shot hits or misses
 
@@ -590,6 +587,27 @@ public class Main {
             model.add_player_miss(mycoord);
 
         }
+    }
+
+    private static Coord AIHardFire(BattleshipModel model) {
+        Random rand = new Random(System.currentTimeMillis());
+        Coord mycoord;
+
+        mycoord = new Coord(1,1);
+
+
+        return mycoord;
+    }
+
+    private static Coord AIEasyFire(BattleshipModel model) {
+        Random rand = new Random(System.currentTimeMillis());
+        Coord mycoord;
+        do {
+            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
+
+        } while (!checkValidShot(model, mycoord));//while the shot has already been done
+
+       return mycoord;
     }
 
     public static boolean posHelper(Ship model, Coord pos){
