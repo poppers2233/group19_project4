@@ -14,10 +14,11 @@ function placeShip() {
    console.log($( "#rowSelec" ).val());
    console.log($( "#colSelec" ).val());
    console.log($( "#orientationSelec" ).val());
+   console.log($( "#diffSelec").val());
 
    //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
-     url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$( "#orientationSelec" ).val(),
+     url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$( "#orientationSelec" ).val()+"/"+$( "#diffSelec" ).val(),
      method: "post",
      data: JSON.stringify(gameModel),
      contentType: "application/json; charset=utf-8",
@@ -156,7 +157,7 @@ $( '#MyBoard td'  ).css("background-color", "blue");
 $( '#TheirBoard td'  ).css("background-color", "blue");
 
 if(gameModel.scanResult){
-document.getElementById("ScanResults").innerHTML = "Scan found at leas one ship"}
+document.getElementById("ScanResults").innerHTML = "Scan found at least one ship"}
 else{
 document.getElementById("ScanResults").innerHTML = "Scan found no ships"}
 
