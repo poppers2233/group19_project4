@@ -1,6 +1,8 @@
 
 var gameModel;
 
+
+
 $( document ).ready(function() {
   // Handler for .ready() called.
   $.getJSON("model", function( json ) {
@@ -8,6 +10,8 @@ $( document ).ready(function() {
     console.log( "JSON Data: " + json );
    });
 });
+
+
 
 function placeShip() {
    console.log($( "#shipSelec" ).val());
@@ -91,6 +95,18 @@ function fireClick(c, r){
      alert( "Request failed: " + textStatus );
    });
 
+}
+
+function difficultySelect(diff){
+    modal.style.display = "none";
+    var obj = document.getElementById("diffSelec");
+        var selected = obj.options;
+        for(var opt, j = 0; opt = selected[j]; j++) {
+                if(opt.value == diff) {
+                    obj.selectedIndex = j;
+                    break;
+                }
+        }
 }
 
 function scan(){
