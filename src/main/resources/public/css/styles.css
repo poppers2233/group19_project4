@@ -48,9 +48,24 @@ background-color: light-gray;
     width: 80%;
 }
 
+.modal-header {
+    padding: 2px 16px;
+    background-color: #999999;
+    color: white;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #999999;
+    color:white;
+}
+
 .modal-button {
-    width: 40%;
-    height: 30%;
+    width: 49%;
+    padding: 20px 16px;
+    position:relative;
+    top:50%;
+    left:0.7%;
 }
 
 /* The Close Button */

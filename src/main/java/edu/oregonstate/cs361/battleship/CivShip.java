@@ -18,7 +18,7 @@ public class CivShip extends Ship {
     {
         int diffX = (end.get_x() - start.get_x())/2;
         int diffY = (end.get_y() - start.get_y())/2;
-        model.add_computer_hit(start);
+        //model.add_computer_hit(start);
         if(isAI)
         {
             model.add_computer_hit(start);
