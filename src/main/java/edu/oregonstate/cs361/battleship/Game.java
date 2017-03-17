@@ -39,7 +39,6 @@ public class Game {
         String AIOrientation;
         int row = coord.get_x();
         int col = coord.get_y();
-        AIOrientation = "throw me an error";
 
         Coord[] easyPlace = new Coord[5];
         String[] easyOrient = new String[5];
@@ -69,8 +68,8 @@ public class Game {
                 if (model.isHard()) {
                     System.out.println("hard place");
                     do {
-                        AICol = rand.nextInt(boardWidth + 1) +1;
-                        AIRow = rand.nextInt(boardHeight + 1) +1;
+                        AICol = rand.nextInt(boardWidth) +1;
+                        AIRow = rand.nextInt(boardHeight) +1;
                         if (rand.nextInt(2) == 0)
                             AIOrientation = "horizontal";
                         else
@@ -87,7 +86,7 @@ public class Game {
                     AIOrientation = easyOrient[0];
 
                 }
-                System.out.println("x: "+AICol + "y: "+AIRow +"ori"+ AIOrientation);
+                System.out.println("x: "+AICol + " y: "+AIRow +" ori: "+ AIOrientation);
                 model.getAIaircraftCarrier().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
@@ -114,6 +113,8 @@ public class Game {
                     AIOrientation = easyOrient[1];
 
                 }
+
+                System.out.println("Placing ship at " + AIRow+","+AICol);
 
                 model.getAIbattleship().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
@@ -430,6 +431,13 @@ public class Game {
                     }
                 }
             }
+
+            if(col + length > 10 && orientation.equals("horizontal"))
+                return false;
+            if(row + length > 10 && orientation.equals("vertical"))
+                return  false;
+
+
             return true;
         }
     }
@@ -604,11 +612,9 @@ public class Game {
                 }
                 if (checkValidShot(model, mycoord))
                     return mycoord;
-                System.out.println("Didn't find");
                 model.setAIShot(null);
             }
         }
-        System.out.println("Was null");
         //If the previious shot was not a hit, shoot randomly
         do {
             mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
