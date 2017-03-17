@@ -202,6 +202,11 @@ public class BattleshipModel {
 
 	public boolean isHard(){return difficulty;}
 
+	public void setDifficulty(boolean difficulty)
+	{
+		this.difficulty = difficulty;
+	}
+
 	public Coord getAIShot() {
 		return AIShot;
 	}

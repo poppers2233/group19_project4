@@ -3,8 +3,6 @@ package edu.oregonstate.cs361.battleship;
 import com.google.gson.Gson;
 import spark.Request;
 
-import java.util.Random;
-
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
@@ -25,8 +23,9 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to scan
         post("/scan/:row/:col", (req, res) -> scan(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
-        post("/placeShip/:id/:row/:col/:orientation/:difficulty", (req, res) -> placeShip(req));
+        post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
 
+        post("/difficultySelect/:difficulty", (req, res) -> difficultySelect(req));
 
     }
 
@@ -95,6 +94,21 @@ public class Main {
 
         game_manager.placeShip(model, new Coord(row, col), orientation, id,  difficulty);
 
+        return gson.toJson(model);
+    }
+
+    private static String difficultySelect(Request req)
+    {
+        BattleshipModel model = getModelFromReq(req);
+        Gson gson = new Gson();
+        String difficulty = req.params(":difficulty");
+
+        if(difficulty.equals("easy"))
+            model.setDifficulty(false);
+        else if (difficulty.equals("hard"))
+                model.setDifficulty(true);
+        else
+            System.out.println("Inproper String detected in request");
         return gson.toJson(model);
     }
 

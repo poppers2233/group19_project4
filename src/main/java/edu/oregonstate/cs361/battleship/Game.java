@@ -506,9 +506,12 @@ public class Game {
 
 
         if(checkPlayerShot(model, shot)) {
+
+            //Execute player shot
+
             playerShot(model, shot);
 
-            //------------------------------Execution of the AI's turn
+            //Execution of the AI's shot
 
             AIFire(model);
         }
@@ -567,16 +570,51 @@ public class Game {
     }
 
     private Coord AIHardFire(BattleshipModel model) {
+        System.out.println("In the mix");
         Random rand = new Random(System.currentTimeMillis());
         Coord mycoord;
+        Coord AIShot = model.getAIShot();
+
+        //If it was a hit
+        //Shot the areas that are around the preious shot because that is likely to be another hit
+        if(AIShot != null)
+        {
+            System.out.println("It was not null");
+            //Checks to see if any surrounding areas are available to be shot at
+            for(int i = 0; i < 4; i++)
+            {
+                switch(i) {
+                    case 0:
+                        mycoord = new Coord(AIShot.get_x() + 1, AIShot.get_y());
+                        break;
+                    case 1:
+                        mycoord = new Coord(AIShot.get_x() - 1, AIShot.get_y());
+                        break;
+
+                    case 2:
+                        mycoord = new Coord(AIShot.get_x(), AIShot.get_y()+1);
+                        break;
+
+                    case 3:
+                        mycoord = new Coord(AIShot.get_x(), AIShot.get_y()-1);
+                        break;
+                    default:
+                        mycoord = new Coord(-1,-1);
+                        break;
+                }
+                if (checkValidShot(model, mycoord))
+                    return mycoord;
+                System.out.println("Didn't find");
+            }
+
+        }
+        System.out.println("Was null");
         //If the previious shot was not a hit, shoot randomly
         do {
             mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
 
         } while (!checkValidShot(model, mycoord));//while the shot has already been done
 
-        //If it was a hit
-        //Shot the areas that are around the preious shot because that is likely to be another hit
 
 
         return mycoord;
