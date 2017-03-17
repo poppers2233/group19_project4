@@ -243,7 +243,7 @@ public class Main {
                         AIOrientation = easyOrient[4];
 
                     }
-                    model.getComputer_submarine().set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                    model.getAIsubmarine().set_location(AIRow, AICol, AIOrientation);//Place a ship into
                 }
 
             }
