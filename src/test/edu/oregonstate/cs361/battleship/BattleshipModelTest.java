@@ -44,7 +44,7 @@ public class BattleshipModelTest {
 
         assertEquals(CL.get_name(), model.getClipper().get_name());
         assertEquals(CL.get_name(), model.getComputer_clipper().get_name());
-        //CivShip Ding;
+
         assertEquals(DI.get_name(), model.getDinghy().get_name());
         assertEquals(DI.get_name(), model.getComputer_dinghy().get_name());
 
@@ -115,6 +115,18 @@ public class BattleshipModelTest {
         model.scan(1,1); //Should return true for an aircraft carrier
         assertEquals(model.getScanResult(), true);
 
+        model.scan(2,1); //Should return true for being NEXT TO the aircraft carrier
+        assertEquals(model.getScanResult(), true);
+
+        model.scan(1,6); //Should return true for being NEXT TO the aircraft carrier
+        assertEquals(model.getScanResult(), true);
+
+        model.scan(9,3); //Should return true for being NEXT TO the aircraft carrier
+        assertEquals(model.getScanResult(), true);
+
+        model.scan(1,9); //Should return true for being NEXT TO the aircraft carrier
+        assertEquals(model.getScanResult(), true);
+
         model.scan(4,1);
         //should return false because the battleship has stealth
         assertEquals(model.getScanResult(), false);
@@ -135,6 +147,15 @@ public class BattleshipModelTest {
         //should return false for not hitting any ship
         assertEquals(model.getScanResult(), false);
 
+        //Testing for a vertical ship
+        model.setAIaircraftCarrier(new Ship("AircraftCarrier", 5, 5, 7, 9, 7));
+        //scannin on it
+        model.scan(5,7);
+        assertEquals(model.getScanResult(), true);
+        //scanning and NOT hitting it
+        model.scan(5,5);
+        assertEquals(model.getScanResult(), false);
+
         model.setDifficulty(true);
         boolean diff = model.isHard();
         assertEquals(diff, true);
@@ -143,6 +164,25 @@ public class BattleshipModelTest {
         model.setAIShot(AIshot);
         Coord Testshot = model.getAIShot();
         assertEquals(Testshot, AIshot);
+
+
+
+        /*** TESTING Ship CLASS ***/
+
+        Ship Badship = new Ship();
+        Ship NotSoBadShip = new Ship("this should not have happened", -1, -1, -1, -2, -2);
+        //these two ships should be identical
+        assertEquals(Badship.get_length(), NotSoBadShip.get_length());
+        assertEquals(Badship.get_start().get_x(), NotSoBadShip.get_start().get_x());
+        assertEquals(Badship.get_end().get_x(), NotSoBadShip.get_end().get_x());
+        assertEquals(Badship.get_name(), NotSoBadShip.get_name());
+
+        //finally tring to set a ship outside of the bounds
+        NotSoBadShip.set_location(20,20,"vertical");
+
+        Ship SpawnedShip = new Ship("Im for testing out of bound ships", 0, 0, 0, 0, 0);
+
+        assertEquals(NotSoBadShip.get_end().get_x(), SpawnedShip.get_end().get_x());
     }
 
 }
