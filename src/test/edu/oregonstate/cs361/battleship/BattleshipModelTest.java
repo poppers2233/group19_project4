@@ -44,7 +44,7 @@ public class BattleshipModelTest {
 
         assertEquals(CL.get_name(), model.getClipper().get_name());
         assertEquals(CL.get_name(), model.getComputer_clipper().get_name());
-        CivShip Ding
+        //CivShip Ding;
         assertEquals(DI.get_name(), model.getDinghy().get_name());
         assertEquals(DI.get_name(), model.getComputer_dinghy().get_name());
 

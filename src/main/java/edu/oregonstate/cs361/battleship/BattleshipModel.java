@@ -31,7 +31,7 @@ public class BattleshipModel {
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private boolean scanResult = false;
-	private boolean difficulty = true; //False means easy, true for hard mode
+	private boolean difficulty = false; //False means easy, true for hard mode
 	private Coord AIShot = null;
 
 
