@@ -9,7 +9,28 @@
 <script src="/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/js/app.js"></script>
 
+
 <body>
+
+<!-- Modal display code -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Difficulty Selection</h2>
+        </div>
+        <!--<span id="closeme" class="close">&times;</span>-->
+        <button id="modal-easy" class="modal-button" onclick="difficultySelect('easy');">Easy</button>
+        <button id="modal-hard" class="modal-button" onclick="difficultySelect('hard');">Hard</button>
+        <div class="modal-footer">
+            <h3>Select 'Easy' or 'Hard' difficulty</h3>
+            <p>Easy: ships are placed in the same positions every game. The AI shoots randomly.</p>
+            <p>Hard: ships are placed randomly. The AI is better at hitting your ships.</p>
+        </div>
+    </div>
+
+</div>
 
 <h1>Place Ships</h1>
 <div id="ShipPlacement">
@@ -52,13 +73,15 @@
         <option value="horizontal">horizontal</option>
         <option value="vertical">vertical</option>
     </select>
-    Difficulty:
-    <select name="diffSelec" id="diffSelec">
+
+    <button type="button" onclick="placeShip()">Place</button>
+
+    <select name="diffSelec" id="diffSelec" class="hide-me">
         <option value="easy">easy</option>
         <option value="hard">hard</option>
     </select>
 
-    <button type="button" onclick="placeShip()">Place</button>
+
 </div>
 
 
@@ -542,6 +565,16 @@
  
 
 </section>
+<script>
+    var btn = document.getElementById("myBtn");
+    var modal = document.getElementById('myModal');
+    var mbtn = document.getElementsByClassName("modal-button");
+
+    mbtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+</script>
 </body>
 
 </html>

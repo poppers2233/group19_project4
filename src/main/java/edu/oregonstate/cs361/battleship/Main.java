@@ -23,6 +23,7 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to scan
         post("/scan/:row/:col", (req, res) -> scan(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
+
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
 
         post("/difficultySelect/:difficulty", (req, res) -> difficultySelect(req));
@@ -41,6 +42,7 @@ public class Main {
     }
 
     //This function should accept an HTTP request and deseralize it into an actual Java object.
+
     private static BattleshipModel getModelFromReq(Request req){
         String boardState = req.body(); //should be a JSON stored as a string
         Gson gson = new Gson();
