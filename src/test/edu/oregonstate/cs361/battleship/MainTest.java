@@ -42,7 +42,7 @@ class MainTest {
 
         assertEquals("{\"aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"computer_battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"computer_cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"computer_destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computerHits\":[],\"computerMisses\":[],\"playerHits\":[],\"playerMisses\":[]}",res.body);
 
-    }
+    }/*
     @Test
     public void testFireAt(){
         TestResponse res = request("POST", "/fire/1/1");
@@ -51,7 +51,7 @@ class MainTest {
         ArrayList<Coord> miss = new ArrayList<Coord>();
         assertEquals(miss, model.get_computer_hits());
 
-    }
+    }*/
     
    /*
    This function tests the second and third user story. The first user story is the ability to place ships while avoiding 
@@ -62,7 +62,7 @@ class MainTest {
     @Test
     public void testPlaceShip() {
         //looped so the random element for AI placing is accounted for
-        for(i = 0; i<100; i++){
+        for(int i = 0; i<100; i++){
             BattleshipModel model = new BattleshipModel();
             Gson gson = new Gson();
             TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
@@ -83,12 +83,6 @@ class MainTest {
             res = request("POST", "/placeShip/battleship/1/1/horizontal");
             model = gson.fromJson(res.body, BattleshipModel.class);
             assertEquals(1, model.getBattleship().get_start().get_x());
-            res = request("POST", "/placeShip/cruiser/1/1/horizontal");
-            model = gson.fromJson(res.body, BattleshipModel.class);
-            assertEquals(1, model.getCruiser().get_start().get_x());
-            res = request("POST", "/placeShip/destroyer/1/1/horizontal");
-            model = gson.fromJson(res.body, BattleshipModel.class);
-            assertEquals(1, model.getDestroyer().get_start().get_x());
 
             //out of bounds
             res = request("POST", "/placeShip/aircraftCarrier/12/12/horizontal");
@@ -105,12 +99,6 @@ class MainTest {
             res = request("POST", "/placeShip/battleship/1/1/vertical");
             model = gson.fromJson(res.body, BattleshipModel.class);
             assertEquals(1, model.getBattleship().get_start().get_x());
-            res = request("POST", "/placeShip/cruiser/1/1/vertical");
-            model = gson.fromJson(res.body, BattleshipModel.class);
-            assertEquals(1, model.getCruiser().get_start().get_x());
-            res = request("POST", "/placeShip/destroyer/1/1/vertical");
-            model = gson.fromJson(res.body, BattleshipModel.class);
-            assertEquals(1, model.getDestroyer().get_start().get_x());
         }
     }
 
