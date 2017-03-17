@@ -108,8 +108,12 @@ public class BattleshipModel {
 	public void setAIbattleship(Ship aIbattleship) {
 		computer_battleship = aIbattleship;
 	}
-
-
+	public void setAIclipper(CivShip AIclipper){
+		computer_clipper = AIclipper;
+	}
+	public void setAIdinghy(CivShip AIdinghy){
+		computer_dinghy = AIdinghy;
+	}
 
 	public Ship getAIsubmarine() {
 		return computer_submarine;
@@ -175,14 +179,12 @@ public class BattleshipModel {
 	}
 
 
-	public void scan(int rowInt, int colInt) 
-	{
-        	 Coord coor = new Coord(rowInt,colInt);
+	public void scan(int rowInt, int colInt) {
+		 Coord coor = new Coord(rowInt,colInt);
 		 scanResult = false;
 		 if(computer_aircraftCarrier.scan(coor)){
 		     scanResult = true;
-		 }
-		 else if (computer_battleship.scan(coor)){
+		 }else if (computer_battleship.scan(coor)){
 		     scanResult = false;
 		 }else if (computer_clipper.scan(coor)){
 		     scanResult = true;
@@ -191,10 +193,9 @@ public class BattleshipModel {
 		 }else if (computer_submarine.scan(coor)){
 		     scanResult = false;
 		 } else {
-		     scanResult = false;
-		 }
+             scanResult = false;
+         }
 	}
- 
 	public boolean getScanResult()
 	{
 		return scanResult;

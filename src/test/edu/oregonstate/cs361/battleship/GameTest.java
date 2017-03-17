@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FireAtTest {
+public class GameTest {
     /*
     //This function tests to make sure the game over function returnes the correct value when the number of hits
     // by the player OR the AI reaches the maximum number of hits for their respective board. IE: all ships for
