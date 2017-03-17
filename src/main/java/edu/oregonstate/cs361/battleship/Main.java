@@ -54,10 +54,7 @@ public class Main {
     static String newModel() {
 
     	BattleshipModel model = new BattleshipModel();
-    	Ship ship = new Ship("thefkinship",1,0,0,0,0);
     	Gson gson = new Gson();
-        //System.out.println(gson.toJson(ship));
-        //System.out.println(gson.toJson(model));
         return gson.toJson(model);
     }
 
@@ -243,7 +240,7 @@ public class Main {
                         AIOrientation = easyOrient[4];
 
                     }
-                    model.getComputer_submarine().set_location(AIRow, AICol, AIOrientation);//Place a ship into
+                    model.getAIsubmarine().set_location(AIRow, AICol, AIOrientation);//Place a ship into
                 }
 
             }
@@ -626,40 +623,84 @@ public class Main {
         if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
             //mark as a hit for the computer
             model.add_player_hit(mycoord);
+            model.setAIShot(mycoord);
         }
         else if( posHelper(model.getClipper(), mycoord)){
             model.getClipper().hit(model, false);
+            model.setAIShot(mycoord);
         }
         else if( posHelper(model.getDinghy(), mycoord )){
             model.getDinghy().hit(model, false);
+            model.setAIShot(mycoord);
         }
         else {
             //mark as a miss for the computer
             model.add_player_miss(mycoord);
+            model.setAIShot(null);
 
         }
     }
 
     private static Coord AIHardFire(BattleshipModel model) {
+        System.out.println("In the mix");
         Random rand = new Random(System.currentTimeMillis());
         Coord mycoord;
+        Coord AIShot = model.getAIShot();
+
+        //If it was a hit
+        //Shot the areas that are around the preious shot because that is likely to be another hit
+        if(AIShot != null)
+        {
+            System.out.println("It was not null");
+            //Checks to see if any surrounding areas are available to be shot at
+            for(int i = 0; i < 4; i++)
+            {
+                switch(i) {
+                    case 0:
+                        mycoord = new Coord(AIShot.get_x() + 1, AIShot.get_y());
+                        break;
+                    case 1:
+                        mycoord = new Coord(AIShot.get_x() - 1, AIShot.get_y());
+                        break;
+
+                    case 2:
+                        mycoord = new Coord(AIShot.get_x(), AIShot.get_y()+1);
+                        break;
+
+                    case 3:
+                        mycoord = new Coord(AIShot.get_x(), AIShot.get_y()-1);
+                        break;
+                    default:
+                        mycoord = new Coord(-1,-1);
+                        break;
+                }
+                if (checkValidShot(model, mycoord))
+                    return mycoord;
+                System.out.println("Didn't find");
+            }
+
+        }
+        System.out.println("Was null");
         //If the previious shot was not a hit, shoot randomly
         do {
             mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
 
         } while (!checkValidShot(model, mycoord));//while the shot has already been done
 
-        //If it was a hit
-        //Shot the areas that are around the preious shot because that is likely to be another hit
 
 
         return mycoord;
     }
 
     private static Coord AIEasyFire(BattleshipModel model) {
-       Coord mycoord;
+        //Just a random shot for easy mode
+        Random rand = new Random(System.currentTimeMillis());
+        Coord mycoord;
         //Must be changed, some pattern for firing must be created
-        mycoord = new Coord(1,1);
+        do {
+            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
+
+        } while (!checkValidShot(model, mycoord));//while the shot has already been done
 
        return mycoord;
     }
