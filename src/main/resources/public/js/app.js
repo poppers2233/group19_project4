@@ -22,7 +22,7 @@ function placeShip() {
 
    //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
-     url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$( "#orientationSelec" ).val()+"/"+$( "#diffSelec" ).val(),
+     url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$( "#orientationSelec" ).val(),
      method: "post",
      data: JSON.stringify(gameModel),
      contentType: "application/json; charset=utf-8",
@@ -98,15 +98,36 @@ function fireClick(c, r){
 }
 
 function difficultySelect(diff){
+
+
+    //make our modal invisible
     modal.style.display = "none";
+
     var obj = document.getElementById("diffSelec");
-        var selected = obj.options;
-        for(var opt, j = 0; opt = selected[j]; j++) {
-                if(opt.value == diff) {
-                    obj.selectedIndex = j;
-                    break;
-                }
-        }
+    var selected = obj.options;
+    //set the field to easy/hard
+    for(var opt, j = 0; opt = selected[j]; j++) {
+            if(opt.value == diff) {
+                obj.selectedIndex = j;
+                break;
+            }
+    }
+    //send our request
+    var request = $.ajax({
+             url: "/difficultySelect/"+$( "#diffSelec" ).val(),
+             method: "post",
+             data: JSON.stringify(gameModel),
+             contentType: "application/json; charset=utf-8",
+             dataType: "json"
+    });
+    request.done(function( currModel ) {
+      displayGameState(currModel);
+      gameModel = currModel;
+    });
+
+    request.fail(function( jqXHR, textStatus ) {
+      alert( "Request failed: " + textStatus );
+    });
 }
 
 function scan(){
