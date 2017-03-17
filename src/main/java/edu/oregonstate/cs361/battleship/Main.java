@@ -9,7 +9,7 @@ import static spark.Spark.staticFiles;
 
 public class Main {
 
-    private static Game game_manager = new Game();
+    private static Game game_manager = new Game(15,10,10);
 
     public static void main(String[] args) {
 
@@ -23,7 +23,6 @@ public class Main {
         //This will listen to POST requests and expects to receive a game model, as well as location to scan
         post("/scan/:row/:col", (req, res) -> scan(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
-
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
 
         post("/difficultySelect/:difficulty", (req, res) -> difficultySelect(req));
@@ -92,9 +91,9 @@ public class Main {
         int row = Integer.parseInt(req.params(":row"));
         int col = Integer.parseInt(req.params(":col"));
         String orientation = req.params(":orientation");
-        String difficulty = req.params(":difficulty");
 
-        game_manager.placeShip(model, new Coord(row, col), orientation, id,  difficulty);
+
+        game_manager.placeShip(model, new Coord(row, col), orientation, id);
 
         return gson.toJson(model);
     }

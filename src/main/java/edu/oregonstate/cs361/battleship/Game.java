@@ -30,7 +30,7 @@ public class Game {
 
 
     //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
-    public void placeShip(BattleshipModel model, Coord coord, String orientation, String id, String difficulty) {
+    public void placeShip(BattleshipModel model, Coord coord, String orientation, String id) {
 
         Random rand = new Random(System.currentTimeMillis());
         int AICol, AIRow;
@@ -39,11 +39,9 @@ public class Game {
         String AIOrientation;
         int row = coord.get_x();
         int col = coord.get_y();
-        AIOrientation = "throw me an error";
 
         Coord[] easyPlace = new Coord[5];
         String[] easyOrient = new String[5];
-        System.out.println("difficulty set at "+difficulty);
 
         //intialize coordinate and orientation arrays for ez mode
         //non casual mode is handled within the actual placement
@@ -67,11 +65,11 @@ public class Game {
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getAircraftCarrier().set_location(row, col, orientation);
                 Ship temp = model.getAIaircraftCarrier();
-                if (difficulty.equals("hard")) {
+                if (model.isHard()) {
                     System.out.println("hard place");
                     do {
-                        AICol = rand.nextInt(boardWidth + 1) +1;
-                        AIRow = rand.nextInt(boardHeight + 1) +1;
+                        AICol = rand.nextInt(boardWidth) +1;
+                        AIRow = rand.nextInt(boardHeight) +1;
                         if (rand.nextInt(2) == 0)
                             AIOrientation = "horizontal";
                         else
@@ -80,7 +78,7 @@ public class Game {
 
                     } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
                 }
-                if(difficulty.equals("easy")){
+                else{
                     //coords are now valid (in theory)
                     System.out.println("place battleship easy at"+ easyPlace[0].get_x()+","+easyPlace[0].get_y());
                     AICol = easyPlace[0].get_x();
@@ -88,7 +86,7 @@ public class Game {
                     AIOrientation = easyOrient[0];
 
                 }
-                System.out.println("x: "+AICol + "y: "+AIRow +"ori"+ AIOrientation);
+                System.out.println("x: "+AICol + " y: "+AIRow +" ori: "+ AIOrientation);
                 model.getAIaircraftCarrier().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
         }
@@ -96,7 +94,7 @@ public class Game {
             if(isValidLocation(model, row, col, orientation, 4, true)) {
                 model.getBattleship().set_location(row, col, orientation);
                 Ship temp = model.getAIbattleship();
-                if (difficulty.equals("hard")) {
+                if (model.isHard()) {
                     do {
                         AICol = rand.nextInt(boardWidth + 1) +1;
                         AIRow = rand.nextInt(boardHeight + 1) +1;
@@ -108,13 +106,15 @@ public class Game {
 
                     } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
                 }
-                if(difficulty.equals("easy")){
+                else{
                     //coords are now valid (in theory)
                     AICol = easyPlace[1].get_x();
                     AIRow = easyPlace[1].get_y();
                     AIOrientation = easyOrient[1];
 
                 }
+
+                System.out.println("Placing ship at " + AIRow+","+AICol);
 
                 model.getAIbattleship().set_location(AIRow, AICol, AIOrientation);//Place a ship into
             }
@@ -123,7 +123,7 @@ public class Game {
             if (isValidLocation(model, row, col, orientation, 3, true)) {
                 model.getClipper().set_location(row, col, orientation);
                 Ship temp = model.getComputer_clipper();
-                if (difficulty.equals("hard")) {
+                if (model.isHard()) {
                     do {
                         AICol = rand.nextInt(boardWidth + 1)+1;
                         AIRow = rand.nextInt(boardHeight + 1)+1;
@@ -135,7 +135,7 @@ public class Game {
 
                     } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
                 }
-                if(difficulty.equals("easy")){
+                else{
                     //coords are now valid (in theory)
                     AICol = easyPlace[2].get_x();
                     AIRow = easyPlace[2].get_y();
@@ -149,7 +149,7 @@ public class Game {
             if (isValidLocation(model, row, col, orientation, 1, true)) {
                 model.getDinghy().set_location(row, col, orientation);
                 Ship temp = model.getComputer_dinghy();
-                if (difficulty.equals("hard")) {
+                if (model.isHard()) {
                     do {
                         AICol = rand.nextInt(boardWidth + 1) +1;
                         AIRow = rand.nextInt(boardHeight + 1) +1;
@@ -161,7 +161,7 @@ public class Game {
 
                     } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
                 }
-                if(difficulty.equals("easy")){
+                else{
                     //coords are now valid (in theory)
                     AICol = easyPlace[3].get_x();
                     AIRow = easyPlace[3].get_y();
@@ -175,7 +175,7 @@ public class Game {
             if (isValidLocation(model, row, col, orientation, 2, true)) {
                 model.getSubmarine().set_location(row, col, orientation);
                 Ship temp = model.getAIsubmarine();
-                if (difficulty.equals("hard")) {
+                if (model.isHard()) {
                     do {
                         AICol = rand.nextInt(boardWidth + 1) +1;
                         AIRow = rand.nextInt(boardHeight + 1) +1;
@@ -187,7 +187,7 @@ public class Game {
 
                     } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
                 }
-                if(difficulty.equals("easy")){
+                else{
                     //coords are now valid (in theory)
                     AICol = easyPlace[4].get_x();
                     AIRow = easyPlace[4].get_y();
@@ -431,6 +431,13 @@ public class Game {
                     }
                 }
             }
+
+            if(col + length > 10 && orientation.equals("horizontal"))
+                return false;
+            if(row + length > 10 && orientation.equals("vertical"))
+                return  false;
+
+
             return true;
         }
     }
@@ -555,12 +562,15 @@ public class Game {
         if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
             //mark as a hit for the computer
             model.add_player_hit(mycoord);
+            model.setAIShot(mycoord);
         }
         else if( posHelper(model.getClipper(), mycoord)){
             model.getClipper().hit(model, false);
+            model.setAIShot(mycoord);
         }
         else if( posHelper(model.getDinghy(), mycoord )){
             model.getDinghy().hit(model, false);
+            model.setAIShot(mycoord);
         }
         else {
             //mark as a miss for the computer
@@ -570,7 +580,6 @@ public class Game {
     }
 
     private Coord AIHardFire(BattleshipModel model) {
-        System.out.println("In the mix");
         Random rand = new Random(System.currentTimeMillis());
         Coord mycoord;
         Coord AIShot = model.getAIShot();
@@ -579,7 +588,6 @@ public class Game {
         //Shot the areas that are around the preious shot because that is likely to be another hit
         if(AIShot != null)
         {
-            System.out.println("It was not null");
             //Checks to see if any surrounding areas are available to be shot at
             for(int i = 0; i < 4; i++)
             {
@@ -604,11 +612,9 @@ public class Game {
                 }
                 if (checkValidShot(model, mycoord))
                     return mycoord;
-                System.out.println("Didn't find");
+                model.setAIShot(null);
             }
-
         }
-        System.out.println("Was null");
         //If the previious shot was not a hit, shoot randomly
         do {
             mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
@@ -622,8 +628,12 @@ public class Game {
 
     private Coord AIEasyFire(BattleshipModel model) {
         Coord mycoord;
+        Random rand = new Random(System.currentTimeMillis());
+
         //Must be changed, some pattern for firing must be created
-        mycoord = new Coord(1,1);
+        do {
+            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
+        } while (!checkValidShot(model, mycoord));
 
         return mycoord;
     }
