@@ -40,9 +40,48 @@ class MainTest {
         TestResponse res = request("GET", "/model");
         assertEquals(200, res.status);
 
-        assertEquals("{\"aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"computer_battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"computer_cruiser\":{\"name\":\"Cruiser\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"computer_destroyer\":{\"name\":\"Destroyer\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computerHits\":[],\"computerMisses\":[],\"playerHits\":[],\"playerMisses\":[]}",res.body);
+        assertEquals("{\"aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"clipper\":{\"name\":\"Clipper\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"dinghy\":{\"name\":\"Dinghy\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":1},\"submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computer_aircraftCarrier\":{\"name\":\"AircraftCarrier\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":5},\"computer_battleship\":{\"name\":\"BattleShip\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":4},\"computer_clipper\":{\"name\":\"Clipper\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":3},\"computer_dinghy\":{\"name\":\"Dinghy\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":1},\"computer_submarine\":{\"name\":\"Submarine\",\"start\":{\"Across\":0,\"Down\":0},\"end\":{\"Across\":0,\"Down\":0},\"length\":2},\"computerHits\":[],\"computerMisses\":[],\"playerHits\":[],\"playerMisses\":[],\"scanResult\":false,\"difficulty\":false}",res.body);
 
-    }/*
+    }
+
+    @Test
+    public void testPrepFire()
+    {
+        TestResponse res = request("POST", "/fire/6/6");
+        assertEquals(200, res.status);
+    }
+
+    @Test
+    public void testScan()
+    {
+        TestResponse res = request("GET", "/model");
+        assertEquals(200, res.status);
+
+        res = request("POST", "/scan/6/6");
+        assertEquals(200, res.status);
+    }
+
+    @Test
+    public void testDiffSelect()
+    {
+        BattleshipModel model;
+        Gson gson = new Gson();
+
+        TestResponse res = request("GET", "/model");
+        assertEquals(200, res.status);
+
+        model = gson.fromJson(res.body, BattleshipModel.class);
+
+        assertEquals(false, model.isHard());
+
+        res = request("POST", "/difficultySelect/easy");
+        assertEquals(200, res.status);
+
+        model = gson.fromJson(res.body, BattleshipModel.class);
+
+        assertEquals(true, model.isHard());
+    }
+    /*
     @Test
     public void testFireAt(){
         TestResponse res = request("POST", "/fire/1/1");
@@ -63,7 +102,7 @@ class MainTest {
     public void testPlaceShip() {
         //looped so the random element for AI placing is accounted for
         for(int i = 0; i<100; i++){
-            BattleshipModel model = new BattleshipModel();
+            BattleshipModel model;
             Gson gson = new Gson();
             TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
             assertEquals(200, res.status);
@@ -71,7 +110,7 @@ class MainTest {
             assertEquals(1, model.getAircraftCarrier().get_start().get_x());
             assertEquals(1, model.getAircraftCarrier().get_start().get_y());
             assertEquals(1, model.getAircraftCarrier().get_end().get_x());
-            assertEquals(6, model.getAircraftCarrier().get_end().get_y());
+            assertEquals(5, model.getAircraftCarrier().get_end().get_y());
             //name
             assertEquals("AircraftCarrier", model.getAircraftCarrier().get_name());
 
