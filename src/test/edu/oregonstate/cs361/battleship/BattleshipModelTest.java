@@ -30,51 +30,28 @@ public class BattleshipModelTest {
 
         Ship AC = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
         Ship BS = new Ship("BattleShip", 4, 0, 0, 0, 0);
-        Ship CR = new Ship("Cruiser", 3, 0, 0, 0, 0);
-        Ship DR = new Ship("Destroyer", 2, 0, 0, 0, 0);
+        //Ship CR = new Ship("Cruiser", 3, 0, 0, 0, 0);
+        //Ship DR = new Ship("Destroyer", 2, 0, 0, 0, 0);
         Ship SB = new Ship("Submarine", 2, 0, 0, 0, 0);
-        assertEquals(AC.get_name(), model.getaircraftCarrier().get_name());
         assertEquals(AC.get_name(), model.getAircraftCarrier().get_name());
         assertEquals(AC.get_name(), model.getAIaircraftCarrier().get_name());
-        assertEquals(AC.get_length(), model.getaircraftCarrier().get_length());
-        assertEquals(0, model.getaircraftCarrier().get_end().get_y());
-        assertEquals(0, model.getaircraftCarrier().get_start().get_x());
 
         assertEquals(BS.get_name(), model.getBattleship().get_name());
         assertEquals(BS.get_name(), model.getAIbattleship().get_name());
-
-        assertEquals(CR.get_name(), model.getCruiser().get_name());
-        assertEquals(CR.get_name(), model.getAIcruiser().get_name());
-
-        assertEquals(DR.get_name(), model.getDestroyer().get_name());
-        assertEquals(DR.get_name(), model.getAIdestroyer().get_name());
 
         assertEquals(SB.get_name(), model.getSubmarine().get_name());
         assertEquals(SB.get_name(), model.getAIsubmarine().get_name());
 
         model.setAircraftCarrier(AC);
-        model.aircraftCarrier(AC);
-        model.setDestroyer(DR);
         model.setBattleship(BS);
         model.setSubmarine(SB);
-        model.setCruiser(CR);
 
         model.setAIaircraftCarrier(AC);
-        model.setComputer_aircraftCarrier(AC);
-        model.setAIdestroyer(DR);
-        model.setComputer_destroyer(DR);
         model.setAIbattleship(BS);
         model.setComputer_battleship(BS);
         model.setAIsubmarine(SB);
-        model.setComputer_submarine(SB);
-        model.setAIcruiser(CR);
-        model.setComputer_cruiser(CR);
 
-        assertEquals(AC, model.getComputer_aircraftCarrier());
         assertEquals(BS, model.getComputer_battleship());
-        assertEquals(DR, model.getComputer_destroyer());
-        assertEquals(SB, model.getComputer_submarine());
-        assertEquals(CR, model.getComputer_cruiser());
 
         ArrayList<Coord> testHits = new ArrayList<Coord>();
         ArrayList<Coord> testMisses = new ArrayList<Coord>();
@@ -114,27 +91,11 @@ public class BattleshipModelTest {
         newtest.add(new3);
 
         model.setComputerHits(newtest);
-        model.setComputerMisses(newtest);
         model.setPlayerHits(newtest);
-        model.setPlayerMisses(newtest);
 
-        assertEquals(newtest, model.getComputerHits());
-        assertEquals(newtest, model.getComputerMisses());
-        assertEquals(newtest, model.getPlayerHits());
-        assertEquals(newtest, model.getPlayerMisses());
-
-        model.getaircraftCarrier().set_location(2, 3, "horizontal");
-        assertEquals(8, model.getaircraftCarrier().get_end().get_y());
         model.getBattleship().set_location(2, 4, "vertical");
-        assertEquals(6, model.getBattleship().get_end().get_x());
+        assertEquals(5, model.getBattleship().get_end().get_x());
         model.getSubmarine().set_location(10, 10, "horizontal");
-        model.getCruiser().set_location(10,10, "vertical");
-        assertEquals(0, model.getCruiser().get_end().get_x());
-
-    }
-
-    @Test
-    public void testFireAt2(){
 
     }
 
