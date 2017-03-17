@@ -61,12 +61,10 @@ public class Game {
 
         //System.out.println("row: " + row + " col: " + col + " id: " + id + " orientation: " + orientation);
         if(id.equals("aircraftCarrier")){
-            System.out.println("dropping aircraft carrier");
             if(isValidLocation(model, row, col, orientation, 5, true)) {
                 model.getAircraftCarrier().set_location(row, col, orientation);
                 Ship temp = model.getAIaircraftCarrier();
                 if (model.isHard()) {
-                    System.out.println("hard place");
                     do {
                         AICol = rand.nextInt(boardWidth) +1;
                         AIRow = rand.nextInt(boardHeight) +1;
@@ -201,7 +199,7 @@ public class Game {
 
     }
 
-    private boolean isValidLocation(BattleshipModel model, int row, int col, String orientation, int length, boolean isPlayer)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
+    public boolean isValidLocation(BattleshipModel model, int row, int col, String orientation, int length, boolean isPlayer)//Needs to check to see if a given coordiante is valid for the ship to be placed at.  OTHER PARAMS MAY BE NEEDED
     {
         if(isPlayer)
         {
@@ -317,6 +315,12 @@ public class Game {
                     }
                 }
             }
+
+            if(col + length > boardWidth+1 && orientation.equals("horizontal"))
+                return false;
+            if(row + length > boardHeight+1 && orientation.equals("vertical"))
+                return  false;
+
             return true;
         }
         else
@@ -432,9 +436,9 @@ public class Game {
                 }
             }
 
-            if(col + length > 10 && orientation.equals("horizontal"))
+            if(col + length > boardWidth+1 && orientation.equals("horizontal"))
                 return false;
-            if(row + length > 10 && orientation.equals("vertical"))
+            if(row + length > boardHeight+1 && orientation.equals("vertical"))
                 return  false;
 
 
