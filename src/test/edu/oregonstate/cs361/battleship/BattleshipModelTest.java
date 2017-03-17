@@ -30,8 +30,8 @@ public class BattleshipModelTest {
 
         Ship AC = new Ship("AircraftCarrier", 5, 0, 0, 0, 0);
         Ship BS = new Ship("BattleShip", 4, 0, 0, 0, 0);
-        //Ship CR = new Ship("Cruiser", 3, 0, 0, 0, 0);
-        //Ship DR = new Ship("Destroyer", 2, 0, 0, 0, 0);
+        CivShip CL = new CivShip("Clipper", 3, 0, 0, 0, 0);
+        CivShip DI = new CivShip("Dinghy", 1, 0, 0, 0, 0);
         Ship SB = new Ship("Submarine", 2, 0, 0, 0, 0);
         assertEquals(AC.get_name(), model.getAircraftCarrier().get_name());
         assertEquals(AC.get_name(), model.getAIaircraftCarrier().get_name());
@@ -42,9 +42,17 @@ public class BattleshipModelTest {
         assertEquals(SB.get_name(), model.getSubmarine().get_name());
         assertEquals(SB.get_name(), model.getAIsubmarine().get_name());
 
+        assertEquals(CL.get_name(), model.getClipper().get_name());
+        assertEquals(CL.get_name(), model.getComputer_clipper().get_name());
+        CivShip Ding
+        assertEquals(DI.get_name(), model.getDinghy().get_name());
+        assertEquals(DI.get_name(), model.getComputer_dinghy().get_name());
+
         model.setAircraftCarrier(AC);
         model.setBattleship(BS);
         model.setSubmarine(SB);
+        model.setClipper(CL);
+        model.setDinghy(DI);
 
         model.setAIaircraftCarrier(AC);
         model.setAIbattleship(BS);
@@ -97,6 +105,44 @@ public class BattleshipModelTest {
         assertEquals(5, model.getBattleship().get_end().get_x());
         model.getSubmarine().set_location(10, 10, "horizontal");
 
+        //Scan test.
+        model.setAIaircraftCarrier(new Ship("AircraftCarrier", 5, 1, 1, 1, 5));
+        model.setAIbattleship(new Ship("BattleShip", 4, 4, 1, 4, 4));
+        model.setAIsubmarine(new Ship("Submarine", 2, 7, 1, 7, 2));
+        model.setAIclipper(new CivShip("Clipper", 3, 10,1,10,3));
+        model.setAIdinghy(new CivShip("Dinghy",1,1,10,1,10));
+
+        model.scan(1,1); //Should return true for an aircraft carrier
+        assertEquals(model.getScanResult(), true);
+
+        model.scan(4,1);
+        //should return false because the battleship has stealth
+        assertEquals(model.getScanResult(), false);
+
+        model.scan(7,1);
+        //should return false beccause the submarine has stealth
+        assertEquals(model.getScanResult(), false);
+
+        model.scan(10,1);
+        //should return true for the Clipper
+        assertEquals(model.getScanResult(), true);
+
+        model.scan(1,10);
+        //should return true for the Dinghy
+        assertEquals(model.getScanResult(), true);
+
+        model.scan(10, 10);
+        //should return false for not hitting any ship
+        assertEquals(model.getScanResult(), false);
+
+        model.setDifficulty(true);
+        boolean diff = model.isHard();
+        assertEquals(diff, true);
+
+        Coord AIshot = new Coord(1,1);
+        model.setAIShot(AIshot);
+        Coord Testshot = model.getAIShot();
+        assertEquals(Testshot, AIshot);
     }
 
 }
