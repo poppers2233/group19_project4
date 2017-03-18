@@ -61,7 +61,6 @@ class MainTest {
         assertEquals(200, res.status);
     }
 
-
     @Test
     public void testDiffSelect()
     {
@@ -82,7 +81,6 @@ class MainTest {
 
         assertEquals(true, model.isHard());
     }
-
     /*
     @Test
     public void testFireAt(){
