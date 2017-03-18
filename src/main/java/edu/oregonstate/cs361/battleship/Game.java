@@ -1,7 +1,6 @@
 package edu.oregonstate.cs361.battleship;
 
 import com.google.gson.Gson;
-import spark.Request;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,73 +24,17 @@ public class Game {
         this.boardWidth = boardWidth;
     }
 
-    public String scan(Request req) {
+    public void scan(BattleshipModel model, int rowInt, int colInt) {
 
-        BattleshipModel currModel = getModelFromReq(req);
-        String row = req.params("row");
-        String col = req.params("col");
-        int rowInt = Integer.parseInt(row);
-        int colInt = Integer.parseInt(col);
-        currModel.scan(rowInt,colInt);
-        //currModel.shootAtPlayer();
-        Gson gson = new Gson();
-        return gson.toJson(currModel);
+       model.scan(rowInt, colInt);
     }
 
+    private void placeEasy(BattleshipModel model, Coord coord, String orientation, String id) {
 
-    //This function should return a new model
-    public String newModel() {
-
-        BattleshipModel model = new BattleshipModel();
-        //Ship ship = new Ship("?",1,0,0,0,0);
-        Gson gson = new Gson();
-        //System.out.println(gson.toJson(ship));
-        //System.out.println(gson.toJson(model));
-        return gson.toJson(model);
-    }
-
-    //This function should accept an HTTP request and deseralize it into an actual Java object.
-    private BattleshipModel getModelFromReq(Request req){
-        String boardState = req.body(); //should be a JSON stored as a string
-        Gson gson = new Gson();
-        return gson.fromJson(boardState, BattleshipModel.class); //returns the battleship model
-    }
-
-    //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
-    public String placeShip(Request req) {
-
-        Random rand = new Random(System.currentTimeMillis());
-        int AICol, AIRow;
-        AICol=0;
-        AIRow =0;
+        int row, col, AIRow, AICol;
         String AIOrientation;
-        AIOrientation = "throw me an error";
-        String difficulty = req.params(":difficulty");
-        System.out.println("difficulty set at "+difficulty);
-
-
-        //------------------------------Parsing and execution of the player's turn
-        BattleshipModel model = getModelFromReq(req); //calls above function to create an object from board state
-        if(model == null){
-            model = new BattleshipModel();
-        }
-        Gson gson = new Gson();
-        //declares variables for the details specified for the ship
-        String id = req.params(":id");
-        System.out.println("ship type" + id);
-        //System.out.println(req);
-        int row = Integer.parseInt(req.params(":row"));
-        int col = Integer.parseInt(req.params(":col"));
-        String orientation = req.params(":orientation");
-
-        placeWithDifficulty(difficulty,id,col,row,AICol,AIRow,orientation,AIOrientation,model);
-
-        return gson.toJson(model);
-    }
-
-    private void placeWithDifficulty(String difficulty,String id,int col, int row,int AICol,int AIRow,String orientation,
-            String AIOrientation, BattleshipModel model){
-
+        row = coord.get_x();
+        col = coord.get_y();
         int easySet=0;
         if (id.equals("aircraftCarrier"))
             easySet=0;
@@ -125,25 +68,69 @@ public class Game {
         if (isValidLocation(model, row, col, orientation,ships[0].get_length(), true)) {
             ships[0].set_location(row, col, orientation);
             Ship temp =ships[1];
-            if (difficulty.equals("hard")) {
-                do {
-                    AICol = rand.nextInt(boardWidth + 1) +1;
-                    AIRow = rand.nextInt(boardHeight + 1) +1;
-                    if (rand.nextInt(2) == 0)
-                        AIOrientation = "horizontal";
-                    else
-                        AIOrientation = "vertical";
+
+            //coords are now valid (in theory)
+            AICol = easyPlace[easySet].get_x();
+            AIRow = easyPlace[easySet].get_y();
+            AIOrientation = easyOrient[easySet];
 
 
-                } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
+            ships[1].set_location(AIRow,AICol,AIOrientation);
+        }
+
+    }
+
+    private void placeHard(BattleshipModel model, Coord coord, String orientation, String id){
+
+        int row, col, AIRow, AICol;
+        String AIOrientation;
+        row = coord.get_x();
+        col = coord.get_y();
+        int easySet=0;
+        if (id.equals("aircraftCarrier"))
+            easySet=0;
+        if (id.equals("battleship"))
+            easySet=1;
+        if (id.equals("clipper"))
+            easySet=2;
+        if (id.equals("dinghy"))
+            easySet=3;
+        if (id.equals("submarine"))
+            easySet=4;
+
+        Ship[] ships = model.getShipsByID(id);
+        Random rand = new Random(System.currentTimeMillis());
+        //intialize coordinate and orientation arrays for ez mode
+        //non casual mode is handled within the actual placement
+        Coord[] easyPlace = new Coord[5];
+        String[] easyOrient = new String[5];
+
+        for(int i=0; i<5; i++){
+            if(i<3){
+                easyPlace[i] = new Coord((i+1)*2,1);
+                easyOrient[i] = "vertical";
             }
-            if(difficulty.equals("easy")){
-                //coords are now valid (in theory)
-                AICol = easyPlace[easySet].get_x();
-                AIRow = easyPlace[easySet].get_y();
-                AIOrientation = easyOrient[easySet];
-
+            else{
+                easyPlace[i] = new Coord(1,i*2);
+                easyOrient[i] = "horizontal";
             }
+        }
+
+        if (isValidLocation(model, row, col, orientation,ships[0].get_length(), true)) {
+            ships[0].set_location(row, col, orientation);
+            Ship temp =ships[1];
+
+            do {
+                AICol = rand.nextInt(boardWidth + 1) +1;
+                AIRow = rand.nextInt(boardHeight + 1) +1;
+                if (rand.nextInt(2) == 0)
+                    AIOrientation = "horizontal";
+                else
+                    AIOrientation = "vertical";
+
+
+            } while (!isValidLocation(model, AIRow, AICol, AIOrientation, temp.get_length(), false));
+
             ships[1].set_location(AIRow,AICol,AIOrientation);
         }
     }
@@ -382,10 +369,35 @@ public class Game {
         }
     }
 
-    private boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
+
+    //This controller should take a json object from the front end, and place the ship as requested, and then return the object.
+    public void placeShip(BattleshipModel model, Coord coord, String orientation, String id) {
+
+
+        //------------------------------Parsing and execution of the player's turn
+        if(model == null){
+            model = new BattleshipModel();
+        }
+        Gson gson = new Gson();
+        //declares variables for the details specified for the ship
+
+        if(model.isHard())
+            placeHard(model,coord,orientation,id);
+        else
+            placeEasy(model,coord,orientation,id);
+
+    }
+
+    public void prepFire(BattleshipModel model, Coord shot)
+    {
+        model = fireAt(model, shot);
+        game_over(model);
+    }
+
+    public boolean checkValidShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
         //Check to see if it is off the map
-        if(coord.get_x() < 1 || coord.get_x() > boardWidth + 1 || coord.get_y() < 1 || coord.get_y() > boardHeight + 1)
+        if(coord.get_x() < 1 || coord.get_x() >= boardWidth + 1 || coord.get_y() < 1 || coord.get_y() >= boardHeight + 1)
         {
             return false;
         }
@@ -414,7 +426,7 @@ public class Game {
     }
 
     //Used to make sure the player does not fire at the same spot more than once.
-    private boolean checkPlayerShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
+    public boolean checkPlayerShot(BattleshipModel model, Coord coord)//Checks to see if a shot being done by the AI has already been done
     {
         //Check to see if thats been fired before
         for (int i = 0; i < model.get_computer_hits().size(); i++) {
@@ -442,44 +454,17 @@ public class Game {
         return true;
     }
 
-    //Similar to placeShip, but with firing.
-    public String prepFire(Request req) {
 
-
-
-        //------------------------------Parsing and execution of the player's turn
-
-
-        //System.out.println("prepFire called.");
-        BattleshipModel model = getModelFromReq(req);
-        if(model == null){
-            model = new BattleshipModel();
-        }
-        Gson gson = new Gson();
-        int[] pos = new int[]{0, 0};                                //to be passed to the position helper function
-        pos[0] = Integer.parseInt(req.params(":col"));
-        pos[1] = Integer.parseInt(req.params(":row"));
-        Coord shot = new Coord(pos[0], pos[1]);
-
-        //>>>>>This if statement makes sure that the user has not already fired at the location. if they have it will prevent
-        // the AI from fireing that turn and NOT add to the users hits/misses to prevent that array from having
-        // multiple of the same hit/ miss
-        model = fireAt(model, shot);
-        //Check to see if the game is over now
-
-        game_over(model);
-
-        return gson.toJson(model);
-
-    }
-
-    private BattleshipModel fireAt(BattleshipModel model, Coord shot){
+    public BattleshipModel fireAt(BattleshipModel model, Coord shot){
 
 
         if(checkPlayerShot(model, shot)) {
+
+            //Execute player shot
+
             playerShot(model, shot);
 
-            //------------------------------Execution of the AI's turn
+            //Execution of the AI's shot
 
             AIFire(model);
         }
@@ -523,12 +508,15 @@ public class Game {
         if (posHelper(model.getAircraftCarrier(), mycoord) || posHelper(model.getBattleship(), mycoord) || posHelper(model.getSubmarine(), mycoord)) {
             //mark as a hit for the computer
             model.add_player_hit(mycoord);
+            model.setAIShot(mycoord);
         }
         else if( posHelper(model.getClipper(), mycoord)){
             model.getClipper().hit(model, false);
+            model.setAIShot(mycoord);
         }
         else if( posHelper(model.getDinghy(), mycoord )){
             model.getDinghy().hit(model, false);
+            model.setAIShot(mycoord);
         }
         else {
             //mark as a miss for the computer
@@ -540,28 +528,61 @@ public class Game {
     private Coord AIHardFire(BattleshipModel model) {
         Random rand = new Random(System.currentTimeMillis());
         Coord mycoord;
+        Coord AIShot = model.getAIShot();
+
+        //If it was a hit
+        //Shot the areas that are around the preious shot because that is likely to be another hit
+        if(AIShot != null)
+        {
+            //Checks to see if any surrounding areas are available to be shot at
+            for(int i = 0; i < 4; i++)
+            {
+                switch(i) {
+                    case 0:
+                        mycoord = new Coord(AIShot.get_x() + 1, AIShot.get_y());
+                        break;
+                    case 1:
+                        mycoord = new Coord(AIShot.get_x() - 1, AIShot.get_y());
+                        break;
+
+                    case 2:
+                        mycoord = new Coord(AIShot.get_x(), AIShot.get_y()+1);
+                        break;
+
+                    case 3:
+                        mycoord = new Coord(AIShot.get_x(), AIShot.get_y()-1);
+                        break;
+                    default:
+                        mycoord = new Coord(-1,-1);
+                        break;
+                }
+                if (checkValidShot(model, mycoord))
+                    return mycoord;
+                model.setAIShot(null);
+            }
+        }
         //If the previious shot was not a hit, shoot randomly
         do {
             mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
 
         } while (!checkValidShot(model, mycoord));//while the shot has already been done
 
-        //If it was a hit
-        //Shot the areas that are around the preious shot because that is likely to be another hit
-
-
         return mycoord;
     }
 
     private Coord AIEasyFire(BattleshipModel model) {
         Coord mycoord;
+        Random rand = new Random(System.currentTimeMillis());
+
         //Must be changed, some pattern for firing must be created
-        mycoord = new Coord(1,1);
+        do {
+            mycoord = new Coord(rand.nextInt(boardHeight+1), rand.nextInt(boardWidth+1));
+        } while (!checkValidShot(model, mycoord));
 
         return mycoord;
     }
 
-    private boolean posHelper(Ship model, Coord pos){
+    public boolean posHelper(Ship model, Coord pos){
         Coord start = model.get_start();
         Coord end = model.get_end();
 
@@ -574,7 +595,7 @@ public class Game {
         //System.out.println("False");
         return false;
     }
-    private void game_over(BattleshipModel model){
+    public void game_over(BattleshipModel model){
 
         if(model.get_player_hits().size() == max_hits)
         {
@@ -587,7 +608,7 @@ public class Game {
         }
     }
 
-    private void game_complete(BattleshipModel model, boolean isPlayer)
+    public void game_complete(BattleshipModel model, boolean isPlayer)
     {
         ArrayList<Coord> temp = new ArrayList<Coord>();
         model.get_player_hits().clear();
@@ -666,4 +687,3 @@ public class Game {
         }
     }
 }
-
