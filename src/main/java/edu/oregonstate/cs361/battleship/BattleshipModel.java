@@ -31,7 +31,7 @@ public class BattleshipModel {
 	private ArrayList<Coord> playerHits = new ArrayList<Coord>();
 	private ArrayList<Coord> playerMisses = new ArrayList<Coord>();
 	private boolean scanResult = false;
-	private boolean difficulty = false; //False means easy, true for hard mode
+	private boolean difficulty = true; //False means easy, true for hard mode
 	private Coord AIShot = null;
 
 
@@ -108,12 +108,8 @@ public class BattleshipModel {
 	public void setAIbattleship(Ship aIbattleship) {
 		computer_battleship = aIbattleship;
 	}
-	public void setAIclipper(CivShip AIclipper){
-		computer_clipper = AIclipper;
-	}
-	public void setAIdinghy(CivShip AIdinghy){
-		computer_dinghy = AIdinghy;
-	}
+
+
 
 	public Ship getAIsubmarine() {
 		return computer_submarine;
@@ -178,13 +174,43 @@ public class BattleshipModel {
 		this.playerHits = playerHits;
 	}
 
+	public Ship[] getShipsByID(String id){
 
-	public void scan(int rowInt, int colInt) {
-		 Coord coor = new Coord(rowInt,colInt);
+		Ship[] ships = new Ship[2];
+
+		if(id.equals("aircraftCarrier")) {
+			ships[0] = aircraftCarrier;
+			ships[1] = computer_aircraftCarrier;
+		}
+		if(id.equals("battleShip")) {
+			ships[0] = battleship;
+			ships[1] = computer_battleship;
+		}
+		if(id.equals("clipper")) {
+			ships[0] = clipper;
+			ships[1] = computer_clipper;
+		}
+		if(id.equals("dinghy")) {
+			ships[0] = dinghy;
+			ships[1] = computer_dinghy;
+		}
+		if(id.equals("submarine")) {
+			ships[0] = submarine;
+			ships[1] = computer_submarine;
+		}
+
+		return ships;
+	}
+
+
+	public void scan(int rowInt, int colInt) 
+	{
+        	 Coord coor = new Coord(rowInt,colInt);
 		 scanResult = false;
 		 if(computer_aircraftCarrier.scan(coor)){
 		     scanResult = true;
-		 }else if (computer_battleship.scan(coor)){
+		 }
+		 else if (computer_battleship.scan(coor)){
 		     scanResult = false;
 		 }else if (computer_clipper.scan(coor)){
 		     scanResult = true;
@@ -193,20 +219,16 @@ public class BattleshipModel {
 		 }else if (computer_submarine.scan(coor)){
 		     scanResult = false;
 		 } else {
-             scanResult = false;
-         }
+		     scanResult = false;
+		 }
 	}
+ 
 	public boolean getScanResult()
 	{
 		return scanResult;
 	}
 
 	public boolean isHard(){return difficulty;}
-
-	public void setDifficulty(boolean difficulty)
-	{
-		this.difficulty = difficulty;
-	}
 
 	public Coord getAIShot() {
 		return AIShot;
